@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Experiments" %}{% endblock %}
+{% block content %}
+<h3>{% trans "Experiments" %}</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">{% trans "Name" %}</th>
+      <th scope="col">{% trans "Description" %}</th>
+      <th scope="col">{% trans "Status" %}</th>
+      <th scope="col">{% trans "Delete" %}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for exp in experiments %}
+    <tr>
+      <td scope="row">
+        <a href="{% url 'experiments:show' exp.pk %}">{{ exp.name }}</a>
+      </td>
+      <td>{{ exp.description }}</td>
+      <td>
+        {% if exp.complete %}
+          {% trans "Published" %}
+        {% else %}
+          {% trans "Editing" %}
+        {% endif %}
+      </td>
+      <td>
+        <form method="post" action="{% url 'experiments:delete' exp.pk %}" class="d-inline"
+              onsubmit="return confirm('{% trans "Are you sure?" %}')">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-outline-danger">{% trans "Delete" %}</button>
+        </form>
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="4" class="text-muted">{% trans "No experiments yet." %}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<a href="{% url 'experiments:new' %}" class="btn btn-outline-primary">{% trans "New experiment" %}</a>
+{% endblock %}

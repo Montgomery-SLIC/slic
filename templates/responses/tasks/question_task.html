@@ -1,0 +1,92 @@
+﻿{% extends "base.html" %}
+{% load i18n slic_tags %}
+
+{% block title %}{% trans "Questions" %}{% endblock %}
+
+{% block content %}
+<div class="py-3">
+  <h2 class="h5 mb-4">{{ specific.name }}</h2>
+
+  {% if errors %}
+  <div class="alert alert-danger">
+    {% for e in errors %}<div>{{ e }}</div>{% endfor %}
+  </div>
+  {% endif %}
+
+  <form method="post" action="{% url 'responses:task_submit' slug=slug participant_id=participant_id task_type='questiontask' task_id=task.id %}">
+    {% csrf_token %}
+
+    {% for question in questions %}
+      <div class="card mb-4">
+        <div class="card-body">
+          <p class="card-text font-weight-bold">
+            {{ question.prompt|markdown }}
+            {% if question.required %}<span class="text-danger" aria-hidden="true">*</span>{% endif %}
+          </p>
+
+          {% if question.question_type == 'text' %}
+            <input type="text" name="question_{{ question.id }}" class="form-control"
+                   value="{{ submitted_data|default_if_none:'' }}"
+                   {% if question.required %}required{% endif %}>
+
+          {% elif question.question_type == 'radio' %}
+            {% for option in question.options.all %}
+              <div class="form-check">
+                <input class="form-check-input" type="radio"
+                       name="question_{{ question.id }}" value="{{ option.contents }}"
+                       id="opt_{{ option.id }}"
+                       {% if forloop.first %}checked{% endif %}
+                       {% if question.required %}required{% endif %}>
+                <label class="form-check-label" for="opt_{{ option.id }}">{{ option.contents }}</label>
+              </div>
+            {% endfor %}
+
+          {% elif question.question_type == 'checkbox' %}
+            {% for option in question.options.all %}
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox"
+                       name="question_{{ question.id }}" value="{{ option.contents }}"
+                       id="opt_{{ option.id }}">
+                <label class="form-check-label" for="opt_{{ option.id }}">{{ option.contents }}</label>
+              </div>
+            {% endfor %}
+
+          {% elif question.question_type == 'dropdown' %}
+            <select name="question_{{ question.id }}" class="form-control"
+                    {% if question.required %}required{% endif %}>
+              <option value="">- {% trans "Select" %} -</option>
+              {% for option in question.options.all %}
+                <option value="{{ option.contents }}">{{ option.contents }}</option>
+              {% endfor %}
+            </select>
+
+          {% elif question.question_type == 'rating' %}
+            {% with question.scale as scale %}
+              {% if scale %}
+              <div class="d-flex justify-content-center align-items-center my-3">
+                <span class="font-weight-bold mr-2">{{ scale.low }}</span>
+                <input type="range" class="custom-range w-75"
+                       name="question_{{ question.id }}"
+                       id="range_{{ question.id }}"
+                       min="1" max="{{ scale.bins }}" step="1"
+                       oninput="document.getElementById('val_{{ question.id }}').textContent = this.value"
+                       {% if question.required %}required{% endif %}>
+                <span class="font-weight-bold ml-2">{{ scale.high }}</span>
+              </div>
+              <div class="d-flex justify-content-between text-muted small px-2 mb-1">
+                {% for val in scale.bins_range %}<span>{{ val }}</span>{% endfor %}
+              </div>
+              <div class="text-center">
+                <strong id="val_{{ question.id }}"></strong>
+              </div>
+              {% endif %}
+            {% endwith %}
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-primary">{% trans "Save and continue" %}</button>
+  </form>
+</div>
+{% endblock %}

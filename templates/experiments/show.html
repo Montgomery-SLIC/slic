@@ -1,0 +1,257 @@
+﻿{% extends "base.html" %}
+{% load i18n slic_tags %}
+{% block title %}{{ experiment.name }}{% endblock %}
+{% block content %}
+
+<a href="{% url 'experiments:index' %}" class="btn btn-outline-primary">
+  <i class="fas fa-reply"></i> {% trans "Back to experiments" %}
+</a>
+<hr>
+
+<h3>{{ experiment.name }}</h3>
+<p>{{ experiment.description }}</p>
+
+{% if experiment.complete %}
+  {# ── Published view ────────────────────────────────────────────────────── #}
+  <h3>{% trans "Link" %}:</h3>
+  <p class="p-3 border m-2">
+    {% with request.scheme|add:"://"|add:request.get_host as base_url %}
+    <a href="{{ base_url }}{% url 'responses:home' experiment.slug %}">
+      {{ base_url }}{% url 'responses:home' experiment.slug %}
+    </a>
+    {% endwith %}
+  </p>
+  <br>
+  <a href="{% url 'experiments:download' experiment.pk %}" class="btn btn-outline-primary">
+    {% trans "Download" %}
+  </a>
+  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#terms">
+    {% trans "View terms" %}
+  </button>
+
+  {# ── Stat table ──────────────────────────────────────────────────────────── #}
+  <br><br>
+  <table class="table" id="statistics_table">
+    <thead class="thead-light">
+      <tr>
+        <th class="col" style="width: 25%">{% trans "Responses" %}</th>
+        <th class="col" style="width: 25%">{% trans "Complete responses" %}</th>
+        <th class="col" style="width: 25%">{% trans "Response ratio" %}</th>
+        <th class="col" style="width: 25%">{% trans "Last response" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td id="total_responses">{{ total_responses }}</td>
+        <td id="fully_finished">{{ finished_responses }}</td>
+        <td>
+          {% if total_responses %}
+            {% widthratio finished_responses total_responses 100 %}%
+          {% else %}
+            0%
+          {% endif %}
+        </td>
+        <td id="last_response">{{ last_response_date|date:"d M Y H:i"|default:"-" }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+
+{% else %}
+  {# ── Editing view ──────────────────────────────────────────────────────── #}
+
+  {# ── Validation errors / warnings from a failed publish attempt ────────── #}
+  {% if completion_errors %}
+  <div class="alert alert-danger">
+    <strong>{{ experiment.name }} {% trans "contains the following errors" %}:</strong>
+    <ul class="mb-0">
+      {% for e in completion_errors %}<li>{{ e }}</li>{% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+  {% if completion_warnings %}
+  <div class="alert alert-warning">
+    <strong>{{ experiment.name }} {% trans "contains the following warnings" %}:</strong>
+    <ul class="mb-0">
+      {% for w in completion_warnings %}<li>{{ w }}</li>{% endfor %}
+    </ul>
+    {% if completion_force %}
+    <form method="post" action="{% url 'experiments:complete' experiment.pk %}" class="mt-2">
+      {% csrf_token %}
+      <input type="hidden" name="force" value="1">
+      <button type="submit" class="btn btn-warning btn-sm">{% trans "Publish anyway" %}</button>
+    </form>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-10 border-right p-3">
+        <a href="{% url 'experiments:edit' experiment.pk %}" class="btn btn-outline-primary">
+          {% trans "Edit experiment" %}
+        </a>
+        <a href="{% url 'experiments:terms' experiment.pk %}" class="btn btn-outline-primary">
+          {% trans "Edit terms" %}
+        </a>
+      </div>
+      <div class="col-sm-2 p-3">
+        <form method="post" action="{% url 'experiments:complete' experiment.pk %}"
+              onsubmit="return confirm('{% trans "Publish this experiment?" %}')">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-outline-success">{% trans "Publish" %}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<br>
+
+{# ── Tasks list ────────────────────────────────────────────────────────────── #}
+<h3>{% trans "Tasks" %}</h3>
+
+{% if not experiment.complete %}
+<div class="d-flex mb-3">
+  <div class="px-2">
+    <a href="{% url 'tasks:question_task_new' taskable_type='experiment' taskable_id=experiment.pk %}"
+       class="btn btn-outline-primary">
+      {% trans "Add question page" %}
+    </a>
+  </div>
+  <div class="px-2">
+    <a href="{% url 'tasks:sample_task_new' taskable_type='experiment' taskable_id=experiment.pk %}"
+       class="btn btn-outline-primary">
+      {% trans "Add audio sample" %}
+    </a>
+  </div>
+  <div class="px-2">
+    <a href="{% url 'tasks:intermediate_screen_new' taskable_type='experiment' taskable_id=experiment.pk %}"
+       class="btn btn-outline-primary">
+      {% trans "Add intermediate screen" %}
+    </a>
+  </div>
+</div>
+{% endif %}
+
+{% if tasks %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      {% if experiment.complete %}
+        <th scope="col" width="2em">{% trans "Random" %}</th>
+      {% else %}
+        <th scope="col" width="2em"></th>
+        <th scope="col" width="2em">{% trans "Randomise" %}</th>
+      {% endif %}
+      <th scope="col">{% trans "Name" %}</th>
+      <th scope="col">{% trans "Type" %}</th>
+      {% if not experiment.complete %}
+        <th scope="col">{% trans "Delete" %}</th>
+      {% endif %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for task in tasks %}
+    {% with task.get_specific as specific %}
+    <tr>
+      {% if experiment.complete %}
+        <td scope="row">
+          <input type="checkbox" {% if task.random %}checked{% endif %} disabled>
+        </td>
+      {% else %}
+        <td><i class="fas fa-bars grabbable"></i></td>
+        <td scope="row">
+          <form method="post" action="{% url 'tasks:task_random' pk=task.pk %}" class="d-inline">
+            {% csrf_token %}
+            <input type="checkbox" name="random" onchange="this.form.submit()"
+                   {% if task.random %}checked{% endif %}>
+          </form>
+        </td>
+      {% endif %}
+      <td>
+        {% if specific %}
+          {% with specific|class_name as cname %}
+            {% if cname == 'SampleTask' %}
+              <a href="{% url 'tasks:sample_task_edit' pk=task.pk %}">{{ task.name }}</a>
+            {% elif cname == 'QuestionTask' %}
+              <a href="{% url 'tasks:question_task_edit' pk=task.pk %}">{{ task.name }}</a>
+            {% elif cname == 'ListeningTask' %}
+              <a href="{% url 'tasks:listening_task_edit' pk=task.pk %}">{{ task.name }}</a>
+            {% elif cname == 'ClickTask' %}
+              <a href="{% url 'tasks:click_task_edit' pk=task.pk %}">{{ task.name }}</a>
+            {% elif cname == 'IntermediateScreenTask' %}
+              <a href="{% url 'tasks:intermediate_screen_edit' pk=task.pk %}">{{ task.name }}</a>
+            {% else %}
+              {{ task.name }}
+            {% endif %}
+          {% endwith %}
+        {% else %}
+          {{ task.name }}
+        {% endif %}
+      </td>
+      <td>{% if specific %}{{ specific.type_name }}{% endif %}</td>
+      {% if not experiment.complete %}
+      <td>
+        {% if specific %}
+        {% with specific|class_name as cname %}
+          {% if cname == 'SampleTask' %}
+          <form method="post" action="{% url 'tasks:sample_task_delete' pk=task.pk %}" class="d-inline"
+                onsubmit="return confirm('{% trans "Are you sure?" %}')">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-danger btn-sm">{% trans "Delete" %}</button>
+          </form>
+          {% elif cname == 'QuestionTask' %}
+          <form method="post" action="{% url 'tasks:question_task_delete' pk=task.pk %}" class="d-inline"
+                onsubmit="return confirm('{% trans "Are you sure?" %}')">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-danger btn-sm">{% trans "Delete" %}</button>
+          </form>
+          {% elif cname == 'ListeningTask' %}
+          <form method="post" action="{% url 'tasks:listening_task_delete' pk=task.pk %}" class="d-inline"
+                onsubmit="return confirm('{% trans "Are you sure?" %}')">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-danger btn-sm">{% trans "Delete" %}</button>
+          </form>
+          {% elif cname == 'ClickTask' %}
+          <form method="post" action="{% url 'tasks:click_task_delete' pk=task.pk %}" class="d-inline"
+                onsubmit="return confirm('{% trans "Are you sure?" %}')">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-danger btn-sm">{% trans "Delete" %}</button>
+          </form>
+          {% elif cname == 'IntermediateScreenTask' %}
+          <form method="post" action="{% url 'tasks:intermediate_screen_delete' pk=task.pk %}" class="d-inline"
+                onsubmit="return confirm('{% trans "Are you sure?" %}')">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-danger btn-sm">{% trans "Delete" %}</button>
+          </form>
+          {% endif %}
+        {% endwith %}
+        {% endif %}
+      </td>
+      {% endif %}
+    </tr>
+    {% endwith %}
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+{# ── Terms modal ───────────────────────────────────────────────────────────── #}
+<div class="modal fade" id="terms" tabindex="-1" role="dialog" aria-labelledby="termsLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="termsLabel">{% trans "Consent terms" %}</h5>
+      </div>
+      <div class="modal-body">
+        {{ experiment.terms }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Close" %}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

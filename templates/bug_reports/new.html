@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Report a bug" %}{% endblock %}
+
+{% block content %}
+<h2>{% trans "Report a bug" %}</h2>
+
+{% if error %}
+<div class="alert alert-danger mt-3" role="alert">{{ error }}</div>
+{% endif %}
+
+<form action="{% url 'bug_report_submit' %}" method="post" class="simple_form" id="bug-report-form">
+  {% csrf_token %}
+  <div class="form-inputs">
+    <div class="form-group">
+      <label for="email">{% trans "Email address" %}</label>
+      <input type="text" name="email" id="email" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="report">{% trans "Details" %}</label>
+      <textarea name="report" id="report" rows="6" cols="24" class="form-control"></textarea>
+    </div>
+    {% if RECAPTCHA_PUBLIC_KEY %}
+      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+      <div class="g-recaptcha mt-2 mb-2" data-sitekey="{{ RECAPTCHA_PUBLIC_KEY }}"></div>
+      <div id="captcha-error" class="text-danger small mt-1" style="display:none;">
+        {% trans "Please complete the 'I am not a robot' check." %}
+      </div>
+    {% endif %}
+    <div class="form-group">
+      <input type="submit" value="{% trans 'Send' %}" class="btn btn-light">
+    </div>
+  </div>
+</form>
+
+{% if RECAPTCHA_PUBLIC_KEY %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var form = document.getElementById('bug-report-form');
+  var captchaError = document.getElementById('captcha-error');
+  if (captchaError) {
+    form.addEventListener('submit', function(e) {
+      if (typeof grecaptcha !== 'undefined' && !grecaptcha.getResponse()) {
+        e.preventDefault();
+        captchaError.style.display = 'block';
+        captchaError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        captchaError.style.display = 'none';
+      }
+    });
+  }
+});
+</script>
+{% endif %}
+{% endblock %}

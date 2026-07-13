@@ -1,0 +1,29 @@
+﻿{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{{ target.name|default:target.email }} - SLIC{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>{{ target.name|default:target.email }}</h2>
+  <a href="{% url 'accounts:admin_users' %}" class="btn btn-outline-secondary btn-sm">{% trans "Back" %}</a>
+</div>
+<dl class="row">
+  <dt class="col-sm-3">{% trans "Email" %}</dt>
+  <dd class="col-sm-9">{{ target.email }}</dd>
+  <dt class="col-sm-3">{% trans "Name" %}</dt>
+  <dd class="col-sm-9">{{ target.name }}</dd>
+  <dt class="col-sm-3">{% trans "Institution" %}</dt>
+  <dd class="col-sm-9">{{ target.institution|default:"-" }}</dd>
+  <dt class="col-sm-3">{% trans "Country" %}</dt>
+  <dd class="col-sm-9">{{ target.country|default:"-" }}</dd>
+  <dt class="col-sm-3">{% trans "Faculty" %}</dt>
+  <dd class="col-sm-9">{{ target.faculty|default:"-" }}</dd>
+  <dt class="col-sm-3">{% trans "Research level" %}</dt>
+  <dd class="col-sm-9">{{ target.research_level|default:"-" }}</dd>
+  <dt class="col-sm-3">{% trans "Admin" %}</dt>
+  <dd class="col-sm-9">{{ target.admin|yesno:"Yes,No" }}</dd>
+  <dt class="col-sm-3">{% trans "Joined" %}</dt>
+  <dd class="col-sm-9">{{ target.date_joined }}</dd>
+  <dt class="col-sm-3">{% trans "Experiments" %}</dt>
+  <dd class="col-sm-9">{{ target.experiments.count }}</dd>
+</dl>
+{% endblock %}

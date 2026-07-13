@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Register" %}{% endblock %}
+{% block main_class %}page-centered{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-md-10 col-lg-8">
+    <div class="card shadow-sm">
+      <div class="card-body py-4 px-4">
+        <h1 class="h4 mb-1">{% trans "Researcher registration" %}</h1>
+        <p class="text-muted mb-4 small">{% trans "You need a valid invitation code to register." %}</p>
+        <form method="post" action="{% url 'account_signup' %}">
+          {% csrf_token %}
+          {% if form.non_field_errors %}
+            <div class="alert alert-danger" role="alert">
+              <i class="fas fa-exclamation-circle mr-1"></i>
+              {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+            </div>
+          {% endif %}
+          {% for field in form %}
+            <div class="mb-3">
+              <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+              {{ field }}
+              {% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}
+              {% if field.errors %}<div class="text-danger small">{{ field.errors }}</div>{% endif %}
+            </div>
+          {% endfor %}
+          <button type="submit" class="btn btn-primary w-100">{% trans "Register" %}</button>
+        </form>
+        <hr>
+        <p class="text-center mb-0 small">
+          {% trans "Already have an account?" %} <a href="{% url 'account_login' %}">{% trans "Sign in" %}</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

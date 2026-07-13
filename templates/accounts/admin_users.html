@@ -1,0 +1,58 @@
+﻿{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "All registered users (researchers)" %} - SLIC{% endblock %}
+{% block content %}
+
+<h3>{% trans "All registered users (researchers)" %}</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">{% trans "Name" %}</th>
+      <th scope="col">{% trans "Country" %}</th>
+      <th scope="col">{% trans "Institution" %}</th>
+      <th scope="col">{% trans "Email" %}</th>
+      <th scope="col">{% trans "Reg. date" %}</th>
+      <th scope="col">{% trans "Admin" %}</th>
+      <th scope="col">{% trans "More" %}</th>
+      <th scope="col">{% trans "Delete" %}</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for u in users %}
+  <tr>
+    <td scope="row">{{ u.name }}</td>
+    <td>{{ u.country|default:"-" }}</td>
+    <td>{{ u.institution|default:"-" }}</td>
+    <td>{{ u.email }}</td>
+    <td>{{ u.date_joined }}</td>
+    <td>
+      {% if u.admin %}
+        <div style="color: red;">{% trans "True" %}</div>
+      {% else %}
+        <form method="post" action="{% url 'accounts:admin_set_admin' u.pk %}" class="d-inline"
+              onsubmit="return confirm('{% trans "Make this user an admin?" %}')">
+          {% csrf_token %}
+          <button class="btn btn-sm btn-outline-success">{% trans "Set admin" %}</button>
+        </form>
+      {% endif %}
+    </td>
+    <td>
+      <a href="{% url 'accounts:admin_view_user' u.pk %}" class="btn btn-sm btn-outline-secondary">
+        {% trans "See more" %}
+      </a>
+    </td>
+    <td>
+      {% if u.pk != request.user.pk %}
+      <form method="post" action="{% url 'accounts:admin_delete_user' u.pk %}" class="d-inline"
+            onsubmit="return confirm('{% trans "Delete this researcher?" %}')">
+        {% csrf_token %}
+        <button class="btn btn-sm btn-danger">{% trans "Delete" %}</button>
+      </form>
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

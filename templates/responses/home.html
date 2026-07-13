@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load i18n slic_tags %}
+
+{% block title %}{{ experiment.name|default:"Study" }}{% endblock %}
+
+{% block content %}
+<h2 class="text-center">{{ experiment.name }}</h2>
+
+{% if experiment.description %}
+<div class="card">
+  <div class="card-body">
+    <h4>{% trans "Description" %}</h4>
+    <p>{{ experiment.description|markdown }}</p>
+  </div>
+</div>
+{% endif %}
+
+<div class="card">
+  <div class="card-body">
+    <h4>{% trans "Terms" %}</h4>
+    <p>{{ experiment.terms|markdown }}</p>
+  </div>
+</div>
+
+{% if error %}
+<div class="alert alert-danger mt-3" role="alert">{{ error }}</div>
+{% endif %}
+
+<br>
+<div class="text-center">
+  <form method="post" action="{% url 'responses:start' slug=experiment.slug %}" id="start-experiment-form">
+    {% csrf_token %}
+    <div class="form-group">
+      <div class="form-text">
+        <label class="form-check-label">{% trans "Email address" %}</label>
+        <label class="form-check-label" title="{% trans 'Your email is only used to link responses if you participate more than once.' %}">?</label>
+        <input class="form-control" type="email" name="email" id="email-input"
+               required placeholder="{% trans 'Enter your email address' %}">
+        <div class="validation-error text-danger mt-1" style="display: none;"></div>
+      </div>
+      <div class="form-check mt-2">
+        <input class="form-check-input" type="checkbox" name="consent" required>
+        <label class="form-check-label">{% trans "I have read and agree to the terms above." %}</label>
+      </div>
+      {% if RECAPTCHA_PUBLIC_KEY %}
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <div class="g-recaptcha mt-2" data-sitekey="{{ RECAPTCHA_PUBLIC_KEY }}"></div>
+        <div id="captcha-error" class="text-danger small mt-1" style="display:none;">
+          {% trans "Please complete the 'I am not a robot' check." %}
+        </div>
+      {% endif %}
+    </div>
+    <button class="btn btn-primary" type="submit">{% trans "Start" %}</button>
+  </form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var form = document.getElementById('start-experiment-form');
+  var emailInput = document.getElementById('email-input');
+  var validationError = emailInput ? emailInput.parentElement.querySelector('.validation-error') : null;
+  var captchaError = document.getElementById('captcha-error');
+
+  function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  if (emailInput && validationError) {
+    emailInput.addEventListener('blur', function() {
+      var email = this.value.trim();
+      if (email === '') {
+        validationError.textContent = '{% trans "Email address is required." %}';
+        validationError.style.display = 'block';
+        emailInput.classList.add('is-invalid');
+      } else if (!validateEmail(email)) {
+        validationError.textContent = '{% trans "Please enter a valid email address." %}';
+        validationError.style.display = 'block';
+        emailInput.classList.add('is-invalid');
+      } else {
+        validationError.style.display = 'none';
+        emailInput.classList.remove('is-invalid');
+      }
+    });
+  }
+
+  if (captchaError) {
+    form.addEventListener('submit', function(e) {
+      if (typeof grecaptcha !== 'undefined' && !grecaptcha.getResponse()) {
+        e.preventDefault();
+        captchaError.style.display = 'block';
+        captchaError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        captchaError.style.display = 'none';
+      }
+    });
+  }
+});
+</script>
+{% endblock %}

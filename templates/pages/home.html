@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Home" %}{% endblock %}
+
+{% block content %}
+<div class="jumbotron mb-3">
+  <h1 class="display-5">{% trans "Welcome to SLIC" %}</h1>
+  <p class="lead">{% trans "SLIC - Salient Language In Context" %}</p>
+  <p>{% trans "This research software allows researchers to collect data about which features of language people pay attention to as they hear it in real time, and provides listeners with the ability to review their reactions and justify why they reacted." %}</p>
+</div>
+<div class="card mb-3 text-center">
+  <div class="card-header">{% trans "If you are a researcher" %}</div>
+  <div class="card-body">
+    <p>{% trans "To use SLIC as a researcher you will need to register for an account. To register you will need an invitation code, which can be obtained from the system administrator." %}</p>
+    <br>
+    <p>
+      {% trans "To access the website's documentation please follow this link:" %}
+      <a href="{% url 'documentation' %}" title="{% trans 'See the documentation' %}">
+        <i class="fas fa-book"></i> {% trans "User guide" %}
+      </a>
+    </p>
+  </div>
+</div>
+{% endblock %}

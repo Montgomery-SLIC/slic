@@ -1,0 +1,183 @@
+﻿{% extends "base.html" %}
+{% load i18n slic_tags %}
+
+{% block title %}{% trans "Edit" %}: {{ task.name }}{% endblock %}
+
+{% block content %}
+
+{# ── Back button ─────────────────────────────────────────────────────────── #}
+{% if task.experiment_id %}
+  {% url 'experiments:show' pk=task.experiment_id as back_url %}
+  {% with task.experiment.name as back_name %}
+<a href="{{ back_url }}" class="btn btn-outline-primary">
+  <i class="fas fa-reply"></i> {% trans "Back" %}: {{ back_name }}
+</a>
+  {% endwith %}
+{% else %}
+  {% url 'tasks:sample_task_edit' pk=task.sample_task_id as back_url %}
+  {% with task.sample_task.name as back_name %}
+<a href="{{ back_url }}" class="btn btn-outline-primary">
+  <i class="fas fa-reply"></i> {% trans "Back" %}: {{ back_name }}
+</a>
+  {% endwith %}
+{% endif %}
+<hr>
+
+{# ── Task header: editable name + delete, or read-only when published ────── #}
+{% if owning_experiment.complete %}
+  <h5>{% trans "Page name" %}</h5>
+  <h3>{{ task.name }}</h3>
+{% else %}
+<div class="container-fluid px-0">
+  <div class="row no-gutters">
+    <div class="col-sm-10 border-right p-3">
+      <h5>{% trans "Task name" %}</h5>
+      <form method="post" action="{% url 'tasks:question_task_update' pk=task.pk %}">
+        {% csrf_token %}
+        <h3>
+          <input type="text" name="name" value="{{ task.name }}" class="form-control">
+        </h3>
+        <button type="submit" class="btn btn-outline-secondary btn-sm">{% trans "Save name" %}</button>
+      </form>
+    </div>
+    <div class="col-sm-2 p-3 mt-3">
+      <form method="post" action="{% url 'tasks:question_task_delete' pk=task.pk %}"
+            onsubmit="return confirm('{% trans "Are you sure?" %}')">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-danger btn-sm">{% trans "Delete" %}</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<br>
+
+{# ── Questions ────────────────────────────────────────────────────────────── #}
+<h3>{% trans "Questions" %}</h3>
+
+{% if not owning_experiment.complete %}
+<div class="d-flex flex-wrap mb-3" style="gap:.5rem">
+  {% for val, label in question_type_choices %}
+  <form method="post" action="{% url 'tasks:question_create' qt_pk=task.pk %}">
+    {% csrf_token %}
+    <input type="hidden" name="question_type" value="{{ val }}">
+    <button type="submit" class="btn btn-outline-primary btn-sm">{% trans "Add" %} {{ label }}</button>
+  </form>
+  {% endfor %}
+</div>
+{% endif %}
+
+<table class="table">
+  <thead>
+    <tr>
+      {% if not owning_experiment.complete %}<th scope="col" style="width:2em"></th>{% endif %}
+      <th scope="col">{% trans "Question prompt" %}</th>
+      <th scope="col">{% trans "Type" %}</th>
+      <th scope="col">{% trans "Options" %}</th>
+      {% if not owning_experiment.complete %}<th scope="col">{% trans "Delete" %}</th>{% endif %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for question in task.questions.all %}
+    <tr>
+      {# Drag handle (visual only - reordering not yet implemented) #}
+      {% if not owning_experiment.complete %}
+      <td><i class="fas fa-bars text-muted" style="cursor:grab"></i></td>
+      {% endif %}
+
+      {# Prompt cell #}
+      <td>
+        {% if owning_experiment.complete %}
+          {{ question.prompt }}
+        {% else %}
+        <form method="post" action="{% url 'tasks:question_update' pk=question.pk %}">
+          {% csrf_token %}
+          <textarea name="prompt" rows="2" class="form-control form-control-sm">{{ question.prompt }}</textarea>
+          <div class="form-check mt-1">
+            <input type="checkbox" name="required" id="req_{{ question.pk }}" class="form-check-input"
+                   {% if question.required %}checked{% endif %}
+                   onchange="this.form.submit()">
+            <label for="req_{{ question.pk }}" class="form-check-label small">{% trans "Required" %}</label>
+          </div>
+          <button type="submit" class="btn btn-outline-secondary btn-sm mt-1">{% trans "Save" %}</button>
+        </form>
+        {% endif %}
+      </td>
+
+      {# Type cell #}
+      <td>{{ question.get_question_type_display }}</td>
+
+      {# Options / scale cell #}
+      <td>
+        {% if question.has_options %}
+          {% for opt in question.options.all %}
+          <div class="d-flex align-items-center mb-1">
+            <span class="small mr-2">{{ opt.contents }}</span>
+            {% if not owning_experiment.complete %}
+            <form method="post" action="{% url 'tasks:option_delete' pk=opt.pk %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-link btn-sm text-danger p-0 leading-none"
+                      style="line-height:1">✕</button>
+            </form>
+            {% endif %}
+          </div>
+          {% empty %}
+            {% if not owning_experiment.complete %}
+            <p class="text-muted small mb-1">{% trans "No options yet." %}</p>
+            {% endif %}
+          {% endfor %}
+          {% if not owning_experiment.complete %}
+          <form method="post" action="{% url 'tasks:option_create' q_pk=question.pk %}" class="d-flex mt-1">
+            {% csrf_token %}
+            <input type="text" name="contents" class="form-control form-control-sm mr-1"
+                   style="max-width:180px" required>
+            <button type="submit" class="btn btn-outline-secondary btn-sm">{% trans "Add" %}</button>
+          </form>
+          {% endif %}
+        {% endif %}
+
+        {% if question.question_type == 'rating' %}
+          {% with question.scale as scale %}
+          {% if owning_experiment.complete %}
+            <small>{{ scale.low }} – {{ scale.bins }} – {{ scale.high }}</small>
+          {% else %}
+          <form method="post" action="{% url 'tasks:scale_update' pk=question.pk %}">
+            {% csrf_token %}
+            {% trans "From" %} <input type="text" name="low" value="{{ scale.low }}"
+                   class="form-control form-control-sm d-inline-block" style="width:80px">
+            <br>
+            {% trans "Num options" %} <input type="number" name="bins" value="{{ scale.bins|default:7 }}"
+                   size="2" class="form-control form-control-sm d-inline-block" style="width:60px">
+            <button type="submit" class="btn btn-outline-secondary btn-sm">{% trans "Save" %}</button>
+            <br>
+            {% trans "To" %} <input type="text" name="high" value="{{ scale.high }}"
+                   class="form-control form-control-sm d-inline-block" style="width:80px">
+          </form>
+          {% endif %}
+          {% endwith %}
+        {% endif %}
+      </td>
+
+      {# Delete cell #}
+      {% if not owning_experiment.complete %}
+      <td>
+        <form method="post" action="{% url 'tasks:question_delete' pk=question.pk %}"
+              onsubmit="return confirm('{% trans "Are you sure?" %}')">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-outline-danger btn-sm">{% trans "Delete" %}</button>
+        </form>
+      </td>
+      {% endif %}
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="{% if not owning_experiment.complete %}5{% else %}3{% endif %}" class="text-muted text-center">
+        {% trans "No questions yet." %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load i18n static slic_tags %}
+
+{% block title %}{% trans "Listening" %}{% endblock %}
+
+{% block content %}
+<div class="text-center">
+  <div class="data" data-listens="{{ specific.listens|default:1 }}"
+       style="display:none;"></div>
+  <div class="player" style="display:none;">
+    <audio src="{% url 'responses:serve_audio' sample_task_id=sample.id %}"
+           preload="auto"></audio>
+  </div>
+  <br>
+  <canvas id="progress" height="100" width="500"></canvas>
+  <br>
+  <div class="listens_counter"><b></b></div>
+  <br>
+  <span id="current-time"></span>
+  /
+  <span id="duration"></span>
+  <br>
+  <div class="btn btn-outline-secondary" id="audioControl" onclick="play()">
+    {% trans "Play" %}
+  </div>
+</div>
+
+<br>
+<div class="text-center">
+  <a href="{{ next_url }}" class="btn btn-primary" role="button"
+     style="display: none;" id="next-button">{% trans "Next" %}</a>
+</div>
+<br>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  var played_once = false;
+  var canvasWidth = 500;
+  var audioEl = document.querySelector('.player audio');
+  var canvas = document.getElementById('progress').getContext('2d');
+  audioEl.ontimeupdate = updateBar;
+
+  var listens = parseInt(document.querySelector('.data').getAttribute('data-listens') || '1');
+  document.querySelector('.listens_counter b').textContent = 'Listens left: ' + listens;
+
+  audioEl.addEventListener('loadedmetadata', function() {
+    var duration = audioEl.duration;
+    var currentTime = audioEl.currentTime;
+    document.getElementById('duration').innerHTML = convertElapsedTime(duration);
+    document.getElementById('current-time').innerHTML = convertElapsedTime(currentTime);
+    canvas.fillRect(0, 0, canvasWidth, 50);
+  });
+
+  function play() {
+    if (listens > 0) {
+      audioEl.currentTime = 0;
+      audioEl.play();
+      listens = listens - 1;
+      document.querySelector('.listens_counter b').textContent = 'Listens left: ' + listens;
+    }
+  }
+
+  function updateBar() {
+    canvas.clearRect(0, 0, canvasWidth, 50);
+    canvas.fillStyle = '#000';
+    canvas.fillRect(0, 0, canvasWidth, 50);
+
+    var currentTime = audioEl.currentTime;
+    var duration = audioEl.duration;
+
+    document.getElementById('current-time').innerHTML = convertElapsedTime(currentTime);
+
+    var percentage = currentTime / duration;
+    var progress = canvasWidth * percentage;
+    canvas.fillStyle = '#FF0000';
+    canvas.fillRect(0, 0, progress, 50);
+
+    if (currentTime >= duration) {
+      document.getElementById('next-button').style.display = 'inline-block';
+    }
+  }
+
+  function convertElapsedTime(inputSeconds) {
+    var seconds = Math.floor(inputSeconds % 60);
+    if (seconds < 10) { seconds = '0' + seconds; }
+    var minutes = Math.floor(inputSeconds / 60);
+    return minutes + ':' + seconds;
+  }
+</script>
+{% endblock %}

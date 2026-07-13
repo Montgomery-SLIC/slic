@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Thank you" %}{% endblock %}
+
+{% block content %}
+<div class="text-center">
+  <h2>{% trans "Thank you!" %}</h2>
+  <h4>{% trans "You have completed this experiment" %}</h4>
+  <p>
+    {% trans "Your unique response ID is" %}
+    {% if response_slug %}<strong>{{ response_slug }}</strong>{% endif %}
+  </p>
+</div>
+{% endblock %}

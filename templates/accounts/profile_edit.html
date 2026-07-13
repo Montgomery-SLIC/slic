@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Settings" %}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-md-10 col-lg-8">
+    <h2>{% trans "Edit Account" %}</h2>
+
+    <form method="post" action="{% url 'accounts:profile_edit' %}">
+      {% csrf_token %}
+
+      {% if form.non_field_errors %}
+        <div class="alert alert-danger" role="alert">
+          {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="form-group">
+        <label for="{{ form.email.id_for_label }}">{{ form.email.label }} <abbr title="required">*</abbr></label>
+        <input type="email"
+               name="{{ form.email.html_name }}"
+               id="{{ form.email.id_for_label }}"
+               value="{{ form.email.value|default:'' }}"
+               class="form-control{% if form.email.errors %} is-invalid{% endif %}"
+               required autofocus>
+        {% if form.email.errors %}
+          <div class="invalid-feedback">{{ form.email.errors|join:', ' }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+        <input type="password"
+               name="{{ form.password.html_name }}"
+               id="{{ form.password.id_for_label }}"
+               class="form-control{% if form.password.errors %} is-invalid{% endif %}"
+               autocomplete="new-password">
+        <small class="form-text text-muted">{{ form.password.help_text }}</small>
+        {% if form.password.errors %}
+          <div class="invalid-feedback">{{ form.password.errors|join:', ' }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.password_confirmation.id_for_label }}">{{ form.password_confirmation.label }}</label>
+        <input type="password"
+               name="{{ form.password_confirmation.html_name }}"
+               id="{{ form.password_confirmation.id_for_label }}"
+               class="form-control{% if form.password_confirmation.errors %} is-invalid{% endif %}"
+               autocomplete="new-password">
+        {% if form.password_confirmation.errors %}
+          <div class="invalid-feedback">{{ form.password_confirmation.errors|join:', ' }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.current_password.id_for_label }}">{{ form.current_password.label }} <abbr title="required">*</abbr></label>
+        <input type="password"
+               name="{{ form.current_password.html_name }}"
+               id="{{ form.current_password.id_for_label }}"
+               class="form-control{% if form.current_password.errors %} is-invalid{% endif %}"
+               autocomplete="current-password"
+               required>
+        <small class="form-text text-muted">{{ form.current_password.help_text }}</small>
+        {% if form.current_password.errors %}
+          <div class="invalid-feedback">{{ form.current_password.errors|join:', ' }}</div>
+        {% endif %}
+      </div>
+
+      <br>
+
+      <div class="form-group">
+        <label for="{{ form.name.id_for_label }}">{{ form.name.label }} <abbr title="required">*</abbr></label>
+        <input type="text"
+               name="{{ form.name.html_name }}"
+               id="{{ form.name.id_for_label }}"
+               value="{{ form.name.value|default:'' }}"
+               class="form-control{% if form.name.errors %} is-invalid{% endif %}"
+               autocomplete="name"
+               required>
+        {% if form.name.errors %}
+          <div class="invalid-feedback">{{ form.name.errors|join:', ' }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.institution.id_for_label }}">{{ form.institution.label }}</label>
+        <input type="text"
+               name="{{ form.institution.html_name }}"
+               id="{{ form.institution.id_for_label }}"
+               value="{{ form.institution.value|default:'' }}"
+               class="form-control{% if form.institution.errors %} is-invalid{% endif %}"
+               autocomplete="organization">
+        {% if form.institution.errors %}
+          <div class="invalid-feedback">{{ form.institution.errors|join:', ' }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.country.id_for_label }}">{{ form.country.label }} <abbr title="required">*</abbr></label>
+        {{ form.country }}
+        {% if form.country.errors %}
+          <div class="invalid-feedback d-block">{{ form.country.errors|join:', ' }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-check mb-3">
+        <input type="checkbox"
+               name="{{ form.funded.html_name }}"
+               id="{{ form.funded.id_for_label }}"
+               class="form-check-input{% if form.funded.errors %} is-invalid{% endif %}"
+               {% if form.funded.value %}checked{% endif %}>
+        <label class="form-check-label" for="{{ form.funded.id_for_label }}">{{ form.funded.label }}</label>
+        {% if form.funded.errors %}
+          <div class="invalid-feedback">{{ form.funded.errors|join:', ' }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-check mb-3">
+        <input type="checkbox"
+               name="{{ form.mailing_list.html_name }}"
+               id="{{ form.mailing_list.id_for_label }}"
+               class="form-check-input{% if form.mailing_list.errors %} is-invalid{% endif %}"
+               {% if form.mailing_list.value %}checked{% endif %}>
+        <label class="form-check-label" for="{{ form.mailing_list.id_for_label }}">{{ form.mailing_list.label }}</label>
+        {% if form.mailing_list.errors %}
+          <div class="invalid-feedback">{{ form.mailing_list.errors|join:', ' }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.faculty.id_for_label }}">{{ form.faculty.label }}</label>
+        <input type="text"
+               name="{{ form.faculty.html_name }}"
+               id="{{ form.faculty.id_for_label }}"
+               value="{{ form.faculty.value|default:'' }}"
+               class="form-control{% if form.faculty.errors %} is-invalid{% endif %}">
+        {% if form.faculty.errors %}
+          <div class="invalid-feedback">{{ form.faculty.errors|join:', ' }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.research_level.id_for_label }}">{{ form.research_level.label }} <abbr title="required">*</abbr></label>
+        {{ form.research_level }}
+        {% if form.research_level.errors %}
+          <div class="invalid-feedback d-block">{{ form.research_level.errors|join:', ' }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-actions">
+        <input type="submit" value="{% trans 'Update' %}" class="btn btn-primary">
+      </div>
+    </form>
+
+    <h3 class="mt-5">{% trans "Cancel my account" %}</h3>
+    <p>
+      {% trans "Unhappy?" %}
+      <form method="post" action="{% url 'accounts:account_delete' %}" style="display:inline"
+            onsubmit="return confirm('{% trans "Are you sure?" %}');">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-link p-0 align-baseline">{% trans "Cancel my account" %}</button>
+      </form>
+    </p>
+
+    <p><a href="javascript:history.back()">{% trans "Back" %}</a></p>
+  </div>
+</div>
+{% endblock %}

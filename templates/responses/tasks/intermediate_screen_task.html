@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n slic_tags %}
+
+{% block title %}{% trans "Information" %}{% endblock %}
+
+{% block content %}
+<div class="text-center">
+  <div class="message-box">
+    {% if specific.message %}{{ specific.message|markdown }}{% endif %}
+  </div>
+  <br>
+  <a href="{{ next_url }}" class="btn btn-primary" role="button">{% trans "Next" %}</a>
+</div>
+{% endblock %}

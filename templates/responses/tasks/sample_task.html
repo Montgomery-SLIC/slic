@@ -1,0 +1,12 @@
+﻿{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="py-4">
+  {# SampleTasks route to sample_intro - this template should not normally be reached #}
+  <p>{% trans "Loading…" %}</p>
+  {% if next_url %}
+    <meta http-equiv="refresh" content="0; url={{ next_url }}">
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Edit terms" %}{% endblock %}
+{% block content %}
+<h2>{% trans "Edit terms" %}</h2>
+
+<form method="post" action="{% url 'experiments:terms' experiment.pk %}">
+  {% csrf_token %}
+  {% if form.non_field_errors %}
+  <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+  {% endif %}
+  <div class="form-inputs">
+    <div class="form-group">
+      {{ form.terms }}
+    </div>
+  </div>
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">{% trans "Edit terms" %}</button>
+  </div>
+</form>
+{% endblock %}

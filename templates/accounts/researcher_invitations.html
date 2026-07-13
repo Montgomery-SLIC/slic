@@ -1,0 +1,54 @@
+﻿{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Researcher Invitations" %} - SLIC{% endblock %}
+{% block content %}
+
+<h3>{% trans "Your invitations" %}</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">{% trans "Code" %}</th>
+      <th scope="col">{% trans "Link" %}</th>
+      <th scope="col">{% trans "Used" %}</th>
+      <th scope="col">{% trans "Created at" %}</th>
+      <th scope="col">{% trans "Delete" %}</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for inv in invitations %}
+  <tr>
+    <td scope="row"><code>{{ inv.registration_code }}</code></td>
+    <td>
+      <small>
+        {{ request.scheme }}://{{ request.get_host }}{% url 'account_signup' %}?code={{ inv.registration_code }}
+      </small>
+    </td>
+    {% if inv.used %}
+      <td class="text-secondary">{% trans "True" %}</td>
+    {% else %}
+      <td class="text-success">{% trans "False" %}</td>
+    {% endif %}
+    <td>{{ inv.created_at }}</td>
+    <td>
+      {% if not inv.used %}
+      <form method="post" action="{% url 'accounts:invitation_delete' inv.pk %}"
+            onsubmit="return confirm('{% trans "Delete this invitation?" %}')">
+        {% csrf_token %}
+        <button class="btn btn-sm btn-danger">{% trans "Delete" %}</button>
+      </form>
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<form method="post" action="{% url 'accounts:invitation_create' %}">
+  {% csrf_token %}
+  <div class="form-inputs">
+    <button type="submit" class="btn btn-primary">{% trans "Create invitation" %}</button>
+  </div>
+</form>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load i18n slic_tags %}
+
+{% block title %}{% trans "Edit" %}: {{ task.name }}{% endblock %}
+
+{% block content %}
+{% if task.sample_task_id %}
+<a href="{% url 'tasks:sample_task_edit' pk=task.sample_task_id %}" class="btn btn-outline-primary">
+  <i class="fas fa-reply"></i> {% trans "Back to" %} {{ task.sample_task.name }}
+</a>
+{% else %}
+<a href="{% url 'experiments:show' pk=task.experiment_id %}" class="btn btn-outline-primary">
+  <i class="fas fa-reply"></i> {% trans "Back to" %} {{ task.experiment.name }}
+</a>
+{% endif %}
+<hr>
+<div class="d-flex justify-content-between align-items-start mb-4">
+  <h1 class="h4">{{ task.name }}</h1>
+</div>
+
+<div class="card mb-4">
+  <div class="card-header">{% trans "Settings" %}</div>
+  <div class="card-body">
+    {% if owning_experiment.complete %}
+      <p><strong>{% trans "Reaction prompt" %}:</strong></p>
+      <p>{{ task.prompt|markdown }}</p>
+      {% if task.explanation_prompt %}
+        <p><strong>{% trans "Explanation prompt" %}:</strong></p>
+        <p>{{ task.explanation_prompt|markdown }}</p>
+      {% endif %}
+    {% else %}
+      <form method="post" action="{% url 'tasks:click_task_update' pk=task.pk %}">
+        {% csrf_token %}
+        {% for field in form %}
+          <div class="mb-3">
+            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+            {{ field }}
+            {% if field.name == 'prompt' or field.name == 'explanation_prompt' %}
+              <div class="form-text">{% trans "Supports Markdown." %}</div>
+            {% endif %}
+            {% if field.errors %}<div class="text-danger small">{{ field.errors }}</div>{% endif %}
+          </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary btn-sm">{% trans "Save" %}</button>
+      </form>
+    {% endif %}
+  </div>
+</div>
+
+{% if not owning_experiment.complete %}
+<div class="card border-danger">
+  <div class="card-header text-danger">{% trans "Danger zone" %}</div>
+  <div class="card-body">
+    <form method="post" action="{% url 'tasks:click_task_delete' pk=task.pk %}"
+          onsubmit="return confirm('{% trans "Delete this reaction task?" %}')">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger btn-sm">{% trans "Delete" %}</button>
+    </form>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
