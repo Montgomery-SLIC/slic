@@ -1,0 +1,332 @@
+# Danish translations for SLIC Django application.
+# Translated from config/locales/dk.yml in the Rails source.
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: da\n"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Contact"
+msgstr "Kontakt"
+
+msgid "Contact us"
+msgstr "Kontakt os"
+
+msgid "Sign in"
+msgstr "Log ind"
+
+msgid "Register"
+msgstr "Tilmeld dig"
+
+msgid "Version"
+msgstr "Version"
+
+msgid "Report a bug"
+msgstr "Rapportér en fejl"
+
+msgid "User guide"
+msgstr "Brugervejledning"
+
+msgid "See the documentation"
+msgstr "Se dokumentationen"
+
+msgid "Dismiss"
+msgstr "Luk"
+
+msgid "Welcome to SLIC"
+msgstr "Velkommen til SLIC"
+
+msgid "SLIC - Salient Language In Context"
+msgstr "SLIC - Salient Language In Context"
+
+msgid "This research software allows researchers to collect data about which features of language people pay attention to as they hear it in real time, and provides listeners with the ability to review their reactions and justify why they reacted."
+msgstr "Dette forskningssoftware giver forskere mulighed for at indsamle data om, hvilke sproglige træk folk lægger mærke til, mens de hører dem i realtid, og giver lytterne mulighed for at gennemgå deres reaktioner og begrunde, hvorfor de reagerede."
+
+msgid "If you are a researcher"
+msgstr "Hvis du er forsker"
+
+msgid "To use SLIC as a researcher you will need to register for an account. To register you will need an invitation code, which can be obtained from the system administrator."
+msgstr "For at bruge SLIC som forsker skal du registrere dig for en konto. For at registrere dig skal du bruge en invitationskode, som kan fås fra systemadministratoren."
+
+msgid "Details"
+msgstr "Detaljer"
+
+msgid "Send"
+msgstr "Send"
+
+msgid "Your report has been sent."
+msgstr "Din rapport er blevet sendt."
+
+msgid "Experiments"
+msgstr "Eksperimenter"
+
+msgid "Settings"
+msgstr "Indstillinger"
+
+msgid "Sign out"
+msgstr "Log ud"
+
+msgid "Admin tools"
+msgstr "Adminværktøjer"
+
+msgid "All users"
+msgstr "Alle brugere"
+
+msgid "Invitations"
+msgstr "Invitationer"
+
+msgid "Toggle navigation"
+msgstr "Skift navigation"
+
+msgid "True"
+msgstr "Sand"
+
+msgid "False"
+msgstr "Falsk"
+
+msgid "Create invitation"
+msgstr "Opret invitation"
+
+msgid "Country"
+msgstr "Land"
+
+msgid "Institution"
+msgstr "Institution"
+
+msgid "Faculty"
+msgstr "Fakultet"
+
+msgid "Research level"
+msgstr "Forskningsniveau"
+
+msgid "Funded"
+msgstr "Finansieret"
+
+msgid "Mailing list"
+msgstr "Mailingliste"
+
+msgid "Reg. date"
+msgstr "Registreringsdato"
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "More"
+msgstr "Mere"
+
+msgid "Set admin"
+msgstr "Gør til admin"
+
+msgid "See more"
+msgstr "Se mere"
+
+msgid "Edit experiment"
+msgstr "Rediger eksperiment"
+
+msgid "New Experiment"
+msgstr "Nyt eksperiment"
+
+msgid "New experiment"
+msgstr "Nyt eksperiment"
+
+msgid "Create experiment"
+msgstr "Opret eksperiment"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Published"
+msgstr "Offentliggjort"
+
+msgid "Editing"
+msgstr "Redigerer"
+
+msgid "Download"
+msgstr "Download resultater"
+
+msgid "Publish"
+msgstr "Offentliggør"
+
+msgid "Consent terms"
+msgstr "Samtykkebetingelser"
+
+msgid "Random"
+msgstr "Tilfældig"
+
+msgid "Randomise"
+msgstr "Gør tilfældig"
+
+msgid "Name"
+msgstr "Navn"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Tasks"
+msgstr "Opgaver"
+
+msgid "Save"
+msgstr "Gem"
+
+msgid "Back"
+msgstr "Tilbage"
+
+msgid "Delete"
+msgstr "Slet"
+
+msgid "Add"
+msgstr "Tilføj"
+
+msgid "Create"
+msgstr "Opret"
+
+msgid "Edit"
+msgstr "Rediger"
+
+msgid "Update"
+msgstr "Opdater"
+
+msgid "Cancel"
+msgstr "Annuller"
+
+msgid "Next"
+msgstr "Næste"
+
+msgid "Begin"
+msgstr "Start"
+
+msgid "Play"
+msgstr "Afspil"
+
+msgid "Click!"
+msgstr "Klik!"
+
+msgid "Upload"
+msgstr "Upload"
+
+msgid "Start"
+msgstr "Start"
+
+# Participant-facing strings (from dk.yml participant section)
+msgid "Description"
+msgstr "Beskrivelse"
+
+msgid "Terms"
+msgstr "Vilkår"
+
+msgid "Email address"
+msgstr "Email-adresse"
+
+msgid "Enter your email address (optional)"
+msgstr "Indtast din e-mailadresse (valgfri)"
+
+msgid "Your email is only used to link responses if you participate more than once."
+msgstr "Din e-mail bruges kun til at forbinde svar, hvis du deltager mere end én gang."
+
+msgid "I have read and agree to the terms above."
+msgstr "Klik her for at bekræfte at du har læst og samtykker til vilkårene, samt at du ikke har deltaget i denne undersøgelse eller en lignende undersøgelse før."
+
+msgid "Please accept terms to continue."
+msgstr "Du skal acceptere vilkårene for at fortsætte testen."
+
+msgid "You have completed this experiment"
+msgstr "Du har gennemført undersøgelsen."
+
+msgid "Thank you!"
+msgstr "Tak!"
+
+msgid "Thank you"
+msgstr "Tak"
+
+msgid "Your unique response ID is"
+msgstr "Dit unikke respondent-ID er"
+
+msgid "You are about to listen to a sample. Please use headphones if possible."
+msgstr "Du vil blive præsenteret for en stemmeprøve, som du skal bruge i de næste få opgaver. Du vil blive guidet igennem hvordan du svarer på opgaverne løbende."
+
+msgid "Click begin when you are ready to start."
+msgstr "Klik på 'Start' når du er klar."
+
+msgid "Experiment is not published yet"
+msgstr "Denne undersøgelse er ikke publiceret endnu."
+
+msgid "Researcher registration"
+msgstr "Forskerregistrering"
+
+msgid "You need a valid invitation code to register."
+msgstr "Du skal bruge en gyldig invitationskode for at registrere dig."
+
+msgid "Already have an account?"
+msgstr "Har du allerede en konto?"
+
+msgid "Forgot password?"
+msgstr "Glemt adgangskode?"
+
+msgid "Code"
+msgstr "Kode"
+
+msgid "Used"
+msgstr "Brugt"
+
+msgid "Created at"
+msgstr "Oprettet"
+
+msgid "Joined"
+msgstr "Tilsluttet"
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "Responses"
+msgstr "Svar"
+
+msgid "Link"
+msgstr "Link"
+
+msgid "View terms"
+msgstr "Se samtykkebetingelser"
+
+msgid "Edit terms"
+msgstr "Rediger samtykkebetingelser"
+
+msgid "Sub-tasks"
+msgstr "Underopgaver"
+
+msgid "Questions"
+msgstr "Spørgsmål"
+
+msgid "Audio file"
+msgstr "Lydfil"
+
+msgid "Required"
+msgstr "Påkrævet"
+
+msgid "Save name"
+msgstr "Gem navn"
+
+msgid "Information"
+msgstr "Information"
+
+msgid "Loading…"
+msgstr "Indlæser…"
+
+msgid "All registered users (researchers)"
+msgstr "Alle registrerede brugere (forskere)"
+
+msgid "Your invitations"
+msgstr "Dine invitationer"
+
+msgid "Are you sure?"
+msgstr "Er du sikker?"
+
+msgid "Edit Account"
+msgstr "Rediger konto"
+
+msgid "Cancel my account"
+msgstr "Slet min konto"
+
+msgid "Unhappy?"
+msgstr "Utilfreds?"

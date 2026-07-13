@@ -1,0 +1,332 @@
+# French translations for SLIC Django application.
+# Translated from config/locales/fr.yml in the Rails source.
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
+
+msgid "Home"
+msgstr "Accueil"
+
+msgid "Contact"
+msgstr "Nous contacter"
+
+msgid "Contact us"
+msgstr "Nous contacter"
+
+msgid "Sign in"
+msgstr "Se connecter"
+
+msgid "Register"
+msgstr "S'inscrire"
+
+msgid "Version"
+msgstr "Version"
+
+msgid "Report a bug"
+msgstr "Signaler un bug"
+
+msgid "User guide"
+msgstr "Guide de l'utilisateur"
+
+msgid "See the documentation"
+msgstr "Voir la documentation"
+
+msgid "Dismiss"
+msgstr "Fermer"
+
+msgid "Welcome to SLIC"
+msgstr "Bienvenue sur SLIC"
+
+msgid "SLIC - Salient Language In Context"
+msgstr "SLIC - Salient Language In Context"
+
+msgid "This research software allows researchers to collect data about which features of language people pay attention to as they hear it in real time, and provides listeners with the ability to review their reactions and justify why they reacted."
+msgstr "Ce logiciel de recherche permet aux chercheurs de recueillir des données sur les caractéristiques linguistiques auxquelles les individus prêtent attention lorsqu'ils les écoutent en temps réel. Il offre également aux participants la possibilité de revoir leurs réactions et de justifier pourquoi ils ont réagi."
+
+msgid "If you are a researcher"
+msgstr "Si vous êtes chercheur"
+
+msgid "To use SLIC as a researcher you will need to register for an account. To register you will need an invitation code, which can be obtained from the system administrator."
+msgstr "Pour ajouter ou gérer des expériences, connectez-vous à votre compte en utilisant le bouton 'Se connecter' en haut à droite."
+
+msgid "Details"
+msgstr "Détails"
+
+msgid "Send"
+msgstr "Envoyer"
+
+msgid "Your report has been sent."
+msgstr "Votre rapport a été envoyé."
+
+msgid "Experiments"
+msgstr "Expériences"
+
+msgid "Settings"
+msgstr "Paramètres"
+
+msgid "Sign out"
+msgstr "Se déconnecter"
+
+msgid "Admin tools"
+msgstr "Outils admin"
+
+msgid "All users"
+msgstr "Tous les utilisateurs"
+
+msgid "Invitations"
+msgstr "Invitations"
+
+msgid "Toggle navigation"
+msgstr "Afficher/masquer la navigation"
+
+msgid "True"
+msgstr "Vrai"
+
+msgid "False"
+msgstr "Faux"
+
+msgid "Create invitation"
+msgstr "Créer une nouvelle invitation"
+
+msgid "Country"
+msgstr "Pays"
+
+msgid "Institution"
+msgstr "Institution"
+
+msgid "Faculty"
+msgstr "Faculté"
+
+msgid "Research level"
+msgstr "Niveau de recherche"
+
+msgid "Funded"
+msgstr "Financé"
+
+msgid "Mailing list"
+msgstr "Liste de diffusion"
+
+msgid "Reg. date"
+msgstr "Date d'inscription"
+
+msgid "Admin"
+msgstr "Administrateur"
+
+msgid "More"
+msgstr "Plus"
+
+msgid "Set admin"
+msgstr "Définir comme administrateur"
+
+msgid "See more"
+msgstr "Voir plus"
+
+msgid "Edit experiment"
+msgstr "Modifier l'expérience"
+
+msgid "New Experiment"
+msgstr "Nouvelle expérience"
+
+msgid "New experiment"
+msgstr "Nouvelle expérience"
+
+msgid "Create experiment"
+msgstr "Créer une expérience"
+
+msgid "Status"
+msgstr "Statut"
+
+msgid "Published"
+msgstr "Publié"
+
+msgid "Editing"
+msgstr "Modification"
+
+msgid "Download"
+msgstr "Télécharger les résultats"
+
+msgid "Publish"
+msgstr "Publier"
+
+msgid "Consent terms"
+msgstr "Conditions de consentement"
+
+msgid "Random"
+msgstr "Aléatoire"
+
+msgid "Randomise"
+msgstr "Rendre aléatoire"
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Tasks"
+msgstr "Tâches"
+
+msgid "Save"
+msgstr "Enregistrer"
+
+msgid "Back"
+msgstr "Retour"
+
+msgid "Delete"
+msgstr "Supprimer"
+
+msgid "Add"
+msgstr "Ajouter"
+
+msgid "Create"
+msgstr "Créer"
+
+msgid "Edit"
+msgstr "Modifier"
+
+msgid "Update"
+msgstr "Mettre à jour"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Next"
+msgstr "Suivant"
+
+msgid "Begin"
+msgstr "Commencer"
+
+msgid "Play"
+msgstr "Écouter"
+
+msgid "Click!"
+msgstr "Cliquer !"
+
+msgid "Upload"
+msgstr "Téléverser"
+
+msgid "Start"
+msgstr "Commencer l'expérience"
+
+# Participant-facing strings (from fr.yml participant section)
+msgid "Description"
+msgstr "Description"
+
+msgid "Terms"
+msgstr "Termes et conditions"
+
+msgid "Email address"
+msgstr "Adresse e-mail"
+
+msgid "Enter your email address (optional)"
+msgstr "Entrez votre adresse e-mail (facultatif)"
+
+msgid "Your email is only used to link responses if you participate more than once."
+msgstr "Votre e-mail n'est utilisé que pour relier vos réponses si vous participez plusieurs fois."
+
+msgid "I have read and agree to the terms above."
+msgstr "Cliquez ici pour indiquer que vous avez lu les conditions ci-dessus et que vous les acceptez, et que vous n'avez jamais participé à cette expérience ni à une expérience similaire."
+
+msgid "Please accept terms to continue."
+msgstr "Veuillez accepter les conditions pour continuer."
+
+msgid "You have completed this experiment"
+msgstr "Vous avez complété cette expérience."
+
+msgid "Thank you!"
+msgstr "Merci beaucoup !"
+
+msgid "Thank you"
+msgstr "Merci"
+
+msgid "Your unique response ID is"
+msgstr "Votre identifiant de participation est"
+
+msgid "You are about to listen to a sample. Please use headphones if possible."
+msgstr "Un échantillon de voix vous sera présenté pour les tâches suivantes. Veuillez effectuer chaque tâche en suivant les consignes."
+
+msgid "Click begin when you are ready to start."
+msgstr "Cliquez sur Commencer lorsque vous êtes prêt(e)."
+
+msgid "Experiment is not published yet"
+msgstr "L'expérience n'a pas encore été publiée."
+
+msgid "Researcher registration"
+msgstr "Inscription chercheur"
+
+msgid "You need a valid invitation code to register."
+msgstr "Vous avez besoin d'un code d'invitation valide pour vous inscrire."
+
+msgid "Already have an account?"
+msgstr "Vous avez déjà un compte ?"
+
+msgid "Forgot password?"
+msgstr "Mot de passe oublié ?"
+
+msgid "Code"
+msgstr "Code"
+
+msgid "Used"
+msgstr "Utilisé"
+
+msgid "Created at"
+msgstr "Créé le"
+
+msgid "Joined"
+msgstr "Inscrit le"
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "Responses"
+msgstr "Réponses"
+
+msgid "Link"
+msgstr "Lien"
+
+msgid "View terms"
+msgstr "Voir les conditions de consentement"
+
+msgid "Edit terms"
+msgstr "Modifier les conditions de consentement"
+
+msgid "Sub-tasks"
+msgstr "Sous-tâches"
+
+msgid "Questions"
+msgstr "Questions"
+
+msgid "Audio file"
+msgstr "Fichier audio"
+
+msgid "Required"
+msgstr "Obligatoire"
+
+msgid "Save name"
+msgstr "Enregistrer le nom"
+
+msgid "Information"
+msgstr "Information"
+
+msgid "Loading…"
+msgstr "Chargement…"
+
+msgid "All registered users (researchers)"
+msgstr "Tous les utilisateurs inscrits (chercheurs)"
+
+msgid "Your invitations"
+msgstr "Vos invitations"
+
+msgid "Are you sure?"
+msgstr "Êtes-vous sûr(e) ?"
+
+msgid "Edit Account"
+msgstr "Modifier le compte"
+
+msgid "Cancel my account"
+msgstr "Supprimer mon compte"
+
+msgid "Unhappy?"
+msgstr "Pas satisfait ?"
