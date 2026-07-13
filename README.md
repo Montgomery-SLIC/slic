@@ -42,7 +42,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Please read the [Code of Conduct](CODE_O
 
 ## License
 
-SLIC is free to use for non-commercial research purposes. See [LICENSE](LICENSE) for full terms. The companion Praat scripts are distributed under the [GNU General Public License v3](https://www.gnu.org/licenses/gpl-3.0.html).
+SLIC is free to use for non-commercial research purposes. See [LICENSE](LICENSE) for full terms.
 
 ## Contact
 

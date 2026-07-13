@@ -12,7 +12,7 @@ proposed changes align with the research goals of the project.
 
 ## Before you start
 
-- Read the [LICENSE](LICENSE). Contributions are accepted on the understanding
+- Read the [LICENSE](LICENSE) - contributions are accepted on the understanding
   that they will be distributed under the same non-commercial research license.
 - Read the [Code of Conduct](CODE_OF_CONDUCT.md).
 - Check the [Architecture docs](docs/architecture.md) to understand how the
