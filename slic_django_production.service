@@ -1,0 +1,23 @@
+[Unit]
+Description=SLIC Django Production
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=notify
+User=slic_service
+Group=slic_service
+WorkingDirectory=/srv/slic_django/current
+EnvironmentFile=/srv/slic_django/shared/.env.production
+ExecStart=/srv/slic_django/venv/bin/gunicorn \
+    --config /srv/slic_django/current/gunicorn_prod.conf.py \
+    slic.wsgi:application
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=5
+PrivateTmp=true
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

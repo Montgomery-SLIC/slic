@@ -1,0 +1,23 @@
+[Unit]
+Description=SLIC Django Staging
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=notify
+User=sa_eg4hwx
+Group=sa_eg4hwx
+WorkingDirectory=/srv/slic/staging/SLIC/django_app
+EnvironmentFile=/srv/slic/staging/.env
+ExecStart=/srv/slic/staging/venv/bin/gunicorn \
+    --config /srv/slic/staging/SLIC/django_app/gunicorn.conf.py \
+    slic.wsgi:application
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=5
+PrivateTmp=true
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
