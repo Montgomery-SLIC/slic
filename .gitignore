@@ -1,0 +1,33 @@
+# Environment
+.env
+
+# Virtual environment
+.venv/
+venv/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Django generated
+staticfiles/
+media/
+
+# Pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Migration scripts and one-off utilities - not for versioning
+utils/
