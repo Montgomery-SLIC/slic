@@ -10,6 +10,9 @@ __pycache__/
 *.py[cod]
 *.pyo
 
+# Build artifacts
+*.egg-info/
+
 # Django generated
 staticfiles/
 media/
