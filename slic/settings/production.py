@@ -28,7 +28,7 @@ SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
-STATIC_ROOT = os.environ.get('STATIC_ROOT', '/srv/slic/production/staticfiles')
+STATIC_ROOT = os.environ.get('STATIC_ROOT', '/srv/slic/production/slic/staticfiles')
 MEDIA_ROOT = os.environ.get('MEDIA_ROOT', '/srv/slic/production/media')
 
 RECAPTCHA_PUBLIC_KEY = os.environ['RECAPTCHA_PUBLIC_KEY']

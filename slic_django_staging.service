@@ -7,10 +7,10 @@ Wants=postgresql.service
 Type=notify
 User=sa_eg4hwx
 Group=sa_eg4hwx
-WorkingDirectory=/srv/slic/staging
-EnvironmentFile=/srv/slic/staging/.env
-ExecStart=/srv/slic/staging/.venv/bin/gunicorn \
-    --config /srv/slic/staging/gunicorn.conf.py \
+WorkingDirectory=/srv/slic/staging/slic
+EnvironmentFile=/srv/slic/staging/slic/.env
+ExecStart=/srv/slic/staging/slic/.venv/bin/gunicorn \
+    --config /srv/slic/staging/slic/gunicorn.conf.py \
     slic.wsgi:application
 ExecReload=/bin/kill -s HUP $MAINPID
 KillMode=mixed
