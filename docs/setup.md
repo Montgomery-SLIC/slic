@@ -2,8 +2,11 @@
 
 ## Prerequisites
 
-- Python 3.12+
+- Python 3.12
 - PostgreSQL 14+
+- [uv](https://docs.astral.sh/uv/) - install once, system-wide:
+  - Windows: `powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"`
+  - Linux/macOS: `curl -LsSf https://astral.sh/uv/install.sh | sh`
 - A `.env` file (copy from `.env.example`)
 
 ## Environment variables
@@ -39,12 +42,8 @@ python -c "from django.core.management.utils import get_random_secret_key; print
 ## First-time setup
 
 ```bash
-# Create and activate a virtual environment
-python -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
+# Install dependencies and create .venv automatically
+uv sync --extra dev
 
 # Copy environment template and fill in values
 cp .env.example .env
@@ -52,11 +51,15 @@ cp .env.example .env
 # Create the database
 createdb slic_django_dev
 
-# Run migrations
-python manage.py migrate
+# Run migrations and start the server
+make migrate
+make runserver
+```
 
-# Start the development server
-python manage.py runserver
+You do not need to activate the venv. `make` targets use `uv run` internally, which runs commands inside `.venv` automatically. If you prefer to run commands directly, activate first:
+
+```bash
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
 ```
 
 ## Creating a researcher account

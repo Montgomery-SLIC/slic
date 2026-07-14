@@ -35,17 +35,20 @@ Production reads from `/etc/slic_django.env` (or the path set in the systemd uni
 | `MEDIA_ROOT` | Absolute path to uploaded file storage |
 | `X_ACCEL_REDIRECT` | `True` |
 
+## uv installation (once, on the VM)
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
 ## Deployment steps
 
 ```bash
 # 1. Pull latest code
 git pull origin main
 
-# 2. Activate the virtualenv
-source /path/to/.venv/bin/activate
-
-# 3. Install any new dependencies
-pip install -r requirements.txt
+# 2. Install any new dependencies
+uv sync
 
 # 4. Collect static files
 python manage.py collectstatic --noinput

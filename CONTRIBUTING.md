@@ -51,6 +51,8 @@ scope.
    format: `feat:`, `fix:`, `docs:`, `test:`, `chore:`, etc.
 6. Open a pull request against `main`. Describe what changed and why.
 
+Maintainers: see [docs/releasing.md](docs/releasing.md) for how to cut a release after merging.
+
 ## Sensitive data
 
 SLIC handles encrypted participant data. Take care with any changes that touch:

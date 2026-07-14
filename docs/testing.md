@@ -9,30 +9,29 @@ The test suite has two layers:
 
 ## Running tests
 
-```bash
-cd django_app
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
-```
+No need to activate the venv - use `make` or `uv run` directly:
 
 **Unit tests only (recommended during development):**
 
 ```bash
-pytest tests/unit/
+make test
+# or: uv run pytest tests/unit/
 ```
 
-**E2E tests only (requires a running dev server and Playwright browsers):**
+**All tests (excluding e2e):**
+
+```bash
+make test-all
+# or: uv run pytest tests/ --ignore=tests/e2e -q
+```
+
+**E2E tests (requires a running dev server and Playwright browsers):**
 
 ```bash
 # Install browsers once
-playwright install chromium
+uv run playwright install chromium
 
-pytest tests/e2e/
-```
-
-**All tests:**
-
-```bash
-pytest
+uv run pytest tests/e2e/
 ```
 
 ## Unit test layout
