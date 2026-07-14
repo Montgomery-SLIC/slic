@@ -72,6 +72,7 @@ TEMPLATES = [
                 'django.template.context_processors.media',
                 'django.template.context_processors.static',
                 'slic.context_processors.recaptcha_key',
+                'slic.context_processors.slic_version',
             ],
         },
     },
