@@ -8,7 +8,7 @@ license-files = ["LICENSE"]
 dependencies = [
     "Django==4.2.30",
     "psycopg2-binary==2.9.9",
-    "django-allauth==0.63.6",
+    "django-allauth==65.14.1",
     "rules==3.3",
     "django-encrypted-model-fields==0.6.5",
     "django-countries==7.6.1",
