@@ -85,6 +85,14 @@ def switch_language(request):
             except Resolver404:
                 pass  # not an i18n_patterns URL - keep base URL, cookie is enough
 
+    # Final safety check after all URL transformations
+    if not url_has_allowed_host_and_scheme(
+        url=next_url,
+        allowed_hosts={request.get_host()},
+        require_https=request.is_secure(),
+    ):
+        next_url = '/'
+
     response = redirect(next_url)
     response.set_cookie(
         settings.LANGUAGE_COOKIE_NAME,
