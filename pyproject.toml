@@ -22,7 +22,7 @@ dependencies = [
     "python-dotenv==1.0.1",
     "Pillow==10.3.0",
     "cryptography==42.0.8",
-    "bleach==6.1.0",
+    "bleach==6.4.0",
 ]
 
 [project.optional-dependencies]
