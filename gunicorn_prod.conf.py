@@ -8,8 +8,8 @@ keepalive = 5
 
 bind = '127.0.0.1:9295'
 
-accesslog = '/var/log/slic_django/access_prod.log'
-errorlog = '/var/log/slic_django/error_prod.log'
+accesslog = '/var/log/slic/access_prod.log'
+errorlog = '/var/log/slic/error_prod.log'
 loglevel = 'warning'
 
 max_requests = 1000

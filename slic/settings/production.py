@@ -48,7 +48,7 @@ LOGGING = {
     'handlers': {
         'file': {
             'class': 'logging.FileHandler',
-            'filename': '/var/log/slic_django/django.log',
+            'filename': '/var/log/slic/django.log',
             'formatter': 'verbose',
         },
     },

@@ -11,8 +11,8 @@ keepalive = 5
 # Override with GUNICORN_BIND env var in systemd unit
 bind = '127.0.0.1:9294'
 
-accesslog = '/var/log/slic_django/access.log'
-errorlog = '/var/log/slic_django/error.log'
+accesslog = '/var/log/slic/access.log'
+errorlog = '/var/log/slic/error.log'
 loglevel = 'info'
 
 # Restart workers after this many requests to prevent memory leaks
