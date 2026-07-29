@@ -98,28 +98,24 @@ class TestAudioUpload(TestCase):
             response, f'/tasks/sample-task/{self.sample.pk}/edit/', fetch_redirect_response=False,
         )
 
-    def test_invalid_file_type_shows_error_message(self):
+    def test_non_wav_file_is_accepted(self):
         self.client.force_login(self.user)
-        bad_file = SimpleUploadedFile('test.mp3', b'\x00' * 512, content_type='audio/mpeg')
+        mp3_file = SimpleUploadedFile('test.mp3', b'\x00' * 512, content_type='audio/mpeg')
         response = self.client.post(
             f'/tasks/sample-task/{self.sample.pk}/audio/',
-            {'audio': bad_file},
+            {'audio': mp3_file},
             follow=True,
         )
         messages = [str(m) for m in response.context['messages']]
-        self.assertTrue(any(messages), 'Expected an error message for invalid file type')
+        self.assertTrue(any('uploaded' in m.lower() for m in messages))
 
-    def test_oversized_file_shows_error_message(self):
-        self.client.force_login(self.user)
+    def test_oversized_file_rejected_by_form(self):
+        from tasks.forms import AudioUploadForm
         big_file = SimpleUploadedFile('big.wav', b'\x00' * 10, content_type='audio/wav')
-        big_file.size = 400 * 1024 * 1024  # fake 400 MB
-        response = self.client.post(
-            f'/tasks/sample-task/{self.sample.pk}/audio/',
-            {'audio': big_file},
-            follow=True,
-        )
-        messages = [str(m) for m in response.context['messages']]
-        self.assertTrue(any(messages), 'Expected an error message for oversized file')
+        big_file.size = 314572800  # at the 300 MB boundary
+        form = AudioUploadForm(data={}, files={'audio': big_file})
+        self.assertFalse(form.is_valid())
+        self.assertIn('300', str(form.errors))
 
     def test_unauthenticated_redirects_to_login(self):
         response = self.client.post(

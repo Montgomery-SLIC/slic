@@ -63,6 +63,7 @@ LOGGING = {
 _admin_email = os.environ.get('ADMIN_EMAIL', '')
 ADMINS = [(os.environ.get('ADMIN_NAME', 'Admin'), _admin_email)] if _admin_email else []
 SERVER_EMAIL = os.environ.get('SERVER_EMAIL', 'root@slic.shef.ac.uk')
+DEFAULT_FROM_EMAIL = SERVER_EMAIL  # use the same address for all outbound mail
 BUG_REPORT_EMAIL = os.environ['BUG_REPORT_EMAIL']
 EMAIL_HOST = os.environ.get('EMAIL_HOST', 'localhost')
 EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 25))

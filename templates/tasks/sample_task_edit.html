@@ -70,8 +70,8 @@
       {% csrf_token %}
       <div class="d-flex align-items-end">
         <div>
-          <label class="form-label small">{% trans "Upload WAV (max 300 MB)" %}</label>
-          <input type="file" name="audio" accept=".wav,audio/wav" class="form-control form-control-sm" required>
+          <label class="form-label small">{% trans "Upload audio (max 300 MB)" %}</label>
+          <input type="file" name="audio" class="form-control form-control-sm" required>
         </div>
         <button type="submit" class="btn btn-primary btn-sm">{% trans "Upload" %}</button>
       </div>
@@ -103,8 +103,8 @@
       {% csrf_token %}
       <div class="d-flex align-items-end">
         <div>
-          <label class="form-label small">{% trans "Upload EAF file" %}</label>
-          <input type="file" name="transcript" accept=".eaf,.xml" class="form-control form-control-sm" required>
+          <label class="form-label small">{% trans "Upload transcript (max 300 MB)" %}</label>
+          <input type="file" name="transcript" class="form-control form-control-sm" required>
         </div>
         <button type="submit" class="btn btn-primary btn-sm">{% trans "Upload" %}</button>
       </div>
