@@ -90,8 +90,10 @@ def _task_edit(request, pk, model_class, form_class, template):
     _check_task(request.user, task)
     form = form_class(instance=task)
     owning_experiment = task.experiment or task.sample_task.experiment
+    subtasks = list(task.subtasks.order_by('sort')) if hasattr(task, 'subtasks') else []
     return render(request, template, {'form': form, 'task': task,
-                                      'owning_experiment': owning_experiment})
+                                      'owning_experiment': owning_experiment,
+                                      'subtasks': subtasks})
 
 
 def _task_update(request, pk, model_class, form_class, template):
