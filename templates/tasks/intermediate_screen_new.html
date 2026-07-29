@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "New intermediate screen" %}{% endblock %}
+{% block title %}{% trans "Create intermediate screen task" %}{% endblock %}
 
 {% block content %}
-<h1 class="h4 mb-4">{% trans "New intermediate screen" %}</h1>
+<h1 class="h4 mb-4">{% trans "Create intermediate screen task" %}</h1>
 <form method="post" action="{% url 'tasks:intermediate_screen_create' taskable_type=taskable_type taskable_id=taskable_id %}">
   {% csrf_token %}
   {% for field in form %}

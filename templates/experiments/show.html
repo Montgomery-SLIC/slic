@@ -92,7 +92,7 @@
           {% trans "Edit experiment" %}
         </a>
         <a href="{% url 'experiments:terms' experiment.pk %}" class="btn btn-outline-primary">
-          {% trans "Edit terms" %}
+          {% trans "Edit consent terms" %}
         </a>
       </div>
       <div class="col-sm-2 p-3">
@@ -116,19 +116,19 @@
   <div class="px-2">
     <a href="{% url 'tasks:question_task_new' taskable_type='experiment' taskable_id=experiment.pk %}"
        class="btn btn-outline-primary">
-      {% trans "Add question page" %}
+      {% trans "Create question task" %}
     </a>
   </div>
   <div class="px-2">
     <a href="{% url 'tasks:sample_task_new' taskable_type='experiment' taskable_id=experiment.pk %}"
        class="btn btn-outline-primary">
-      {% trans "Add audio sample" %}
+      {% trans "Create sample task" %}
     </a>
   </div>
   <div class="px-2">
     <a href="{% url 'tasks:intermediate_screen_new' taskable_type='experiment' taskable_id=experiment.pk %}"
        class="btn btn-outline-primary">
-      {% trans "Add intermediate screen" %}
+      {% trans "Create intermediate screen task" %}
     </a>
   </div>
 </div>

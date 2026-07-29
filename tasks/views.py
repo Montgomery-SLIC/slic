@@ -210,6 +210,10 @@ def audio_upload(request, pk):
             st.audio = form.cleaned_data['audio']
             st.save(update_fields=['audio'])
             messages.success(request, 'Audio uploaded.')
+        else:
+            for error_list in form.errors.values():
+                for error in error_list:
+                    messages.error(request, error)
     return redirect('tasks:sample_task_edit', pk=pk)
 
 
@@ -358,6 +362,8 @@ def task_random(request, pk):
     if request.method == 'POST':
         task.random = not task.random
         task.save(update_fields=['random'])
+        exp = task.experiment if task.experiment_id else task.sample_task.experiment
+        return redirect('experiments:show', pk=exp.pk)
     return JsonResponse({'random': task.random})
 
 
