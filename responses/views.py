@@ -66,12 +66,17 @@ class ExperimentStartView(View):
             # Locking Visit rows doesn't work when no visits exist yet (empty table → nothing to lock).
             exp = Experiment.objects.select_for_update().get(pk=exp.pk)
             top_level_tasks = list(exp.tasks.order_by('sort'))
-            max_pid = (
+            max_from_pids = (
                 ParticipantId.objects
                 .filter(experiment=exp)
                 .aggregate(m=Max('participant_id'))['m']
             ) or 0
-            participant_id = max_pid + 1
+            max_from_visits = (
+                Visit.objects
+                .filter(task__in=top_level_tasks)
+                .aggregate(m=Max('participant_id'))['m']
+            ) or 0
+            participant_id = max(max_from_pids, max_from_visits) + 1
 
             # Create Visit rows for all top-level tasks
             Visit.objects.bulk_create([
