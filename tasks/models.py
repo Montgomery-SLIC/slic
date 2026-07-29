@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.utils.translation import gettext_lazy as _
 
 from responses.models import Visit
 
@@ -61,7 +62,7 @@ class QuestionTask(Task):
         db_table = 'question_tasks'
 
     def type_name(self):
-        return 'Question page'
+        return _('Question page')
 
     def allowed_subtask_types(self):
         return []
@@ -86,7 +87,7 @@ class SampleTask(Task):
         db_table = 'sample_tasks'
 
     def type_name(self):
-        return 'Audio sample'
+        return _('Audio sample')
 
     def allowed_subtask_types(self):
         return ['QuestionTask', 'ListeningTask', 'ClickTask', 'IntermediateScreenTask']
@@ -122,7 +123,7 @@ class ListeningTask(Task):
         db_table = 'listening_tasks'
 
     def type_name(self):
-        return 'Audio hearing'
+        return _('Audio hearing')
 
     def completion_errors(self):
         return {'warnings': [], 'errors': []}
@@ -136,7 +137,7 @@ class ClickTask(Task):
         db_table = 'click_tasks'
 
     def type_name(self):
-        return 'Reaction task'
+        return _('Reaction task')
 
     def completion_errors(self):
         return {'warnings': [], 'errors': []}
@@ -149,7 +150,7 @@ class IntermediateScreenTask(Task):
         db_table = 'intermediate_screen_tasks'
 
     def type_name(self):
-        return 'Intermediate screen'
+        return _('Intermediate screen')
 
     def completion_errors(self):
         return {'warnings': [], 'errors': []}
