@@ -1,0 +1,6 @@
+{% load i18n %}{% autoescape off %}Hello from SLIC!
+
+{% block content %}{% endblock content %}
+
+Thank you for using SLIC!
+{% endautoescape %}
