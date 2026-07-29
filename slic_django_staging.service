@@ -5,8 +5,8 @@ Wants=postgresql.service
 
 [Service]
 Type=notify
-User=sa_eg4hwx
-Group=sa_eg4hwx
+User=slic
+Group=slic
 WorkingDirectory=/srv/slic/staging/slic
 EnvironmentFile=/srv/slic/staging/slic/.env
 ExecStart=/srv/slic/staging/slic/.venv/bin/gunicorn \
