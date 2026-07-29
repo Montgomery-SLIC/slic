@@ -57,6 +57,8 @@ def next_task(taskable, participant_id, slug):
     if not unvisited:
         # Finished this level - recurse up or finish
         if isinstance(taskable, SampleTask):
+            # Mark the sample task itself as visited so the experiment level won't return it again
+            Visit.objects.filter(participant_id=participant_id, task_id=taskable.pk).update(visited=True)
             parent_exp = taskable.experiment
             return next_task(parent_exp, participant_id, slug)
         return reverse('responses:finish', kwargs={'slug': slug, 'participant_id': participant_id})
