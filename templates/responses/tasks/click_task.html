@@ -21,9 +21,27 @@
      data-calibration="{{ is_calibration|yesno:'true,false' }}"
      data-transcript="{{ transcript_content }}"
      data-next-url="{{ next_url }}"
-     data-audio-url="{% url 'responses:serve_audio' sample_task_id=sample.id %}"
+     data-audio-url="{{ audio_url }}"
      data-prompt="{{ specific.prompt }}"
      data-explanation-prompt="{{ specific.explanation_prompt }}"
+     data-str-replay="{% trans 'Replay' %}"
+     data-str-click-at="{% trans 'Click at' %}"
+     data-str-why-click="{% trans 'Why did you click?' %}"
+     data-str-describe-placeholder="{% trans 'Describe what you noticed...' %}"
+     data-str-accident="{% trans 'I clicked by accident' %}"
+     data-str-dontknow="{% trans "I don't know why I clicked" %}"
+     data-str-explain="{% trans 'Please explain your click or tick a checkbox.' %}"
+     data-str-no-clicks="{% trans "You didn't click during this audio clip. Please explain why:" %}"
+     data-str-no-clicks-placeholder="{% trans "I didn't notice any accent features..." %}"
+     data-str-continue="{% trans 'Continue' %}"
+     data-str-you-clicked="{% trans 'You clicked' %}"
+     data-str-time="{% trans 'time' %}"
+     data-str-times="{% trans 'times' %}"
+     data-str-tell-us="{% trans 'For each click, tell us what you noticed:' %}"
+     data-str-submit="{% trans 'Submit and continue' %}"
+     data-str-saving="{% trans 'Saving...' %}"
+     data-str-no-transcript="{% trans '[no transcript]' %}"
+     data-str-clicked-here="{% trans 'You clicked here' %}"
      style="display:none"></div>
 
 <div class="py-3">
@@ -33,7 +51,7 @@
 
   {# Hidden audio element - JS controls it #}
   <audio id="click-audio" preload="auto"
-         src="{% url 'responses:serve_audio' sample_task_id=sample.id %}"></audio>
+         src="{{ audio_url }}"></audio>
 
   <div class="mb-3">
     <canvas id="progress" width="700" height="48"

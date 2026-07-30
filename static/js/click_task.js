@@ -5,14 +5,9 @@
  * to prevent data loss under load.
  *
  * Expects the following data attributes on #click-task-data:
- *   data-participant-id
- *   data-click-task-id
- *   data-calibration ("true"/"false")
- *   data-transcript (full EAF XML string, empty string if calibration)
- *   data-next-url
- *   data-audio-url
- *   data-prompt
- *   data-explanation-prompt
+ *   data-participant-id, data-click-task-id, data-calibration ("true"/"false"),
+ *   data-transcript, data-next-url, data-audio-url, data-prompt, data-explanation-prompt
+ *   data-str-* attributes for all translatable UI strings (see click_task.html)
  */
 
 'use strict';
@@ -37,6 +32,7 @@ let clickTaskId = null;
 let nextUrl = null;
 let explanationPrompt = '';
 let listenCount = 0;
+let i18n = {};
 
 // ── EAF parsing (matches JS behaviour in Rails exactly) ──────────────────────
 
@@ -129,24 +125,24 @@ class SingleClickAudioManager {
         div.innerHTML = `
             <div class="d-flex align-items-center mb-2">
                 <button type="button" class="btn btn-sm btn-outline-secondary mr-2 replay-btn" data-index="${i}">
-                    &#9654; Replay
+                    &#9654; ${i18n.replay}
                 </button>
-                <small class="text-muted">Click at ${this.clickTime.toFixed(2)}s</small>
+                <small class="text-muted">${i18n.clickAt} ${this.clickTime.toFixed(2)}s</small>
             </div>
             <div class="transcript-window mb-2 font-monospace small bg-light p-2 rounded">${this._buildTranscriptHtml()}</div>
             <div class="mb-2">
-                <label class="form-label small">${explanationPrompt || 'Why did you click?'}</label>
-                <textarea class="form-control form-control-sm click-explanation" id="text_field_${i}" rows="2" placeholder="Describe what you noticed..."></textarea>
+                <label class="form-label small">${explanationPrompt || i18n.whyClick}</label>
+                <textarea class="form-control form-control-sm click-explanation" id="text_field_${i}" rows="2" placeholder="${i18n.describePlaceholder}"></textarea>
             </div>
             <div class="form-check form-check-inline">
                 <input type="checkbox" class="form-check-input accident-cb" id="accident_checkbox_${i}">
-                <label class="form-check-label small" for="accident_checkbox_${i}">I clicked by accident</label>
+                <label class="form-check-label small" for="accident_checkbox_${i}">${i18n.accident}</label>
             </div>
             <div class="form-check form-check-inline">
                 <input type="checkbox" class="form-check-input dontknow-cb" id="dontknow_checkbox_${i}">
-                <label class="form-check-label small" for="dontknow_checkbox_${i}">I don't know why I clicked</label>
+                <label class="form-check-label small" for="dontknow_checkbox_${i}">${i18n.dontknow}</label>
             </div>
-            <div class="validation-msg text-danger small mt-1" id="validation_${i}" style="display:none;">Please explain your click or tick a checkbox.</div>
+            <div class="validation-msg text-danger small mt-1" id="validation_${i}" style="display:none;">${i18n.explain}</div>
         `;
         container.appendChild(div);
 
@@ -169,12 +165,12 @@ class SingleClickAudioManager {
     }
 
     _buildTranscriptHtml() {
-        if (!this.windowAnnotations.length) return '<em class="text-muted">[no transcript]</em>';
+        if (!this.windowAnnotations.length) return `<em class="text-muted">${i18n.noTranscript}</em>`;
         return this.windowAnnotations.map(ann => {
             const isClicked = ann === this.clickedWord;
             const word = escapeHtml(ann.text);
             if (isClicked) {
-                return `<span class="clicked-word fw-bold text-primary" title="You clicked here">${word}<br><span style="color:var(--bs-primary)">^</span></span>`;
+                return `<span class="clicked-word fw-bold text-primary" title="${i18n.clickedHere}">${word}<br><span style="color:var(--bs-primary)">^</span></span>`;
             }
             return `<span>${word}</span>`;
         }).join(' ');
@@ -289,10 +285,10 @@ function onAudioEnd() {
 function displayNoClicksUI() {
     const container = document.getElementById('review-container');
     container.innerHTML = `
-        <p class="mb-3">You didn't click during this audio clip. Please explain why:</p>
+        <p class="mb-3">${i18n.noClicks}</p>
         <textarea id="no-click-explanation" class="form-control mb-3" rows="3"
-                  placeholder="I didn't notice any accent features..."></textarea>
-        <button type="button" class="btn btn-primary" id="no-click-submit">Continue</button>
+                  placeholder="${i18n.noClicksPlaceholder}"></textarea>
+        <button type="button" class="btn btn-primary" id="no-click-submit">${i18n.continueBtn}</button>
     `;
     container.style.display = '';
 
@@ -312,7 +308,9 @@ let managers = [];
 
 function displayClickReview() {
     const container = document.getElementById('review-container');
-    container.innerHTML = `<p class="mb-3">You clicked ${clickTimes.length} time${clickTimes.length !== 1 ? 's' : ''}. For each click, tell us what you noticed:</p>`;
+    const _count = clickTimes.length;
+    const _timeWord = _count === 1 ? i18n.time : i18n.times;
+    container.innerHTML = `<p class="mb-3">${i18n.youClicked} ${_count} ${_timeWord}. ${i18n.tellUs}</p>`;
     container.style.display = '';
 
     managers = clickTimes.map((t, i) => {
@@ -324,7 +322,7 @@ function displayClickReview() {
     const submitBtn = document.createElement('button');
     submitBtn.type = 'button';
     submitBtn.className = 'btn btn-primary mt-3';
-    submitBtn.textContent = 'Submit and continue';
+    submitBtn.textContent = i18n.submit;
     submitBtn.addEventListener('click', collectAndSend);
     container.appendChild(submitBtn);
 }
@@ -343,7 +341,7 @@ function collectAndSend() {
 
 function sendAllResponses(responses) {
     const submitBtn = document.querySelector('#review-container .btn-primary');
-    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Saving...'; }
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = i18n.saving; }
 
     const req = new XMLHttpRequest();
     req.open('POST', '/click-responses/');
@@ -383,6 +381,27 @@ document.addEventListener('DOMContentLoaded', () => {
     isCalibration = dataEl.dataset.calibration === 'true';
     nextUrl = dataEl.dataset.nextUrl;
     explanationPrompt = dataEl.dataset.explanationPrompt || '';
+
+    i18n = {
+        replay:              dataEl.dataset.strReplay              || 'Replay',
+        clickAt:             dataEl.dataset.strClickAt             || 'Click at',
+        whyClick:            dataEl.dataset.strWhyClick            || 'Why did you click?',
+        describePlaceholder: dataEl.dataset.strDescribePlaceholder || 'Describe what you noticed...',
+        accident:            dataEl.dataset.strAccident            || 'I clicked by accident',
+        dontknow:            dataEl.dataset.strDontknow            || "I don't know why I clicked",
+        explain:             dataEl.dataset.strExplain             || 'Please explain your click or tick a checkbox.',
+        noClicks:            dataEl.dataset.strNoClicks            || "You didn't click. Please explain why:",
+        noClicksPlaceholder: dataEl.dataset.strNoClicksPlaceholder || 'I didn\'t notice any accent features...',
+        continueBtn:         dataEl.dataset.strContinue            || 'Continue',
+        youClicked:          dataEl.dataset.strYouClicked          || 'You clicked',
+        time:                dataEl.dataset.strTime                || 'time',
+        times:               dataEl.dataset.strTimes               || 'times',
+        tellUs:              dataEl.dataset.strTellUs              || 'For each click, tell us what you noticed:',
+        submit:              dataEl.dataset.strSubmit              || 'Submit and continue',
+        saving:              dataEl.dataset.strSaving              || 'Saving...',
+        noTranscript:        dataEl.dataset.strNoTranscript        || '[no transcript]',
+        clickedHere:         dataEl.dataset.strClickedHere         || 'You clicked here',
+    };
 
     // Load EAF transcript (only if not calibration)
     if (!isCalibration) {

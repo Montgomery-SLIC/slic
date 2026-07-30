@@ -3,40 +3,155 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-29 22:23+0100\n"
+"POT-Creation-Date: 2026-07-30 11:38+0100\n"
 "Language: fr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: .\accounts\forms.py:8
+msgid "-- Select --"
+msgstr "-- Sélectionner --"
+
+#: .\accounts\forms.py:9
+msgid "Undergraduate"
+msgstr "Licence"
+
+#: .\accounts\forms.py:10
+msgid "Postgraduate"
+msgstr "Master / Doctorat"
+
+#: .\accounts\forms.py:11
+msgid "Staff"
+msgstr "Personnel"
+
+#: .\accounts\forms.py:16 .\templates\accounts\admin_users.html:14
+#: .\templates\accounts\view_user.html:10
+msgid "Email"
+msgstr "E-mail"
+
+#: .\accounts\forms.py:18
+msgid "Password"
+msgstr "Mot de passe"
+
+#: .\accounts\forms.py:21
+msgid "Leave it blank if you don't want to change it."
+msgstr "Laissez-le vide si vous ne souhaitez pas le modifier."
+
+#: .\accounts\forms.py:24
+msgid "Password confirmation"
+msgstr "Confirmation du mot de passe"
+
+#: .\accounts\forms.py:29
+msgid "Current password"
+msgstr "Mot de passe actuel"
+
+#: .\accounts\forms.py:31
+msgid "We need your current password to confirm your changes."
+msgstr "Nous avons besoin de votre mot de passe actuel pour confirmer vos modifications."
+
+#: .\accounts\forms.py:33 .\templates\accounts\admin_users.html:11
+#: .\templates\accounts\view_user.html:12 .\templates\experiments\edit.html:14
+#: .\templates\experiments\index.html:10 .\templates\experiments\new.html:14
+#: .\templates\experiments\show.html:150
+msgid "Name"
+msgstr "Nom"
+
+#: .\accounts\forms.py:34 .\accounts\forms.py:73
+#: .\templates\accounts\admin_users.html:13
+#: .\templates\accounts\view_user.html:14
+msgid "Institution"
+msgstr "Institution"
+
+#: .\accounts\forms.py:35 .\accounts\forms.py:74
+#: .\templates\accounts\admin_users.html:12
+#: .\templates\accounts\view_user.html:16
+msgid "Country"
+msgstr "Pays"
+
+#: .\accounts\forms.py:36
+msgid "Funded"
+msgstr "Financé"
+
+#: .\accounts\forms.py:37
+msgid "Mailing list"
+msgstr "Liste de diffusion"
+
+#: .\accounts\forms.py:38 .\templates\accounts\view_user.html:18
+msgid "Faculty"
+msgstr "Faculté"
+
+#: .\accounts\forms.py:41 .\accounts\forms.py:76
+#: .\templates\accounts\view_user.html:20
+msgid "Research level"
+msgstr "Niveau de recherche"
+
+#: .\accounts\forms.py:54
+msgid "Your current password is incorrect."
+msgstr "Votre mot de passe actuel est incorrect."
+
+#: .\accounts\forms.py:62
+msgid "Passwords do not match."
+msgstr "Les mots de passe ne correspondent pas."
+
+#: .\accounts\forms.py:69
+msgid "Registration code"
+msgstr "Code d'invitation"
+
+#: .\accounts\forms.py:70
+msgid "You need an invitation code to register."
+msgstr "Vous avez besoin d'un code d'invitation pour vous inscrire."
+
+#: .\accounts\forms.py:72
+msgid "Full name"
+msgstr "Nom complet"
+
+#: .\accounts\forms.py:75
+msgid "Faculty / Department"
+msgstr "Faculté / Département"
+
+#: .\accounts\forms.py:79
+msgid "My research is externally funded"
+msgstr "Ma recherche est financée par des fonds extérieurs"
+
+#: .\accounts\forms.py:83
+msgid "I would like to join the SLIC mailing list"
+msgstr "Je souhaite rejoindre la liste de diffusion SLIC"
+
 #: .\slic\settings\base.py:110
 msgid "English"
-msgstr ""
+msgstr "Anglais"
 
 #: .\slic\settings\base.py:111
 msgid "Danish"
-msgstr ""
+msgstr "Danois"
 
 #: .\slic\settings\base.py:112
 msgid "French"
-msgstr ""
+msgstr "Français"
+
+#: .\tasks\forms.py:45 .\templates\tasks\sample_task_edit.html:48
+msgid "Audio file"
+msgstr "Fichier audio"
+
+#: .\tasks\forms.py:50 .\tasks\forms.py:60
+msgid "File must be under 300 MB."
+msgstr "Le fichier doit être inférieur à 300 Mo."
+
+#: .\tasks\forms.py:55
+msgid "Transcript file"
+msgstr "Fichier de transcription"
 
 #: .\tasks\models.py:65 .\templates\tasks\sample_task_edit.html:132
-#, fuzzy
-#| msgid "Questions"
 msgid "Question page"
-msgstr "Questions"
+msgstr "Page de questions"
 
 #: .\tasks\models.py:90
-#, fuzzy
-#| msgid "Audio file"
 msgid "Audio sample"
-msgstr "Fichier audio"
+msgstr "Échantillon audio"
 
 #: .\tasks\models.py:126
-#, fuzzy
-#| msgid "Audio file"
 msgid "Audio hearing"
-msgstr "Fichier audio"
+msgstr "Écoute audio"
 
 #: .\tasks\models.py:140
 msgid "Reaction task"
@@ -46,43 +161,57 @@ msgstr "Tâche de réaction"
 msgid "Intermediate screen"
 msgstr "Écran intermédiaire"
 
+#: .\tasks\models.py:166
+msgid "Text question"
+msgstr "Question textuelle"
+
+#: .\tasks\models.py:167
+msgid "Checkboxes"
+msgstr "Cases à cocher"
+
+#: .\tasks\models.py:168
+msgid "Radio buttons"
+msgstr "Boutons radio"
+
+#: .\tasks\models.py:169
+msgid "Dropdown box"
+msgstr "Liste déroulante"
+
+#: .\tasks\models.py:170
+msgid "Rating scale"
+msgstr "Échelle d'évaluation"
+
 #: .\templates\account\email.html:4 .\templates\account\email.html:9
-#, fuzzy
-#| msgid "Email address"
 msgid "Email Addresses"
-msgstr "Adresse e-mail"
+msgstr "Adresses e-mail"
 
 #: .\templates\account\email.html:14
 msgid "The following email addresses are associated with your account:"
-msgstr ""
+msgstr "Les adresses e-mail suivantes sont associées à votre compte :"
 
 #: .\templates\account\email.html:26
 msgid "Primary"
-msgstr ""
+msgstr "Principale"
 
 #: .\templates\account\email.html:34
 msgid "Make Primary"
-msgstr ""
+msgstr "Rendre principale"
 
 #: .\templates\account\email.html:37
 msgid "Do you really want to remove the selected email address?"
-msgstr ""
+msgstr "Voulez-vous vraiment supprimer cette adresse e-mail ?"
 
 #: .\templates\account\email.html:38
 msgid "Remove"
-msgstr ""
+msgstr "Supprimer"
 
 #: .\templates\account\email.html:49
-#, fuzzy
-#| msgid "Email address"
 msgid "Add Email Address"
-msgstr "Adresse e-mail"
+msgstr "Ajouter une adresse e-mail"
 
 #: .\templates\account\email.html:59
-#, fuzzy
-#| msgid "Email"
 msgid "Add Email"
-msgstr "E-mail"
+msgstr "Ajouter un e-mail"
 
 #: .\templates\account\login.html:4 .\templates\account\login.html:12
 #: .\templates\account\login.html:30
@@ -94,7 +223,7 @@ msgstr "Se connecter"
 
 #: .\templates\account\login.html:34
 msgid "Register with an invitation code"
-msgstr ""
+msgstr "S'inscrire avec un code d'invitation"
 
 #: .\templates\account\login.html:36
 msgid "Forgot password?"
@@ -107,13 +236,11 @@ msgstr "Se déconnecter"
 
 #: .\templates\account\logout.html:10
 msgid "Are you sure you want to sign out?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir vous déconnecter ?"
 
 #: .\templates\account\logout.html:13
-#, fuzzy
-#| msgid "Sign out"
 msgid "Yes, sign out"
-msgstr "Se déconnecter"
+msgstr "Oui, se déconnecter"
 
 #: .\templates\account\logout.html:14 .\templates\tasks\click_task_new.html:19
 #: .\templates\tasks\intermediate_screen_new.html:19
@@ -127,68 +254,66 @@ msgstr "Annuler"
 #: .\templates\account\password_change.html:12
 #: .\templates\account\password_change.html:28
 msgid "Change Password"
-msgstr ""
+msgstr "Changer le mot de passe"
 
 #: .\templates\account\password_reset.html:4
 #: .\templates\account\password_reset.html:11
 #: .\templates\account\password_reset_from_key.html:15
-#, fuzzy
-#| msgid "Forgot password?"
 msgid "Reset password"
-msgstr "Mot de passe oublié ?"
+msgstr "Réinitialiser le mot de passe"
 
 #: .\templates\account\password_reset.html:12
-#, fuzzy
-#| msgid "Enter your email address (optional)"
 msgid "Enter your email address and we'll send a reset link."
-msgstr "Entrez votre adresse e-mail (facultatif)"
+msgstr "Saisissez votre adresse e-mail et nous vous enverrons un lien de réinitialisation."
+"Entrez votre adresse e-mail et nous vous enverrons un lien de "
+"réinitialisation."
 
 #: .\templates\account\password_reset.html:22
 msgid "Send reset email"
-msgstr ""
+msgstr "Envoyer l'e-mail de réinitialisation"
 
 #: .\templates\account\password_reset_done.html:4
 msgid "Password reset sent"
-msgstr ""
+msgstr "Réinitialisation du mot de passe envoyée"
 
 #: .\templates\account\password_reset_done.html:9
 msgid "Check your email"
-msgstr ""
+msgstr "Vérifiez votre e-mail"
 
 #: .\templates\account\password_reset_done.html:10
 msgid ""
 "If an account exists for that email address, you will receive a password "
 "reset link shortly."
 msgstr ""
+"Si un compte existe pour cette adresse e-mail, vous recevrez prochainement "
+"un lien de réinitialisation."
 
 #: .\templates\account\password_reset_done.html:11
 msgid "Back to sign in"
-msgstr ""
+msgstr "Retour à la connexion"
 
 #: .\templates\account\password_reset_from_key.html:4
 #: .\templates\account\password_reset_from_key.html:11
-#, fuzzy
-#| msgid "Forgot password?"
 msgid "Set new password"
-msgstr "Mot de passe oublié ?"
+msgstr "Définir un nouveau mot de passe"
 
 #: .\templates\account\password_reset_from_key.html:14
 msgid "This link is invalid or has expired. Please request a new reset."
-msgstr ""
+msgstr "Ce lien est invalide ou a expiré. Veuillez demander une nouvelle réinitialisation."
+"Ce lien est invalide ou a expiré. Veuillez demander une nouvelle "
+"réinitialisation."
 
 #: .\templates\account\password_reset_from_key.html:27
-#, fuzzy
-#| msgid "Forgot password?"
 msgid "Set password"
-msgstr "Mot de passe oublié ?"
+msgstr "Définir le mot de passe"
 
 #: .\templates\account\password_reset_from_key_done.html:4
 msgid "Password changed"
-msgstr ""
+msgstr "Mot de passe modifié"
 
 #: .\templates\account\password_reset_from_key_done.html:9
 msgid "Password changed successfully"
-msgstr ""
+msgstr "Mot de passe modifié avec succès"
 
 #: .\templates\account\signup.html:4 .\templates\account\signup.html:30
 #: .\templates\base.html:122 .\templates\base.html:123
@@ -212,28 +337,6 @@ msgstr "Vous avez déjà un compte ?"
 msgid "All registered users (researchers)"
 msgstr "Tous les utilisateurs inscrits (chercheurs)"
 
-#: .\templates\accounts\admin_users.html:11
-#: .\templates\accounts\view_user.html:12 .\templates\experiments\edit.html:14
-#: .\templates\experiments\index.html:10 .\templates\experiments\new.html:14
-#: .\templates\experiments\show.html:147
-msgid "Name"
-msgstr "Nom"
-
-#: .\templates\accounts\admin_users.html:12
-#: .\templates\accounts\view_user.html:16
-msgid "Country"
-msgstr "Pays"
-
-#: .\templates\accounts\admin_users.html:13
-#: .\templates\accounts\view_user.html:14
-msgid "Institution"
-msgstr "Institution"
-
-#: .\templates\accounts\admin_users.html:14
-#: .\templates\accounts\view_user.html:10
-msgid "Email"
-msgstr "E-mail"
-
 #: .\templates\accounts\admin_users.html:15
 msgid "Reg. date"
 msgstr "Date d'inscription"
@@ -252,9 +355,9 @@ msgstr "Plus"
 #: .\templates\accounts\researcher_invitations.html:15
 #: .\templates\accounts\researcher_invitations.html:38
 #: .\templates\experiments\index.html:13 .\templates\experiments\index.html:34
-#: .\templates\experiments\show.html:150 .\templates\experiments\show.html:202
-#: .\templates\experiments\show.html:208 .\templates\experiments\show.html:214
-#: .\templates\experiments\show.html:220 .\templates\experiments\show.html:226
+#: .\templates\experiments\show.html:153 .\templates\experiments\show.html:205
+#: .\templates\experiments\show.html:211 .\templates\experiments\show.html:217
+#: .\templates\experiments\show.html:223 .\templates\experiments\show.html:229
 #: .\templates\tasks\click_task_edit.html:57
 #: .\templates\tasks\intermediate_screen_edit.html:52
 #: .\templates\tasks\listening_task_edit.html:50
@@ -271,7 +374,7 @@ msgstr "Vrai"
 
 #: .\templates\accounts\admin_users.html:34
 msgid "Make this user an admin?"
-msgstr ""
+msgstr "Rendre cet utilisateur administrateur ?"
 
 #: .\templates\accounts\admin_users.html:36
 msgid "Set admin"
@@ -283,7 +386,7 @@ msgstr "Voir plus"
 
 #: .\templates\accounts\admin_users.html:48
 msgid "Delete this researcher?"
-msgstr ""
+msgstr "Supprimer ce chercheur ?"
 
 #: .\templates\accounts\profile_edit.html:4 .\templates\base.html:104
 #: .\templates\base.html:105 .\templates\tasks\click_task_edit.html:22
@@ -301,19 +404,34 @@ msgstr "Modifier le compte"
 msgid "Update"
 msgstr "Mettre à jour"
 
-#: .\templates\accounts\profile_edit.html:158
-#: .\templates\accounts\profile_edit.html:164
-msgid "Cancel my account"
+#: .\templates\accounts\profile_edit.html
+msgid "Delete Account"
+msgstr "Supprimer le compte"
+
+#: .\templates\accounts\profile_edit.html
+msgid "Permanently deletes your account and all associated data. This action cannot be undone."
+msgstr "Supprime définitivement votre compte et toutes les données associées. Cette action est irréversible."
+
+#: .\templates\accounts\profile_edit.html
+msgid "This will permanently delete your account and all associated data. This cannot be undone."
+msgstr "Cela supprimera définitivement votre compte et toutes les données associées. Cette action est irréversible."
+
+#: .\templates\accounts\profile_edit.html
+msgid "To confirm, type your email address below:"
+msgstr "Pour confirmer, saisissez votre adresse e-mail ci-dessous :"
+
+#: .\templates\accounts\profile_edit.html
+msgid "Email does not match."
+msgstr "L'adresse e-mail ne correspond pas."
+
+#: .\templates\accounts\profile_edit.html
+msgid "Delete my account"
 msgstr "Supprimer mon compte"
 
-#: .\templates\accounts\profile_edit.html:160
-msgid "Unhappy?"
-msgstr "Pas satisfait ?"
-
 #: .\templates\accounts\profile_edit.html:162
-#: .\templates\experiments\index.html:32 .\templates\experiments\show.html:200
-#: .\templates\experiments\show.html:206 .\templates\experiments\show.html:212
-#: .\templates\experiments\show.html:218 .\templates\experiments\show.html:224
+#: .\templates\experiments\index.html:32 .\templates\experiments\show.html:203
+#: .\templates\experiments\show.html:209 .\templates\experiments\show.html:215
+#: .\templates\experiments\show.html:221 .\templates\experiments\show.html:227
 #: .\templates\tasks\question_task_edit.html:45
 #: .\templates\tasks\question_task_edit.html:166
 msgid "Are you sure?"
@@ -327,10 +445,8 @@ msgid "Back"
 msgstr "Retour"
 
 #: .\templates\accounts\researcher_invitations.html:3
-#, fuzzy
-#| msgid "Researcher registration"
 msgid "Researcher Invitations"
-msgstr "Inscription chercheur"
+msgstr "Invitations chercheurs"
 
 #: .\templates\accounts\researcher_invitations.html:6
 msgid "Your invitations"
@@ -358,22 +474,20 @@ msgid "False"
 msgstr "Faux"
 
 #: .\templates\accounts\researcher_invitations.html:36
-#, fuzzy
-#| msgid "Create invitation"
 msgid "Delete this invitation?"
-msgstr "Créer une nouvelle invitation"
+msgstr "Supprimer cette invitation ?"
 
 #: .\templates\accounts\researcher_invitations.html:50
 msgid "Create invitation"
 msgstr "Créer une nouvelle invitation"
 
-#: .\templates\accounts\view_user.html:18
-msgid "Faculty"
-msgstr "Faculté"
+#: .\templates\accounts\view_user.html:23
+msgid "Yes"
+msgstr "Oui"
 
-#: .\templates\accounts\view_user.html:20
-msgid "Research level"
-msgstr "Niveau de recherche"
+#: .\templates\accounts\view_user.html:23
+msgid "No"
+msgstr "Non"
 
 #: .\templates\accounts\view_user.html:24
 msgid "Joined"
@@ -418,21 +532,29 @@ msgstr "Tous les utilisateurs"
 msgid "Invitations"
 msgstr "Invitations"
 
-#: .\templates\base.html:172
+#: .\templates\base.html:164
+msgid "Preview - no data is saved."
+msgstr "Aperçu - aucune donnée n'est enregistrée."
+
+#: .\templates\base.html:165 .\templates\tasks\sample_task_edit.html:10
+msgid "Back to experiment"
+msgstr "Retour à l'expérience"
+
+#: .\templates\base.html:178
 msgid "Version"
 msgstr "Version"
 
-#: .\templates\base.html:175 .\templates\base.html:176
+#: .\templates\base.html:181 .\templates\base.html:182
 #: .\templates\bug_reports\new.html:4 .\templates\bug_reports\new.html:7
 #: .\templates\bug_reports\received.html:4
 msgid "Report a bug"
 msgstr "Signaler un bug"
 
-#: .\templates\base.html:178 .\templates\pages\home.html:19
+#: .\templates\base.html:184 .\templates\pages\home.html:19
 msgid "See the documentation"
 msgstr "Voir la documentation"
 
-#: .\templates\base.html:179 .\templates\pages\documentation.html:4
+#: .\templates\base.html:185 .\templates\pages\documentation.html:4
 #: .\templates\pages\home.html:20
 msgid "User guide"
 msgstr "Guide de l'utilisateur"
@@ -447,7 +569,7 @@ msgstr "Détails"
 
 #: .\templates\bug_reports\new.html:28 .\templates\responses\home.html:49
 msgid "Please complete the 'I am not a robot' check."
-msgstr ""
+msgstr "Veuillez compléter la vérification 'Je ne suis pas un robot'."
 
 #: .\templates\bug_reports\new.html:32
 msgid "Send"
@@ -485,10 +607,8 @@ msgid "Editing"
 msgstr "Modification"
 
 #: .\templates\experiments\index.html:40
-#, fuzzy
-#| msgid "New experiment"
 msgid "No experiments yet."
-msgstr "Nouvelle expérience"
+msgstr "Aucune expérience pour l'instant."
 
 #: .\templates\experiments\index.html:46 .\templates\experiments\new.html:5
 msgid "New experiment"
@@ -503,10 +623,8 @@ msgid "Create experiment"
 msgstr "Créer une expérience"
 
 #: .\templates\experiments\show.html:7
-#, fuzzy
-#| msgid "Create experiment"
 msgid "Back to experiments"
-msgstr "Créer une expérience"
+msgstr "Retour aux expériences"
 
 #: .\templates\experiments\show.html:26
 msgid "Download"
@@ -522,94 +640,86 @@ msgstr "Réponses"
 
 #: .\templates\experiments\show.html:38
 msgid "Complete responses"
-msgstr ""
+msgstr "Réponses complètes"
 
 #: .\templates\experiments\show.html:39
-#, fuzzy
-#| msgid "Responses"
 msgid "Response ratio"
-msgstr "Réponses"
+msgstr "Taux de réponse"
 
 #: .\templates\experiments\show.html:40
-#, fuzzy
-#| msgid "Responses"
 msgid "Last response"
-msgstr "Réponses"
+msgstr "Dernière réponse"
 
 #: .\templates\experiments\show.html:66
 msgid "contains the following errors"
-msgstr ""
+msgstr "contient les erreurs suivantes"
 
 #: .\templates\experiments\show.html:74
 msgid "contains the following warnings"
-msgstr ""
+msgstr "contient les avertissements suivants"
 
 #: .\templates\experiments\show.html:82
-#, fuzzy
-#| msgid "Publish"
 msgid "Publish anyway"
-msgstr "Publier"
+msgstr "Publier quand même"
 
 #: .\templates\experiments\show.html:95
-#, fuzzy
-#| msgid "Consent terms"
 msgid "Edit consent terms"
-msgstr "Conditions de consentement"
+msgstr "Modifier les conditions de consentement"
 
 #: .\templates\experiments\show.html:100
-#, fuzzy
-#| msgid "Edit experiment"
-msgid "Publish this experiment?"
-msgstr "Modifier l'expérience"
+msgid "Preview"
+msgstr "Aperçu"
 
-#: .\templates\experiments\show.html:102
+#: .\templates\experiments\show.html:103
+msgid "Publish this experiment?"
+msgstr "Publier cette expérience ?"
+
+#: .\templates\experiments\show.html:105
 msgid "Publish"
 msgstr "Publier"
 
-#: .\templates\experiments\show.html:112
+#: .\templates\experiments\show.html:115
 msgid "Tasks"
 msgstr "Tâches"
 
-#: .\templates\experiments\show.html:119
+#: .\templates\experiments\show.html:122
 #: .\templates\tasks\question_task_new.html:4
 #: .\templates\tasks\question_task_new.html:7
 msgid "Create question task"
-msgstr ""
+msgstr "Créer une tâche de questions"
 
-#: .\templates\experiments\show.html:125
+#: .\templates\experiments\show.html:128
 #: .\templates\tasks\sample_task_new.html:4
 #: .\templates\tasks\sample_task_new.html:7
-#, fuzzy
-#| msgid "Created at"
 msgid "Create sample task"
-msgstr "Créé le"
+msgstr "Créer une tâche d'exemple audio"
 
-#: .\templates\experiments\show.html:131
+#: .\templates\experiments\show.html:134
 #: .\templates\tasks\intermediate_screen_new.html:4
 #: .\templates\tasks\intermediate_screen_new.html:7
 msgid "Create intermediate screen task"
-msgstr ""
+msgstr "Créer une tâche d'écran intermédiaire"
 
-#: .\templates\experiments\show.html:142
+#: .\templates\experiments\show.html:145
 msgid "Random"
 msgstr "Aléatoire"
 
-#: .\templates\experiments\show.html:145
+#: .\templates\experiments\show.html:148
 msgid "Randomise"
 msgstr "Rendre aléatoire"
 
-#: .\templates\experiments\show.html:148
+#: .\templates\experiments\show.html:151
 #: .\templates\tasks\question_task_edit.html:76
 msgid "Type"
 msgstr "Type"
 
-#: .\templates\experiments\show.html:245
+#: .\templates\experiments\show.html:248
 msgid "Consent terms"
 msgstr "Conditions de consentement"
 
-#: .\templates\experiments\show.html:251
+#: .\templates\experiments\show.html:254
 msgid "Close"
-msgstr ""
+msgstr "Fermer"
 
 #: .\templates\experiments\terms.html:3 .\templates\experiments\terms.html:5
 #: .\templates\experiments\terms.html:18
@@ -652,7 +762,7 @@ msgstr ""
 
 #: .\templates\pages\home.html:18
 msgid "To access the website's documentation please follow this link:"
-msgstr ""
+msgstr "Pour accéder à la documentation, veuillez suivre ce lien :"
 
 #: .\templates\responses\finish.html:4
 msgid "Thank you"
@@ -662,7 +772,7 @@ msgstr "Merci"
 msgid "You have completed this experiment"
 msgstr "Vous avez complété cette expérience."
 
-#: .\templates\responses\finish.html:11
+#: .\templates\responses\finish.html:12 .\templates\responses\finish.html:14
 msgid "Your unique response ID is"
 msgstr "Votre identifiant de participation est"
 
@@ -678,14 +788,12 @@ msgstr ""
 "plusieurs fois."
 
 #: .\templates\responses\home.html:38
-#, fuzzy
-#| msgid "Enter your email address (optional)"
 msgid "Enter your email address"
-msgstr "Entrez votre adresse e-mail (facultatif)"
+msgstr "Entrez votre adresse e-mail"
 
 #: .\templates\responses\home.html:43
 msgid "I have read and agree to the terms above."
-msgstr ""
+msgstr "J'ai lu et j'accepte les conditions ci-dessus."
 "Cliquez ici pour indiquer que vous avez lu les conditions ci-dessus et que "
 "vous les acceptez, et que vous n'avez jamais participé à cette expérience ni "
 "à une expérience similaire."
@@ -695,18 +803,16 @@ msgid "Start"
 msgstr "Commencer l'expérience"
 
 #: .\templates\responses\home.html:72
-#, fuzzy
-#| msgid "Email address"
 msgid "Email address is required."
-msgstr "Adresse e-mail"
+msgstr "Une adresse e-mail est requise."
 
 #: .\templates\responses\home.html:76
 msgid "Please enter a valid email address."
-msgstr ""
+msgstr "Veuillez saisir une adresse e-mail valide."
 
 #: .\templates\responses\sample_intro.html:9
 msgid "You are about to listen to a sample. Please use headphones if possible."
-msgstr ""
+msgstr "Vous êtes sur le point d'ecouter un extrait audio. Veuillez utiliser des écouteurs si possible."
 "Un échantillon de voix vous sera présenté pour les tâches suivantes. "
 "Veuillez effectuer chaque tâche en suivant les consignes."
 
@@ -721,18 +827,91 @@ msgstr "Cliquez sur Commencer lorsque vous êtes prêt(e)."
 #: .\templates\responses\tasks\click_task.html:4
 #: .\templates\tasks\sample_task_edit.html:126
 msgid "Listening task"
-msgstr ""
+msgstr "Tâche d'écoute"
+
+#: .\templates\responses\tasks\click_task.html:27
+msgid "Replay"
+msgstr "Rejouer"
+
+#: .\templates\responses\tasks\click_task.html:28
+msgid "Click at"
+msgstr "Clic à"
+
+#: .\templates\responses\tasks\click_task.html:29
+msgid "Why did you click?"
+msgstr "Pourquoi avez-vous cliqué ?"
+
+#: .\templates\responses\tasks\click_task.html:30
+msgid "Describe what you noticed..."
+msgstr "Décrivez ce que vous avez remarqué..."
+
+#: .\templates\responses\tasks\click_task.html:31
+msgid "I clicked by accident"
+msgstr "J'ai cliqué par accident"
+
+#: .\templates\responses\tasks\click_task.html:32
+msgid "I don't know why I clicked"
+msgstr "Je ne sais pas pourquoi j'ai cliqué"
+
+#: .\templates\responses\tasks\click_task.html:33
+msgid "Please explain your click or tick a checkbox."
+msgstr "Veuillez expliquer votre clic ou cocher une case."
+
+#: .\templates\responses\tasks\click_task.html:34
+msgid "You didn't click during this audio clip. Please explain why:"
+msgstr "Vous n'avez pas cliqué pendant cet extrait audio. Veuillez expliquer pourquoi :"
+"Vous n'avez pas cliqué pendant ce clip audio. Veuillez expliquer pourquoi :"
+
+#: .\templates\responses\tasks\click_task.html:35
+msgid "I didn't notice any accent features..."
+msgstr "Je n'ai pas remarqué de caractéristiques accentuelles..."
+
+#: .\templates\responses\tasks\click_task.html:36
+msgid "Continue"
+msgstr "Continuer"
+
+#: .\templates\responses\tasks\click_task.html:37
+msgid "You clicked"
+msgstr "Vous avez cliqué"
+
+#: .\templates\responses\tasks\click_task.html:38
+msgid "time"
+msgstr "fois"
+
+#: .\templates\responses\tasks\click_task.html:39
+msgid "times"
+msgstr "fois"
 
 #: .\templates\responses\tasks\click_task.html:40
-msgid "Audio progress"
-msgstr ""
+msgid "For each click, tell us what you noticed:"
+msgstr "Pour chaque clic, dites-nous ce que vous avez remarqué :"
 
-#: .\templates\responses\tasks\click_task.html:45
-#: .\templates\responses\tasks\listening_task.html:24
+#: .\templates\responses\tasks\click_task.html:41
+msgid "Submit and continue"
+msgstr "Soumettre et continuer"
+
+#: .\templates\responses\tasks\click_task.html:42
+msgid "Saving..."
+msgstr "Enregistrement..."
+
+#: .\templates\responses\tasks\click_task.html:43
+msgid "[no transcript]"
+msgstr "[pas de transcription]"
+
+#: .\templates\responses\tasks\click_task.html:44
+msgid "You clicked here"
+msgstr "Vous avez cliqué ici"
+
+#: .\templates\responses\tasks\click_task.html:58
+msgid "Audio progress"
+msgstr "Progression audio"
+
+#: .\templates\responses\tasks\click_task.html:63
+#: .\templates\responses\tasks\listening_task.html:27
 msgid "Play"
 msgstr "Écouter"
 
-#: .\templates\responses\tasks\click_task.html:48
+#: .\templates\responses\tasks\click_task.html:66
 msgid "Click!"
 msgstr "Cliquer !"
 
@@ -741,26 +920,30 @@ msgid "Information"
 msgstr "Information"
 
 #: .\templates\responses\tasks\intermediate_screen_task.html:12
-#: .\templates\responses\tasks\listening_task.html:31
+#: .\templates\responses\tasks\listening_task.html:32
 msgid "Next"
 msgstr "Suivant"
 
 #: .\templates\responses\tasks\listening_task.html:4
 msgid "Listening"
-msgstr ""
+msgstr "Écoute"
+
+#: .\templates\responses\tasks\listening_task.html:59
+msgid "Listens remaining"
+msgstr "Écoutes restantes"
 
 #: .\templates\responses\tasks\question_task.html:4
 #: .\templates\tasks\question_task_edit.html:57
 msgid "Questions"
 msgstr "Questions"
 
-#: .\templates\responses\tasks\question_task.html:57
-msgid "Select"
-msgstr ""
+#: .\templates\responses\tasks\question_task.html:60
+msgid "Select an option"
+msgstr "Sélectionner une option"
 
-#: .\templates\responses\tasks\question_task.html:89
+#: .\templates\responses\tasks\question_task.html:96
 msgid "Save and continue"
-msgstr ""
+msgstr "Enregistrer et continuer"
 
 #: .\templates\responses\tasks\sample_task.html:7
 msgid "Loading…"
@@ -785,23 +968,21 @@ msgstr "Modifier"
 #: .\templates\tasks\intermediate_screen_edit.html:13
 #: .\templates\tasks\listening_task_edit.html:9
 #: .\templates\tasks\listening_task_edit.html:13
-#, fuzzy
-#| msgid "Back"
 msgid "Back to"
-msgstr "Retour"
+msgstr "Retour à"
 
 #: .\templates\tasks\click_task_edit.html:25
 msgid "Reaction prompt"
-msgstr ""
+msgstr "Invite de réaction"
 
 #: .\templates\tasks\click_task_edit.html:28
 msgid "Explanation prompt"
-msgstr ""
+msgstr "Invite d'explication"
 
 #: .\templates\tasks\click_task_edit.html:39
 #: .\templates\tasks\intermediate_screen_edit.html:34
 msgid "Supports Markdown."
-msgstr ""
+msgstr "Prend en charge le Markdown."
 
 #: .\templates\tasks\click_task_edit.html:44
 #: .\templates\tasks\intermediate_screen_edit.html:39
@@ -816,16 +997,16 @@ msgstr "Enregistrer"
 #: .\templates\tasks\listening_task_edit.html:45
 #: .\templates\tasks\sample_task_edit.html:174
 msgid "Danger zone"
-msgstr ""
+msgstr "Zone de danger"
 
 #: .\templates\tasks\click_task_edit.html:55
 msgid "Delete this reaction task?"
-msgstr ""
+msgstr "Supprimer cette tâche de réaction ?"
 
 #: .\templates\tasks\click_task_new.html:4
 #: .\templates\tasks\click_task_new.html:7
 msgid "New reaction task"
-msgstr ""
+msgstr "Nouvelle tâche de réaction"
 
 #: .\templates\tasks\click_task_new.html:18
 #: .\templates\tasks\intermediate_screen_new.html:18
@@ -837,34 +1018,28 @@ msgstr "Créer"
 
 #: .\templates\tasks\intermediate_screen_edit.html:50
 msgid "Delete this screen?"
-msgstr ""
+msgstr "Supprimer cet écran ?"
 
 #: .\templates\tasks\listening_task_edit.html:25
-#, fuzzy
-#| msgid "Mailing list"
 msgid "Max listens"
-msgstr "Liste de diffusion"
+msgstr "Nombre maximal d'écoutes"
 
 #: .\templates\tasks\listening_task_edit.html:48
 msgid "Delete this listening task?"
-msgstr ""
+msgstr "Supprimer cette tâche d'écoute ?"
 
 #: .\templates\tasks\listening_task_new.html:4
 #: .\templates\tasks\listening_task_new.html:7
 msgid "New listening task"
-msgstr ""
+msgstr "Nouvelle tâche d'écoute"
 
 #: .\templates\tasks\question_task_edit.html:28
-#, fuzzy
-#| msgid "Save name"
 msgid "Page name"
-msgstr "Enregistrer le nom"
+msgstr "Nom de la page"
 
 #: .\templates\tasks\question_task_edit.html:34
-#, fuzzy
-#| msgid "Save name"
 msgid "Task name"
-msgstr "Enregistrer le nom"
+msgstr "Nom de la tâche"
 
 #: .\templates\tasks\question_task_edit.html:40
 #: .\templates\tasks\sample_task_edit.html:41
@@ -877,16 +1052,12 @@ msgid "Add"
 msgstr "Ajouter"
 
 #: .\templates\tasks\question_task_edit.html:75
-#, fuzzy
-#| msgid "Questions"
 msgid "Question prompt"
-msgstr "Questions"
+msgstr "Invite de question"
 
 #: .\templates\tasks\question_task_edit.html:77
-#, fuzzy
-#| msgid "Questions"
 msgid "Options"
-msgstr "Questions"
+msgstr "Options"
 
 #: .\templates\tasks\question_task_edit.html:101
 msgid "Required"
@@ -894,74 +1065,56 @@ msgstr "Obligatoire"
 
 #: .\templates\tasks\question_task_edit.html:127
 msgid "No options yet."
-msgstr ""
+msgstr "Aucune option pour l'instant."
 
 #: .\templates\tasks\question_task_edit.html:147
 msgid "From"
-msgstr ""
+msgstr "De"
 
 #: .\templates\tasks\question_task_edit.html:150
-#, fuzzy
-#| msgid "Questions"
 msgid "Num options"
-msgstr "Questions"
+msgstr "Nombre d'options"
 
 #: .\templates\tasks\question_task_edit.html:154
 msgid "To"
-msgstr ""
+msgstr "À"
 
 #: .\templates\tasks\question_task_edit.html:176
-#, fuzzy
-#| msgid "Questions"
 msgid "No questions yet."
-msgstr "Questions"
-
-#: .\templates\tasks\sample_task_edit.html:10
-#, fuzzy
-#| msgid "Create experiment"
-msgid "Back to experiment"
-msgstr "Créer une expérience"
+msgstr "Aucune question pour l'instant."
 
 #: .\templates\tasks\sample_task_edit.html:19
 msgid "Calibration sample"
-msgstr ""
+msgstr "Échantillon de calibration"
 
 #: .\templates\tasks\sample_task_edit.html:24
 msgid "Unset calibration"
-msgstr ""
+msgstr "Désactiver la calibration"
 
 #: .\templates\tasks\sample_task_edit.html:24
 msgid "Set as calibration"
-msgstr ""
-
-#: .\templates\tasks\sample_task_edit.html:48
-msgid "Audio file"
-msgstr "Fichier audio"
+msgstr "Définir comme calibration"
 
 #: .\templates\tasks\sample_task_edit.html:52
 #: .\templates\tasks\sample_task_edit.html:88
-#, fuzzy
-#| msgid "Upload"
 msgid "Uploaded"
-msgstr "Téléverser"
+msgstr "Téléchargé"
 
 #: .\templates\tasks\sample_task_edit.html:61
-#, fuzzy
-#| msgid "Audio file"
 msgid "Delete audio file?"
-msgstr "Fichier audio"
+msgstr "Supprimer le fichier audio ?"
 
 #: .\templates\tasks\sample_task_edit.html:62
 msgid "Remove audio"
-msgstr ""
+msgstr "Supprimer l'audio"
 
 #: .\templates\tasks\sample_task_edit.html:66
 msgid "No audio uploaded yet."
-msgstr ""
+msgstr "Aucun audio téléchargé pour l'instant."
 
 #: .\templates\tasks\sample_task_edit.html:73
 msgid "Upload audio (max 300 MB)"
-msgstr ""
+msgstr "Télécharger l'audio (max 300 Mo)"
 
 #: .\templates\tasks\sample_task_edit.html:76
 #: .\templates\tasks\sample_task_edit.html:109
@@ -970,60 +1123,53 @@ msgstr "Téléverser"
 
 #: .\templates\tasks\sample_task_edit.html:84
 msgid "Transcript (EAF)"
-msgstr ""
+msgstr "Transcription (EAF)"
 
 #: .\templates\tasks\sample_task_edit.html:94
 msgid "Delete transcript?"
-msgstr ""
+msgstr "Supprimer la transcription ?"
 
 #: .\templates\tasks\sample_task_edit.html:95
 msgid "Remove transcript"
-msgstr ""
+msgstr "Supprimer la transcription"
 
 #: .\templates\tasks\sample_task_edit.html:99
 msgid "No transcript uploaded. Click task will show no transcript window."
-msgstr ""
+msgstr "Aucune transcription chargée. La tâche de clic n'affichera pas de fenêtre de transcription."
+"Aucune transcription téléchargée. La tâche de clic n'affichera pas de "
+"fenêtre de transcription."
 
 #: .\templates\tasks\sample_task_edit.html:106
 msgid "Upload transcript (max 300 MB)"
-msgstr ""
+msgstr "Télécharger la transcription (max 300 Mo)"
 
 #: .\templates\tasks\sample_task_edit.html:118
 msgid "Sub-tasks"
 msgstr "Sous-tâches"
 
 #: .\templates\tasks\sample_task_edit.html:122
-#, fuzzy
-#| msgid "Sub-tasks"
 msgid "Add sub-task"
-msgstr "Sous-tâches"
+msgstr "Ajouter une sous-tâche"
 
 #: .\templates\tasks\sample_task_edit.html:129
 msgid "Reaction (click) task"
-msgstr ""
+msgstr "Tâche de réaction (clic)"
 
 #: .\templates\tasks\sample_task_edit.html:148
-#, fuzzy
-#| msgid "Random"
 msgid "random"
-msgstr "Aléatoire"
+msgstr "aléatoire"
 
 #: .\templates\tasks\sample_task_edit.html:167
-#, fuzzy
-#| msgid "Sub-tasks"
 msgid "No sub-tasks yet."
-msgstr "Sous-tâches"
+msgstr "Aucune sous-tâche pour l'instant."
 
 #: .\templates\tasks\sample_task_edit.html:177
 msgid "Delete this sample and all its sub-tasks?"
-msgstr ""
+msgstr "Supprimer cet exemple et toutes ses sous-tâches ?"
 
 #: .\templates\tasks\sample_task_edit.html:179
 msgid "Delete audio sample"
-msgstr ""
-
-#~ msgid "Funded"
-#~ msgstr "Financé"
+msgstr "Supprimer l'échantillon audio"
 
 #~ msgid "Please accept terms to continue."
 #~ msgstr "Veuillez accepter les conditions pour continuer."
