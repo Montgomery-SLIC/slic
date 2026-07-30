@@ -28,7 +28,7 @@
 
 <br>
 <div class="text-center">
-  <form method="post" action="{% url 'responses:start' slug=experiment.slug %}" id="start-experiment-form">
+  <form method="post" action="{{ start_url }}" id="start-experiment-form">
     {% csrf_token %}
     <div class="form-group">
       <div class="form-text">

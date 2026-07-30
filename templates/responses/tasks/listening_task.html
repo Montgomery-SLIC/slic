@@ -1,91 +1,89 @@
 {% extends "base.html" %}
-{% load i18n static slic_tags %}
+{% load i18n %}
 
 {% block title %}{% trans "Listening" %}{% endblock %}
 
 {% block content %}
-<div class="text-center">
-  <div class="data" data-listens="{{ specific.listens|default:1 }}"
-       style="display:none;"></div>
-  <div class="player" style="display:none;">
-    <audio src="{% url 'responses:serve_audio' sample_task_id=sample.id %}"
-           preload="auto"></audio>
-  </div>
-  <br>
-  <canvas id="progress" height="100" width="500"></canvas>
-  <br>
-  <div class="listens_counter"><b></b></div>
-  <br>
-  <span id="current-time"></span>
-  /
-  <span id="duration"></span>
-  <br>
-  <div class="btn btn-outline-secondary" id="audioControl" onclick="play()">
-    {% trans "Play" %}
-  </div>
-</div>
+<div class="py-4 text-center">
+  <div class="data" data-listens="{{ specific.listens|default:1 }}" style="display:none;"></div>
+  <audio id="audio-el" src="{{ audio_url }}" preload="auto"></audio>
 
-<br>
-<div class="text-center">
-  <a href="{{ next_url }}" class="btn btn-primary" role="button"
-     style="display: none;" id="next-button">{% trans "Next" %}</a>
+  <div class="mx-auto" style="max-width:520px;">
+
+    <div class="progress mb-1" style="height:6px; border-radius:3px;">
+      <div id="progress-bar" class="progress-bar" role="progressbar"
+           style="width:0%; transition:width 0.25s linear;" aria-valuenow="0"
+           aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+
+    <div class="d-flex justify-content-between text-muted small mb-4">
+      <span id="current-time">0:00</span>
+      <span id="duration">--:--</span>
+    </div>
+
+    <p class="text-muted small mb-3" id="listens-counter"></p>
+
+    <button id="play-btn" type="button" class="btn btn-outline-secondary">
+      {% trans "Play" %}
+    </button>
+
+    <div class="mt-5">
+      <a id="next-btn" href="{{ next_url }}" class="btn btn-primary" style="display:none;">
+        {% trans "Next" %}
+      </a>
+    </div>
+
+  </div>
 </div>
-<br>
 {% endblock %}
 
 {% block extra_js %}
 <script>
-  var played_once = false;
-  var canvasWidth = 500;
-  var audioEl = document.querySelector('.player audio');
-  var canvas = document.getElementById('progress').getContext('2d');
-  audioEl.ontimeupdate = updateBar;
+(function () {
+  var audio    = document.getElementById('audio-el');
+  var bar      = document.getElementById('progress-bar');
+  var timeEl   = document.getElementById('current-time');
+  var durEl    = document.getElementById('duration');
+  var counter  = document.getElementById('listens-counter');
+  var playBtn  = document.getElementById('play-btn');
+  var nextBtn  = document.getElementById('next-btn');
+  var listens  = parseInt(document.querySelector('.data').dataset.listens || '1');
 
-  var listens = parseInt(document.querySelector('.data').getAttribute('data-listens') || '1');
-  document.querySelector('.listens_counter b').textContent = 'Listens left: ' + listens;
+  function fmt(s) {
+    if (!isFinite(s)) return '--:--';
+    var m = Math.floor(s / 60), sec = Math.floor(s % 60);
+    return m + ':' + (sec < 10 ? '0' : '') + sec;
+  }
 
-  audioEl.addEventListener('loadedmetadata', function() {
-    var duration = audioEl.duration;
-    var currentTime = audioEl.currentTime;
-    document.getElementById('duration').innerHTML = convertElapsedTime(duration);
-    document.getElementById('current-time').innerHTML = convertElapsedTime(currentTime);
-    canvas.fillRect(0, 0, canvasWidth, 50);
+  function updateCounter() {
+    counter.textContent = '{% trans "Listens remaining" %}: ' + listens;
+    if (listens <= 0) { playBtn.disabled = true; }
+  }
+
+  updateCounter();
+
+  audio.addEventListener('loadedmetadata', function () {
+    durEl.textContent = fmt(audio.duration);
   });
 
-  function play() {
+  audio.addEventListener('timeupdate', function () {
+    var pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+    bar.style.width = pct + '%';
+    bar.setAttribute('aria-valuenow', Math.round(pct));
+    timeEl.textContent = fmt(audio.currentTime);
+    if (audio.currentTime >= audio.duration - 0.05) {
+      nextBtn.style.display = 'inline-block';
+    }
+  });
+
+  playBtn.addEventListener('click', function () {
     if (listens > 0) {
-      audioEl.currentTime = 0;
-      audioEl.play();
-      listens = listens - 1;
-      document.querySelector('.listens_counter b').textContent = 'Listens left: ' + listens;
+      audio.currentTime = 0;
+      audio.play();
+      listens -= 1;
+      updateCounter();
     }
-  }
-
-  function updateBar() {
-    canvas.clearRect(0, 0, canvasWidth, 50);
-    canvas.fillStyle = '#000';
-    canvas.fillRect(0, 0, canvasWidth, 50);
-
-    var currentTime = audioEl.currentTime;
-    var duration = audioEl.duration;
-
-    document.getElementById('current-time').innerHTML = convertElapsedTime(currentTime);
-
-    var percentage = currentTime / duration;
-    var progress = canvasWidth * percentage;
-    canvas.fillStyle = '#FF0000';
-    canvas.fillRect(0, 0, progress, 50);
-
-    if (currentTime >= duration) {
-      document.getElementById('next-button').style.display = 'inline-block';
-    }
-  }
-
-  function convertElapsedTime(inputSeconds) {
-    var seconds = Math.floor(inputSeconds % 60);
-    if (seconds < 10) { seconds = '0' + seconds; }
-    var minutes = Math.floor(inputSeconds / 60);
-    return minutes + ':' + seconds;
-  }
+  });
+}());
 </script>
 {% endblock %}

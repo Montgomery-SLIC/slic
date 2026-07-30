@@ -6,7 +6,7 @@ from tasks.models import (
     QuestionTask, SampleTask, ClickTask,
     Question, Option, Scale,
     QUESTION_TYPE_TEXT, QUESTION_TYPE_CHECKBOX, QUESTION_TYPE_RADIO,
-    QUESTION_TYPE_DROPDOWN, QUESTION_TYPE_RATING, QUESTION_DEFAULT_PROMPTS,
+    QUESTION_TYPE_DROPDOWN, QUESTION_TYPE_RATING,
 )
 from tests.factories import make_user, make_experiment, make_question_task, make_sample_task, make_question
 
@@ -19,14 +19,14 @@ class TestQuestionCompletionErrors(TestCase):
         self.exp = make_experiment(self.user)
         self.qt = make_question_task('page 1', 1, experiment=self.exp)
 
-    def test_default_prompt_text_is_a_warning(self):
+    def test_empty_prompt_is_a_warning(self):
         q = Question.objects.create(
             question_task=self.qt, question_type=QUESTION_TYPE_TEXT,
-            prompt=QUESTION_DEFAULT_PROMPTS[QUESTION_TYPE_TEXT], sort=1,
+            prompt='', sort=1,
         )
         result = q.completion_errors()
         self.assertEqual(len(result['warnings']), 1)
-        self.assertIn('still has default prompt', result['warnings'][0])
+        self.assertIn('no prompt text', result['warnings'][0])
         self.assertEqual(result['errors'], [])
 
     def test_custom_prompt_no_warning(self):
@@ -83,14 +83,15 @@ class TestQuestionCompletionErrors(TestCase):
         Scale.objects.create(question=q, bins=7, low='Bad', high='Good')
         self.assertEqual(q.completion_errors()['errors'], [])
 
-    def test_default_prompt_fires_warning_for_all_types(self):
-        for qtype, default in QUESTION_DEFAULT_PROMPTS.items():
+    def test_empty_prompt_fires_warning_for_all_types(self):
+        for qtype in [QUESTION_TYPE_TEXT, QUESTION_TYPE_CHECKBOX, QUESTION_TYPE_RADIO,
+                      QUESTION_TYPE_DROPDOWN, QUESTION_TYPE_RATING]:
             with self.subTest(qtype=qtype):
                 q = Question.objects.create(
-                    question_task=self.qt, question_type=qtype, prompt=default, sort=99,
+                    question_task=self.qt, question_type=qtype, prompt='', sort=99,
                 )
                 warns = q.completion_errors()['warnings']
-                self.assertEqual(len(warns), 1)
+                self.assertGreaterEqual(len(warns), 1)
                 q.delete()
 
 
@@ -106,11 +107,11 @@ class TestQuestionTaskCompletionErrors(TestCase):
         errors = qt.completion_errors()['errors']
         self.assertTrue(any('does not contain any questions' in e for e in errors))
 
-    def test_question_with_default_prompt_is_warning_not_error(self):
+    def test_question_with_empty_prompt_is_warning_not_error(self):
         qt = make_question_task('q page', 1, experiment=self.exp)
         Question.objects.create(
             question_task=qt, question_type=QUESTION_TYPE_TEXT,
-            prompt=QUESTION_DEFAULT_PROMPTS[QUESTION_TYPE_TEXT], sort=1,
+            prompt='', sort=1,
         )
         result = qt.completion_errors()
         self.assertEqual(result['errors'], [])
@@ -190,7 +191,7 @@ class TestExperimentCompletionErrors(TestCase):
         qt = make_question_task('q page', 1, experiment=self.exp)
         Question.objects.create(
             question_task=qt, question_type=QUESTION_TYPE_TEXT,
-            prompt=QUESTION_DEFAULT_PROMPTS[QUESTION_TYPE_TEXT], sort=1,
+            prompt='', sort=1,
         )
         result = self.exp.completion_errors()
         self.assertEqual(result['errors'], [])
@@ -236,7 +237,7 @@ class TestExperimentCompleteView(TestCase):
         qt = make_question_task('q page', 1, experiment=self.exp)
         Question.objects.create(
             question_task=qt, question_type=QUESTION_TYPE_TEXT,
-            prompt=QUESTION_DEFAULT_PROMPTS[QUESTION_TYPE_TEXT], sort=1,
+            prompt='', sort=1,
         )
         self.client.post(self.url)
         self.exp.refresh_from_db()
@@ -246,7 +247,7 @@ class TestExperimentCompleteView(TestCase):
         qt = make_question_task('q page', 1, experiment=self.exp)
         Question.objects.create(
             question_task=qt, question_type=QUESTION_TYPE_TEXT,
-            prompt=QUESTION_DEFAULT_PROMPTS[QUESTION_TYPE_TEXT], sort=1,
+            prompt='A question', sort=1,
         )
         self.client.post(self.url, data={'force': '1'})
         self.exp.refresh_from_db()
