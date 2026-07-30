@@ -1,13 +1,16 @@
 import secrets
+import markdown as md
+from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, View, CreateView, DeleteView
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth import logout
+from django.utils.safestring import mark_safe
 import rules
 
-from .models import User, ResearcherInvitation
+from .models import User, ResearcherInvitation, SiteContent
 from .forms import ProfileEditForm
 
 
@@ -134,3 +137,20 @@ class ResearcherInvitationDeleteView(AdminRequiredMixin, View):
         invitation.delete()
         messages.success(request, 'Invitation deleted.')
         return redirect('accounts:invitations')
+
+
+class DocumentationEditView(AdminRequiredMixin, View):
+    def _get_content(self):
+        obj = SiteContent.objects.filter(key='documentation').first()
+        if obj:
+            return obj.content
+        return (settings.BASE_DIR / 'docs/USER_DOCUMENTATION.md').read_text(encoding='utf-8')
+
+    def get(self, request):
+        return render(request, 'pages/documentation_edit.html', {'content': self._get_content()})
+
+    def post(self, request):
+        content = request.POST.get('content', '')
+        SiteContent.objects.update_or_create(key='documentation', defaults={'content': content})
+        messages.success(request, 'User guide updated successfully.')
+        return redirect('documentation')

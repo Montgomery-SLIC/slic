@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Edit User Guide" %}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-10">
+    <div class="d-flex align-items-center mb-3" style="gap: .75rem;">
+      <h2 class="mb-0">{% trans "Edit User Guide" %}</h2>
+      <a href="{% url 'documentation' %}" class="btn btn-secondary btn-sm">{% trans "Cancel" %}</a>
+    </div>
+    <p class="text-muted">{% trans "Content is written in Markdown." %}</p>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <textarea name="content" class="form-control" rows="40"
+                  style="font-family: monospace; font-size: 0.875rem; white-space: pre;">{{ content }}</textarea>
+      </div>
+      <div class="mt-3 d-flex align-items-center" style="gap: .75rem;">
+        <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+        <a href="{% url 'documentation' %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
