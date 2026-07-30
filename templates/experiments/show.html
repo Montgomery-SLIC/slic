@@ -87,7 +87,7 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-sm-10 border-right p-3">
+      <div class="col-sm-9 border-right p-3">
         <a href="{% url 'experiments:edit' experiment.pk %}" class="btn btn-outline-primary">
           {% trans "Edit experiment" %}
         </a>
@@ -95,7 +95,10 @@
           {% trans "Edit consent terms" %}
         </a>
       </div>
-      <div class="col-sm-2 p-3">
+      <div class="col-sm-3 p-3 d-flex align-items-start">
+        <a href="{% url 'experiments:preview_home' experiment.pk %}" class="btn btn-outline-secondary mr-2">
+          {% trans "Preview" %}
+        </a>
         <form method="post" action="{% url 'experiments:complete' experiment.pk %}"
               onsubmit="return confirm('{% trans "Publish this experiment?" %}')">
           {% csrf_token %}

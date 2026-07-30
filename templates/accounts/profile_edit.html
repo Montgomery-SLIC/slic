@@ -18,7 +18,7 @@
       {% endif %}
 
       <div class="form-group">
-        <label for="{{ form.email.id_for_label }}">{{ form.email.label }} <abbr title="required">*</abbr></label>
+        <label for="{{ form.email.id_for_label }}">{{ form.email.label }} <span class="text-danger font-weight-bold" aria-hidden="true">*</span></label>
         <input type="email"
                name="{{ form.email.html_name }}"
                id="{{ form.email.id_for_label }}"
@@ -56,7 +56,7 @@
       </div>
 
       <div class="form-group">
-        <label for="{{ form.current_password.id_for_label }}">{{ form.current_password.label }} <abbr title="required">*</abbr></label>
+        <label for="{{ form.current_password.id_for_label }}">{{ form.current_password.label }} <span class="text-danger font-weight-bold" aria-hidden="true">*</span></label>
         <input type="password"
                name="{{ form.current_password.html_name }}"
                id="{{ form.current_password.id_for_label }}"
@@ -72,7 +72,7 @@
       <br>
 
       <div class="form-group">
-        <label for="{{ form.name.id_for_label }}">{{ form.name.label }} <abbr title="required">*</abbr></label>
+        <label for="{{ form.name.id_for_label }}">{{ form.name.label }} <span class="text-danger font-weight-bold" aria-hidden="true">*</span></label>
         <input type="text"
                name="{{ form.name.html_name }}"
                id="{{ form.name.id_for_label }}"
@@ -99,7 +99,7 @@
       </div>
 
       <div class="form-group">
-        <label for="{{ form.country.id_for_label }}">{{ form.country.label }} <abbr title="required">*</abbr></label>
+        <label for="{{ form.country.id_for_label }}">{{ form.country.label }} <span class="text-danger font-weight-bold" aria-hidden="true">*</span></label>
         {{ form.country }}
         {% if form.country.errors %}
           <div class="invalid-feedback d-block">{{ form.country.errors|join:', ' }}</div>
@@ -143,29 +143,88 @@
       </div>
 
       <div class="form-group">
-        <label for="{{ form.research_level.id_for_label }}">{{ form.research_level.label }} <abbr title="required">*</abbr></label>
+        <label for="{{ form.research_level.id_for_label }}">{{ form.research_level.label }} <span class="text-danger font-weight-bold" aria-hidden="true">*</span></label>
         {{ form.research_level }}
         {% if form.research_level.errors %}
           <div class="invalid-feedback d-block">{{ form.research_level.errors|join:', ' }}</div>
         {% endif %}
       </div>
 
-      <div class="form-actions">
+      <div class="form-actions mt-4 d-flex align-items-center" style="gap:.75rem;">
         <input type="submit" value="{% trans 'Update' %}" class="btn btn-primary">
+        <a href="javascript:history.back()" class="btn btn-secondary">{% trans "Back" %}</a>
       </div>
     </form>
 
-    <h3 class="mt-5">{% trans "Cancel my account" %}</h3>
-    <p>
-      {% trans "Unhappy?" %}
-      <form method="post" action="{% url 'accounts:account_delete' %}" style="display:inline"
-            onsubmit="return confirm('{% trans "Are you sure?" %}');">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-link p-0 align-baseline">{% trans "Cancel my account" %}</button>
-      </form>
-    </p>
+    <div class="mt-5 mb-5">
+      <h3>{% trans "Delete Account" %}</h3>
+      <p class="text-danger">{% trans "Permanently deletes your account and all associated data. This action cannot be undone." %}</p>
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-account-modal">
+        {% trans "Delete my account" %}
+      </button>
+    </div>
 
-    <p><a href="javascript:history.back()">{% trans "Back" %}</a></p>
+    <div class="modal fade" id="delete-account-modal" tabindex="-1" role="dialog"
+         aria-labelledby="delete-account-modal-label" aria-modal="true"
+         data-expected-email="{{ user.email|lower }}">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="delete-account-modal-label">{% trans "Delete Account" %}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="{% trans 'Close' %}">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p class="text-danger font-weight-bold">{% trans "This will permanently delete your account and all associated data. This cannot be undone." %}</p>
+            <p>{% trans "To confirm, type your email address below:" %}</p>
+            <input type="email" id="delete-confirm-email" class="form-control"
+                   placeholder="{{ user.email }}" autocomplete="off">
+            <div id="delete-email-error" class="text-danger small d-none mt-1">
+              {% trans "Email does not match." %}
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Cancel" %}</button>
+            <form method="post" action="{% url 'accounts:account_delete' %}">
+              {% csrf_token %}
+              <button type="submit" id="delete-confirm-btn" class="btn btn-danger" disabled>
+                {% trans "Delete my account" %}
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+  var modal = document.getElementById('delete-account-modal');
+  var expectedEmail = modal.dataset.expectedEmail;
+  var input = document.getElementById('delete-confirm-email');
+  var btn   = document.getElementById('delete-confirm-btn');
+  var err   = document.getElementById('delete-email-error');
+
+  modal.addEventListener('show.bs.modal', function () {
+    input.value = '';
+    btn.disabled = true;
+    err.classList.add('d-none');
+  });
+
+  input.addEventListener('input', function () {
+    var matches = input.value.trim().toLowerCase() === expectedEmail;
+    btn.disabled = !matches;
+    if (!matches && input.value.length > 0) {
+      err.classList.remove('d-none');
+    } else {
+      err.classList.add('d-none');
+    }
+  });
+})();
+</script>
+{% endblock %}
+
