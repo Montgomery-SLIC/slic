@@ -20,7 +20,7 @@
   <dt class="col-sm-3">{% trans "Research level" %}</dt>
   <dd class="col-sm-9">{{ target.research_level|default:"-" }}</dd>
   <dt class="col-sm-3">{% trans "Admin" %}</dt>
-  <dd class="col-sm-9">{{ target.admin|yesno:"Yes,No" }}</dd>
+  <dd class="col-sm-9">{% if target.admin %}{% trans "Yes" %}{% else %}{% trans "No" %}{% endif %}</dd>
   <dt class="col-sm-3">{% trans "Joined" %}</dt>
   <dd class="col-sm-9">{{ target.date_joined }}</dd>
   <dt class="col-sm-3">{% trans "Experiments" %}</dt>

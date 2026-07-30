@@ -163,11 +163,11 @@ QUESTION_TYPE_DROPDOWN = 'dropdown'
 QUESTION_TYPE_RATING = 'rating'
 
 QUESTION_TYPE_CHOICES = [
-    (QUESTION_TYPE_TEXT, 'Text question'),
-    (QUESTION_TYPE_CHECKBOX, 'Checkboxes'),
-    (QUESTION_TYPE_RADIO, 'Radio buttons'),
-    (QUESTION_TYPE_DROPDOWN, 'Dropdown box'),
-    (QUESTION_TYPE_RATING, 'Rating scale'),
+    (QUESTION_TYPE_TEXT, _('Text question')),
+    (QUESTION_TYPE_CHECKBOX, _('Checkboxes')),
+    (QUESTION_TYPE_RADIO, _('Radio buttons')),
+    (QUESTION_TYPE_DROPDOWN, _('Dropdown box')),
+    (QUESTION_TYPE_RATING, _('Rating scale')),
 ]
 
 # Default prompt set at creation time; warning fires if prompt is still this value.
@@ -215,9 +215,8 @@ class Question(models.Model):
         warnings, errors = [], []
         qt_name = self.question_task.name
         display = dict(QUESTION_TYPE_CHOICES).get(self.question_type, self.question_type)
-        default_prompt = QUESTION_DEFAULT_PROMPTS.get(self.question_type, '')
-        if self.prompt == default_prompt:
-            warnings.append(f"{display} in '{qt_name}' still has default prompt.")
+        if not self.prompt.strip():
+            warnings.append(f"{display} in '{qt_name}' has no prompt text.")
         if self.has_options() and not self.options.exists():
             errors.append(f"{display} in '{qt_name}' has no options.")
         if self.question_type == QUESTION_TYPE_RATING:

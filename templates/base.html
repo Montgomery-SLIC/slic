@@ -58,11 +58,6 @@
                 <i class="fas fa-home"></i> {% trans "Home" %}
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'contact_us' %}" title="{% trans 'Contact us' %}">
-                <i class="fas fa-info-circle"></i> {% trans "Contact" %}
-              </a>
-            </li>
             {% if user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'experiments:index' %}" title="{% trans 'Experiments' %}">
@@ -90,6 +85,11 @@
             </ul>
             {% endif %}
             {% endif %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'contact_us' %}" title="{% trans 'Contact us' %}">
+                <i class="fas fa-info-circle"></i> {% trans "Contact" %}
+              </a>
+            </li>
           </ul>
 
           {% if user.is_authenticated %}
@@ -159,6 +159,12 @@
     </nav>
   </header>
 
+  {% if preview %}
+  <div class="alert alert-warning text-center mb-0 rounded-0 py-2" role="alert">
+    {% trans "Preview - no data is saved." %}
+    {% if preview_back_url %}&nbsp;<a href="{{ preview_back_url }}" class="alert-link">{% trans "Back to experiment" %}</a>{% endif %}
+  </div>
+  {% endif %}
   <main class="{% block main_class %}{% endblock %}">
     <div id="main-container" class="container">
       {% block content %}{% endblock %}

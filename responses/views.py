@@ -4,6 +4,7 @@ import urllib.request
 
 from django.conf import settings
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from django.http import Http404, HttpResponse, FileResponse, JsonResponse
 from django.views import View
 from django.db import transaction
@@ -12,7 +13,7 @@ from django.db.models import Max
 from experiments.models import Experiment
 from tasks.models import Task, SampleTask, QuestionTask, ListeningTask, ClickTask, IntermediateScreenTask
 from .models import Visit, ParticipantId, Response, ClickResponse
-from .helpers import next_task
+from .helpers import next_task, build_task_context, task_template_name
 
 
 # ── Experiment home ─────────────────────────────────────────────────────────
@@ -20,7 +21,10 @@ from .helpers import next_task
 class ExperimentHomeView(View):
     def get(self, request, slug):
         exp = get_object_or_404(Experiment, slug=slug, complete=True)
-        return render(request, 'responses/home.html', {'experiment': exp})
+        return render(request, 'responses/home.html', {
+            'experiment': exp,
+            'start_url': reverse('responses:start', kwargs={'slug': slug}),
+        })
 
 
 class ExperimentStartView(View):
@@ -141,51 +145,26 @@ class TaskView(View):
         # Mark this task visited
         Visit.objects.filter(participant_id=participant_id, task=task).update(visited=True)
 
-        # Load transcript content for SampleTask-owned tasks (for click task JS)
-        transcript_content = ''
-        sample = None
-        if task.sample_task_id:
-            sample = task.sample_task
-            if sample.transcript:
-                try:
-                    transcript_content = sample.transcript.read().decode('utf-8')
-                    sample.transcript.seek(0)
-                except Exception:
-                    transcript_content = ''
-
-        # Determine next URL (for JS to navigate after click task submission)
+        sample = task.sample_task if task.sample_task_id else None
+        audio_url = (
+            reverse('responses:serve_audio', kwargs={'sample_task_id': sample.pk})
+            if sample else ''
+        )
         taskable = exp if task.experiment_id else sample
         next_url = next_task(taskable, participant_id, slug)
 
-        # Build question list for QuestionTask templates
-        questions = list(specific.questions.order_by('sort')) if isinstance(specific, QuestionTask) else []
-
-        ctx = {
-            'experiment': exp,
-            'task': task,
-            'specific': specific,
-            # sample / sample_task aliases (templates use both)
-            'sample': sample,
-            'sample_task': sample,
-            'participant_id': participant_id,
-            'slug': slug,
-            # transcript aliases (click_task.html uses transcript_xml)
-            'transcript_content': transcript_content,
-            'transcript_xml': transcript_content,
-            'next_url': next_url,
-            'questions': questions,
-            # calibration flag for click task template
-            'is_calibration': sample.calibration if sample else False,
-        }
-        template_map = {
-            'QuestionTask': 'responses/tasks/question_task.html',
-            'SampleTask': 'responses/tasks/sample_task.html',
-            'ListeningTask': 'responses/tasks/listening_task.html',
-            'ClickTask': 'responses/tasks/click_task.html',
-            'IntermediateScreenTask': 'responses/tasks/intermediate_screen_task.html',
-        }
-        template = template_map.get(type(specific).__name__, 'responses/tasks/question_task.html')
-        return render(request, template, ctx)
+        submit_url = reverse('responses:task_submit', kwargs={
+            'slug': slug, 'participant_id': participant_id,
+            'task_type': 'questiontask', 'task_id': task.pk,
+        })
+        ctx = build_task_context(
+            exp, task, specific, sample, next_url,
+            audio_url=audio_url,
+            participant_id=participant_id,
+            slug=slug,
+            submit_url=submit_url,
+        )
+        return render(request, task_template_name(specific), ctx)
 
 
 # ── Task submit ─────────────────────────────────────────────────────────────
@@ -218,10 +197,15 @@ class TaskSubmitView(View):
                         pass
                 taskable = exp if task.experiment_id else sample
                 next_url = next_task(taskable, participant_id, slug)
+                submit_url = reverse('responses:task_submit', kwargs={
+                    'slug': slug, 'participant_id': participant_id,
+                    'task_type': 'questiontask', 'task_id': task.pk,
+                })
                 return render(request, 'responses/tasks/question_task.html', {
                     'experiment': exp, 'task': task, 'specific': specific,
                     'participant_id': participant_id, 'slug': slug,
                     'transcript_content': transcript_content, 'next_url': next_url,
+                    'submit_url': submit_url,
                     'errors': errors, 'submitted_data': request.POST,
                     'questions': list(specific.questions.order_by('sort')),
                 })

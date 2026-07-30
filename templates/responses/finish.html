@@ -8,8 +8,12 @@
   <h2>{% trans "Thank you!" %}</h2>
   <h4>{% trans "You have completed this experiment" %}</h4>
   <p>
-    {% trans "Your unique response ID is" %}
-    {% if response_slug %}<strong>{{ response_slug }}</strong>{% endif %}
+    {% if preview %}
+      {% trans "Your unique response ID is" %} <span class="text-muted">(not shown in preview)</span>
+    {% else %}
+      {% trans "Your unique response ID is" %}
+      {% if response_slug %}<strong>{{ response_slug }}</strong>{% endif %}
+    {% endif %}
   </p>
 </div>
 {% endblock %}
