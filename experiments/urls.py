@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views
+from . import views, preview
 
 app_name = 'experiments'
 urlpatterns = [
@@ -11,4 +11,11 @@ urlpatterns = [
     path('<int:pk>/download/', views.ExperimentDownloadView.as_view(), name='download'),
     path('<int:pk>/complete/', views.ExperimentCompleteView.as_view(), name='complete'),
     path('<int:pk>/terms/', views.ExperimentTermsView.as_view(), name='terms'),
+    # Preview
+    path('<int:pk>/preview/', preview.PreviewHomeView.as_view(), name='preview_home'),
+    path('<int:pk>/preview/start/', preview.PreviewStartView.as_view(), name='preview_start'),
+    path('<int:pk>/preview/sample/<int:sample_id>/', preview.PreviewSampleView.as_view(), name='preview_sample'),
+    path('<int:pk>/preview/task/<int:task_id>/', preview.PreviewTaskView.as_view(), name='preview_task'),
+    path('<int:pk>/preview/finish/', preview.PreviewFinishView.as_view(), name='preview_finish'),
+    path('<int:pk>/preview/audio/<int:sample_task_id>/', preview.preview_audio, name='preview_audio'),
 ]

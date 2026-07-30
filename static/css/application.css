@@ -106,7 +106,7 @@ main.page-centered #main-container {
 .has-tip        { color: grey; text-decoration: underline dotted; }
 
 .card           { width: auto; margin: auto; }
-.card-body      { margin: auto 2% auto 2%; padding: 0.25rem; }
+.card-body      { padding: 1.25rem; }
 
 label.required::after {
   content: " *";
@@ -130,14 +130,45 @@ label.required::after {
   box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
 }
 
+/* ── question cards (participant survey) ─────────────────────────────────── */
+
+.question-card { box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+
+.question-card .card-body { padding: 1.5rem; }
+
+.question-prompt p { margin-bottom: 0.4rem; }
+.question-prompt p:last-of-type { margin-bottom: 0; }
+.question-prompt { font-size: 1rem; font-weight: 500; line-height: 1.5; }
+
+/* inject the required asterisk inside the last <p> from markdown */
+.prompt-required p:last-of-type::after {
+  content: " *";
+  color: #dc3545;
+  font-weight: 700;
+  font-size: 1.05em;
+}
+
+/* ── rating scale ────────────────────────────────────────────────────────── */
+.rating-scale { padding: 0.25rem 0; }
+
+.rating-scale .custom-range { display: block; width: 100%; }
+
+.rating-ticks { padding: 0 0.5rem; }
+.rating-ticks span { text-align: center; min-width: 1ch; }
+
+.rating-value-display {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #495057;
+  line-height: 1;
+}
+
 @media screen and (min-width: 480px) {
-  .card-body { margin: auto 7% auto 7%; padding: 1rem; }
-  .card      { width: 85%; }
+  .card      { width: 90%; }
 }
 
 @media screen and (min-width: 640px) {
-  .card-body { margin: auto 10% auto 10%; padding: 1.25rem; }
-  .card      { width: 70%; }
+  .card      { width: 75%; }
 }
 
 /* ── warning page ────────────────────────────────────────────────────────── */

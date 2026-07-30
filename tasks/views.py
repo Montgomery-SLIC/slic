@@ -12,7 +12,7 @@ from experiments.models import Experiment
 from .models import (
     Task, QuestionTask, SampleTask, ListeningTask, ClickTask,
     IntermediateScreenTask, Question, Option, Scale,
-    QUESTION_TYPE_CHOICES, QUESTION_TYPE_RATING, QUESTION_DEFAULT_PROMPTS,
+    QUESTION_TYPE_CHOICES, QUESTION_TYPE_RATING,
 )
 from .forms import (
     QuestionTaskForm, SampleTaskForm, ListeningTaskForm, ClickTaskForm,
@@ -380,7 +380,7 @@ def question_create(request, qt_pk):
             q = Question.objects.create(
                 question_task=qt,
                 question_type=q_type,
-                prompt=QUESTION_DEFAULT_PROMPTS.get(q_type, ''),
+                prompt='',
                 sort=max_sort + 1,
             )
             if q_type == QUESTION_TYPE_RATING:

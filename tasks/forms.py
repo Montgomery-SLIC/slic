@@ -1,4 +1,5 @@
 ﻿from django import forms
+from django.utils.translation import gettext_lazy as _
 from .models import (
     QuestionTask, SampleTask, ListeningTask, ClickTask, IntermediateScreenTask,
     Question, Option, Scale,
@@ -41,22 +42,22 @@ class IntermediateScreenTaskForm(forms.ModelForm):
 
 
 class AudioUploadForm(forms.Form):
-    audio = forms.FileField(label='Audio file')
+    audio = forms.FileField(label=_('Audio file'))
 
     def clean_audio(self):
         f = self.cleaned_data['audio']
         if f.size >= 314572800:
-            raise forms.ValidationError('File must be under 300 MB.')
+            raise forms.ValidationError(_('File must be under 300 MB.'))
         return f
 
 
 class TranscriptUploadForm(forms.Form):
-    transcript = forms.FileField(label='Transcript file')
+    transcript = forms.FileField(label=_('Transcript file'))
 
     def clean_transcript(self):
         f = self.cleaned_data['transcript']
         if f.size >= 314572800:
-            raise forms.ValidationError('File must be under 300 MB.')
+            raise forms.ValidationError(_('File must be under 300 MB.'))
         return f
 
 

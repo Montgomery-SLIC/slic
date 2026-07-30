@@ -4,6 +4,13 @@
 {% block title %}{% trans "User guide" %}{% endblock %}
 
 {% block content %}
+{% if user.admin %}
+<div class="text-right mb-3">
+  <a href="{% url 'accounts:documentation_edit' %}" class="btn btn-secondary btn-sm">
+    <i class="fas fa-edit"></i> {% trans "Edit" %}
+  </a>
+</div>
+{% endif %}
 <div class="docs">
   {{ content }}
 </div>
