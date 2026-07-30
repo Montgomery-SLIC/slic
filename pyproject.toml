@@ -57,3 +57,8 @@ replace = 'version = "{new_version}"'
 DJANGO_SETTINGS_MODULE = "slic.settings.development"
 python_files = ["tests/e2e/test_*.py", "tests/unit/test_*.py"]
 filterwarnings = ["ignore::DeprecationWarning:openpyxl"]
+
+[dependency-groups]
+dev = [
+    "locust>=2.46.2",
+]
