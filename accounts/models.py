@@ -131,6 +131,18 @@ class User(AbstractBaseUser, PermissionsMixin):
         self.research_level_ciphertext = value
 
 
+class SiteContent(models.Model):
+    key = models.CharField(max_length=100, unique=True)
+    content = models.TextField(blank=True, default='')
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'site_contents'
+
+    def __str__(self):
+        return self.key
+
+
 class ResearcherInvitation(models.Model):
     registration_code = models.CharField(max_length=255, unique=True)
     used = models.BooleanField(default=False)

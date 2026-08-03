@@ -29,7 +29,13 @@ def contact_us_view(request):
 
 
 def documentation_view(request):
-    return render(request, 'pages/documentation.html', {'content': _render_md('docs/USER_DOCUMENTATION.md')})
+    from accounts.models import SiteContent
+    obj = SiteContent.objects.filter(key='documentation').first()
+    if obj:
+        content = mark_safe(md.markdown(obj.content, extensions=['extra', 'nl2br']))
+    else:
+        content = _render_md('docs/USER_DOCUMENTATION.md')
+    return render(request, 'pages/documentation.html', {'content': content})
 
 
 def bug_report_new(request):
