@@ -38,8 +38,8 @@ class ExperimentStartView(View):
                 'error': 'You must accept the terms to continue.',
             })
 
-        # reCAPTCHA validation - skip if no private key configured (dev without key)
-        if getattr(settings, 'RECAPTCHA_PRIVATE_KEY', ''):
+        # reCAPTCHA validation - skip if no private key configured or DISABLE_RECAPTCHA=true
+        if getattr(settings, 'RECAPTCHA_PRIVATE_KEY', '') and not getattr(settings, 'DISABLE_RECAPTCHA', False):
             captcha_response = request.POST.get('g-recaptcha-response', '')
             if not captcha_response:
                 return render(request, 'responses/home.html', {

@@ -33,8 +33,9 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 STATIC_ROOT = os.environ.get('STATIC_ROOT', '/srv/slic/production/slic/staticfiles')
 MEDIA_ROOT = os.environ.get('MEDIA_ROOT', '/srv/slic/production/media')
 
-RECAPTCHA_PUBLIC_KEY = os.environ['RECAPTCHA_PUBLIC_KEY']
-RECAPTCHA_PRIVATE_KEY = os.environ['RECAPTCHA_PRIVATE_KEY']
+RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY', '')
+RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY', '')
+DISABLE_RECAPTCHA = os.environ.get('DISABLE_RECAPTCHA', '').lower() in ('1', 'true', 'yes')
 BLIND_INDEX_KEY = os.environ['BLIND_INDEX_KEY']
 FIELD_ENCRYPTION_KEY = os.environ['FIELD_ENCRYPTION_KEY']
 
