@@ -122,7 +122,7 @@ class ResearcherInvitationListView(AdminRequiredMixin, ListView):
 
 class ResearcherInvitationCreateView(AdminRequiredMixin, View):
     def post(self, request):
-        code = secrets.token_hex(8)
+        code = secrets.token_hex(16)
         ResearcherInvitation.objects.create(registration_code=code)
         messages.success(request, f'Invitation created: {code}')
         return redirect('accounts:invitations')

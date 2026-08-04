@@ -1,6 +1,7 @@
 # SLIC Django development Makefile
 
 MANAGE = uv run python manage.py
+PROD_MANAGE = DJANGO_SETTINGS_MODULE=slic.settings.production uv run python manage.py
 PROJECT_NAME = slic
 
 # Development server
@@ -43,6 +44,13 @@ clean:
 	find . -type f -name "*.pyc" -delete
 	find . -type d -name "__pycache__" -delete
 
+# Deployment
+deploy-staging:
+	uv sync
+	$(PROD_MANAGE) migrate
+	$(PROD_MANAGE) collectstatic --noinput
+	systemctl restart slic_django_staging
+
 # Dependencies
 install:
 	uv sync --extra dev
@@ -76,8 +84,9 @@ help:
 	@echo "  test-all     Run all tests excluding e2e"
 	@echo ""
 	@echo "Deployment"
-	@echo "  static       Collect static files"
-	@echo "  superuser    Create a superuser"
+	@echo "  deploy-staging  Pull-and-restart on staging (migrate, static, restart)"
+	@echo "  static          Collect static files (dev)"
+	@echo "  superuser       Create a superuser"
 	@echo ""
 	@echo "Versioning"
 	@echo "  bump-patch   x.y.Z"
@@ -88,4 +97,4 @@ help:
 
 .DEFAULT_GOAL := help
 
-.PHONY: help runserver migrations migrate check superuser static shell test test-all clean install bump-patch bump-minor bump-major
+.PHONY: help runserver migrations migrate check superuser static shell test test-all clean install deploy-staging bump-patch bump-minor bump-major
