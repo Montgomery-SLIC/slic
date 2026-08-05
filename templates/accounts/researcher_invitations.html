@@ -3,7 +3,13 @@
 {% block title %}{% trans "Researcher Invitations" %} - SLIC{% endblock %}
 {% block content %}
 
-<h3>{% trans "Your invitations" %}</h3>
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <h3 class="mb-0">{% trans "Your invitations" %}</h3>
+  <form method="post" action="{% url 'accounts:invitation_create' %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary btn-sm">{% trans "Create invitation" %}</button>
+  </form>
+</div>
 
 <table class="table table-striped">
   <thead>
@@ -43,12 +49,5 @@
   {% endfor %}
   </tbody>
 </table>
-
-<form method="post" action="{% url 'accounts:invitation_create' %}">
-  {% csrf_token %}
-  <div class="form-inputs">
-    <button type="submit" class="btn btn-primary">{% trans "Create invitation" %}</button>
-  </div>
-</form>
 
 {% endblock %}
