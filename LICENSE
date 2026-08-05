@@ -19,9 +19,10 @@ research purposes only, subject to the following conditions:
 2. Attribution. Any publication, presentation, or other work that makes use of
    this software or results produced by it must cite the following:
 
-       Montgomery, C. et al. (2024). SLIC: Salient Language In Context.
-       Sheffield: The University of Sheffield.
-       https://slic.shef.ac.uk
+       Montgomery, Chris, Gareth Walker and Harry Woods. 2025. Salient Language
+       in Context (SLIC): a web app for collecting real-time attention data in
+       response to audio samples. Linguistics Vanguard 11(1): 397-406.
+       https://doi.org/10.1515/lingvan-2025-0028
 
 3. Redistribution. Redistributions of source code must retain this license
    notice, the above copyright notice, and the attribution requirement.
