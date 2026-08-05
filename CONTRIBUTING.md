@@ -44,8 +44,8 @@ scope.
    a pull request will be reviewed.
 4. Run the tests:
    ```bash
-   pytest tests/unit/
-   pytest tests/          # includes integration tests
+   make test              # unit tests only
+   make test-all          # includes integration tests
    ```
 5. Commit using [Conventional Commits](https://www.conventionalcommits.org/)
    format: `feat:`, `fix:`, `docs:`, `test:`, `chore:`, etc.

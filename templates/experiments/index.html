@@ -31,7 +31,7 @@
         <form method="post" action="{% url 'experiments:delete' exp.pk %}" class="d-inline"
               onsubmit="return confirm('{% trans "Are you sure?" %}')">
           {% csrf_token %}
-          <button type="submit" class="btn btn-outline-danger">{% trans "Delete" %}</button>
+          <button type="submit" class="btn btn-danger">{% trans "Delete" %}</button>
         </form>
       </td>
     </tr>
@@ -43,5 +43,5 @@
   </tbody>
 </table>
 
-<a href="{% url 'experiments:new' %}" class="btn btn-outline-primary">{% trans "New experiment" %}</a>
+<a href="{% url 'experiments:new' %}" class="btn btn-primary">{% trans "New experiment" %}</a>
 {% endblock %}

@@ -9,14 +9,14 @@
 {% if task.experiment_id %}
   {% url 'experiments:show' pk=task.experiment_id as back_url %}
   {% with task.experiment.name as back_name %}
-<a href="{{ back_url }}" class="btn btn-outline-primary">
+<a href="{{ back_url }}" class="btn btn-primary">
   <i class="fas fa-reply"></i> {% trans "Back" %}: {{ back_name }}
 </a>
   {% endwith %}
 {% else %}
   {% url 'tasks:sample_task_edit' pk=task.sample_task_id as back_url %}
   {% with task.sample_task.name as back_name %}
-<a href="{{ back_url }}" class="btn btn-outline-primary">
+<a href="{{ back_url }}" class="btn btn-primary">
   <i class="fas fa-reply"></i> {% trans "Back" %}: {{ back_name }}
 </a>
   {% endwith %}
@@ -37,14 +37,14 @@
         <h3>
           <input type="text" name="name" value="{{ task.name }}" class="form-control">
         </h3>
-        <button type="submit" class="btn btn-outline-secondary btn-sm">{% trans "Save name" %}</button>
+        <button type="submit" class="btn btn-primary btn-sm">{% trans "Save name" %}</button>
       </form>
     </div>
     <div class="col-sm-2 p-3 mt-3">
       <form method="post" action="{% url 'tasks:question_task_delete' pk=task.pk %}"
             onsubmit="return confirm('{% trans "Are you sure?" %}')">
         {% csrf_token %}
-        <button type="submit" class="btn btn-outline-danger btn-sm">{% trans "Delete" %}</button>
+        <button type="submit" class="btn btn-danger btn-sm">{% trans "Delete" %}</button>
       </form>
     </div>
   </div>
@@ -62,7 +62,7 @@
   <form method="post" action="{% url 'tasks:question_create' qt_pk=task.pk %}">
     {% csrf_token %}
     <input type="hidden" name="question_type" value="{{ val }}">
-    <button type="submit" class="btn btn-outline-primary btn-sm">{% trans "Add" %} {{ label }}</button>
+    <button type="submit" class="btn btn-primary btn-sm">{% trans "Add" %} {{ label }}</button>
   </form>
   {% endfor %}
 </div>
@@ -100,7 +100,7 @@
                    onchange="this.form.submit()">
             <label for="req_{{ question.pk }}" class="form-check-label small">{% trans "Required" %}</label>
           </div>
-          <button type="submit" class="btn btn-outline-secondary btn-sm mt-1">{% trans "Save" %}</button>
+          <button type="submit" class="btn btn-primary btn-sm mt-1">{% trans "Save" %}</button>
         </form>
         {% endif %}
       </td>
@@ -149,7 +149,7 @@
             <br>
             {% trans "Num options" %} <input type="number" name="bins" value="{{ scale.bins|default:7 }}"
                    size="2" class="form-control form-control-sm d-inline-block" style="width:60px">
-            <button type="submit" class="btn btn-outline-secondary btn-sm">{% trans "Save" %}</button>
+            <button type="submit" class="btn btn-primary btn-sm">{% trans "Save" %}</button>
             <br>
             {% trans "To" %} <input type="text" name="high" value="{{ scale.high }}"
                    class="form-control form-control-sm d-inline-block" style="width:80px">
@@ -165,7 +165,7 @@
         <form method="post" action="{% url 'tasks:question_delete' pk=question.pk %}"
               onsubmit="return confirm('{% trans "Are you sure?" %}')">
           {% csrf_token %}
-          <button type="submit" class="btn btn-outline-danger btn-sm">{% trans "Delete" %}</button>
+          <button type="submit" class="btn btn-danger btn-sm">{% trans "Delete" %}</button>
         </form>
       </td>
       {% endif %}

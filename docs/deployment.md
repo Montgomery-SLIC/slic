@@ -43,20 +43,20 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 ## Deployment steps
 
+After pulling the latest code, use the Makefile target which runs sync, migrate, collectstatic, and service restart in the correct order:
+
 ```bash
-# 1. Pull latest code
 git pull origin main
+make deploy-staging    # staging
+```
 
-# 2. Install any new dependencies
+For production, the equivalent manual steps are:
+
+```bash
+git pull origin main
 uv sync
-
-# 4. Collect static files
-python manage.py collectstatic --noinput
-
-# 5. Apply migrations
-python manage.py migrate
-
-# 6. Restart the application service
+DJANGO_SETTINGS_MODULE=slic.settings.production uv run python manage.py migrate
+DJANGO_SETTINGS_MODULE=slic.settings.production uv run python manage.py collectstatic --noinput
 sudo systemctl restart slic_production
 ```
 

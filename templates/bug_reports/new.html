@@ -5,6 +5,7 @@
 
 {% block content %}
 <h2>{% trans "Report a bug" %}</h2>
+<p class="text-muted">{% blocktrans %}You can also report bugs directly on our <a href="https://github.com/Montgomery-SLIC/slic/issues" target="_blank" rel="noopener noreferrer">GitHub issue tracker</a>.{% endblocktrans %}</p>
 
 {% if error %}
 <div class="alert alert-danger mt-3" role="alert">{{ error }}</div>
@@ -18,6 +19,10 @@
       <input type="text" name="email" id="email" class="form-control">
     </div>
     <div class="form-group">
+      <label for="subject">{% trans "Subject" %}</label>
+      <input type="text" name="subject" id="subject" class="form-control">
+    </div>
+    <div class="form-group">
       <label for="report">{% trans "Details" %}</label>
       <textarea name="report" id="report" rows="6" cols="24" class="form-control"></textarea>
     </div>
@@ -29,7 +34,7 @@
       </div>
     {% endif %}
     <div class="form-group">
-      <input type="submit" value="{% trans 'Send' %}" class="btn btn-light">
+      <input type="submit" value="{% trans 'Send' %}" class="btn btn-primary">
     </div>
   </div>
 </form>
