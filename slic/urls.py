@@ -147,12 +147,12 @@ def bug_report_submit(request):
 
         report = request.POST.get('report', '')
         email = request.POST.get('email', '')
+        from_email = email if email else getattr(settings, 'SERVER_EMAIL', 'root@localhost')
         msg = EmailMessage(
             subject='[BUG REPORT]',
             body=report,
-            from_email=getattr(settings, 'SERVER_EMAIL', 'root@localhost'),
+            from_email=from_email,
             to=[settings.BUG_REPORT_EMAIL],
-            reply_to=[email] if email else [],
         )
         msg.send(fail_silently=True)
     return render(request, 'bug_reports/received.html')
