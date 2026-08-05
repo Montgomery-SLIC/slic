@@ -21,7 +21,9 @@ import markdown as md
 def _render_md(filename):
     path = settings.BASE_DIR / filename
     text = path.read_text(encoding='utf-8')
-    return mark_safe(md.markdown(text, extensions=['extra', 'nl2br']))
+    html = md.markdown(text, extensions=['extra', 'nl2br'])
+    html = html.replace('src="/images/', 'src="/static/images/')
+    return mark_safe(html)
 
 
 def contact_us_view(request):
@@ -32,7 +34,9 @@ def documentation_view(request):
     from accounts.models import SiteContent
     obj = SiteContent.objects.filter(key='documentation').first()
     if obj:
-        content = mark_safe(md.markdown(obj.content, extensions=['extra', 'nl2br']))
+        html = md.markdown(obj.content, extensions=['extra', 'nl2br'])
+        html = html.replace('src="/images/', 'src="/static/images/')
+        content = mark_safe(html)
     else:
         content = _render_md('docs/USER_DOCUMENTATION.md')
     return render(request, 'pages/documentation.html', {'content': content})
