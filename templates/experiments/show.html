@@ -3,7 +3,7 @@
 {% block title %}{{ experiment.name }}{% endblock %}
 {% block content %}
 
-<a href="{% url 'experiments:index' %}" class="btn btn-outline-primary">
+<a href="{% url 'experiments:index' %}" class="btn btn-primary">
   <i class="fas fa-reply"></i> {% trans "Back to experiments" %}
 </a>
 <hr>
@@ -22,10 +22,10 @@
     {% endwith %}
   </p>
   <br>
-  <a href="{% url 'experiments:download' experiment.pk %}" class="btn btn-outline-primary">
+  <a href="{% url 'experiments:download' experiment.pk %}" class="btn btn-primary">
     {% trans "Download" %}
   </a>
-  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#terms">
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#terms">
     {% trans "View terms" %}
   </button>
 
@@ -88,10 +88,10 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-9 border-right p-3">
-        <a href="{% url 'experiments:edit' experiment.pk %}" class="btn btn-outline-primary">
+        <a href="{% url 'experiments:edit' experiment.pk %}" class="btn btn-primary">
           {% trans "Edit experiment" %}
         </a>
-        <a href="{% url 'experiments:terms' experiment.pk %}" class="btn btn-outline-primary">
+        <a href="{% url 'experiments:terms' experiment.pk %}" class="btn btn-primary">
           {% trans "Edit consent terms" %}
         </a>
       </div>
@@ -102,7 +102,7 @@
         <form method="post" action="{% url 'experiments:complete' experiment.pk %}"
               onsubmit="return confirm('{% trans "Publish this experiment?" %}')">
           {% csrf_token %}
-          <button type="submit" class="btn btn-outline-success">{% trans "Publish" %}</button>
+          <button type="submit" class="btn btn-success">{% trans "Publish" %}</button>
         </form>
       </div>
     </div>
@@ -118,19 +118,19 @@
 <div class="d-flex mb-3">
   <div class="px-2">
     <a href="{% url 'tasks:question_task_new' taskable_type='experiment' taskable_id=experiment.pk %}"
-       class="btn btn-outline-primary">
+       class="btn btn-primary">
       {% trans "Create question task" %}
     </a>
   </div>
   <div class="px-2">
     <a href="{% url 'tasks:sample_task_new' taskable_type='experiment' taskable_id=experiment.pk %}"
-       class="btn btn-outline-primary">
+       class="btn btn-primary">
       {% trans "Create sample task" %}
     </a>
   </div>
   <div class="px-2">
     <a href="{% url 'tasks:intermediate_screen_new' taskable_type='experiment' taskable_id=experiment.pk %}"
-       class="btn btn-outline-primary">
+       class="btn btn-primary">
       {% trans "Create intermediate screen task" %}
     </a>
   </div>
@@ -202,31 +202,31 @@
           <form method="post" action="{% url 'tasks:sample_task_delete' pk=task.pk %}" class="d-inline"
                 onsubmit="return confirm('{% trans "Are you sure?" %}')">
             {% csrf_token %}
-            <button type="submit" class="btn btn-outline-danger btn-sm">{% trans "Delete" %}</button>
+            <button type="submit" class="btn btn-danger btn-sm">{% trans "Delete" %}</button>
           </form>
           {% elif cname == 'QuestionTask' %}
           <form method="post" action="{% url 'tasks:question_task_delete' pk=task.pk %}" class="d-inline"
                 onsubmit="return confirm('{% trans "Are you sure?" %}')">
             {% csrf_token %}
-            <button type="submit" class="btn btn-outline-danger btn-sm">{% trans "Delete" %}</button>
+            <button type="submit" class="btn btn-danger btn-sm">{% trans "Delete" %}</button>
           </form>
           {% elif cname == 'ListeningTask' %}
           <form method="post" action="{% url 'tasks:listening_task_delete' pk=task.pk %}" class="d-inline"
                 onsubmit="return confirm('{% trans "Are you sure?" %}')">
             {% csrf_token %}
-            <button type="submit" class="btn btn-outline-danger btn-sm">{% trans "Delete" %}</button>
+            <button type="submit" class="btn btn-danger btn-sm">{% trans "Delete" %}</button>
           </form>
           {% elif cname == 'ClickTask' %}
           <form method="post" action="{% url 'tasks:click_task_delete' pk=task.pk %}" class="d-inline"
                 onsubmit="return confirm('{% trans "Are you sure?" %}')">
             {% csrf_token %}
-            <button type="submit" class="btn btn-outline-danger btn-sm">{% trans "Delete" %}</button>
+            <button type="submit" class="btn btn-danger btn-sm">{% trans "Delete" %}</button>
           </form>
           {% elif cname == 'IntermediateScreenTask' %}
           <form method="post" action="{% url 'tasks:intermediate_screen_delete' pk=task.pk %}" class="d-inline"
                 onsubmit="return confirm('{% trans "Are you sure?" %}')">
             {% csrf_token %}
-            <button type="submit" class="btn btn-outline-danger btn-sm">{% trans "Delete" %}</button>
+            <button type="submit" class="btn btn-danger btn-sm">{% trans "Delete" %}</button>
           </form>
           {% endif %}
         {% endwith %}

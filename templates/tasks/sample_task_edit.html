@@ -57,7 +57,7 @@
       </audio>
       <form method="post" action="{% url 'tasks:audio_delete' pk=task.pk %}" class="d-inline">
         {% csrf_token %}
-        <button type="submit" class="btn btn-outline-danger btn-sm"
+        <button type="submit" class="btn btn-danger btn-sm"
                 onclick="return confirm('{% trans "Delete audio file?" %}')">
           {% trans "Remove audio" %}
         </button>
@@ -90,7 +90,7 @@
       </p>
       <form method="post" action="{% url 'tasks:transcript_delete' pk=task.pk %}" class="d-inline">
         {% csrf_token %}
-        <button type="submit" class="btn btn-outline-danger btn-sm"
+        <button type="submit" class="btn btn-danger btn-sm"
                 onclick="return confirm('{% trans "Delete transcript?" %}')">
           {% trans "Remove transcript" %}
         </button>
@@ -117,7 +117,7 @@
   <div class="card-header d-flex justify-content-between align-items-center">
     <span>{% trans "Sub-tasks" %} <span class="badge badge-secondary">{{ task.subtasks.count }}</span></span>
     <div class="dropdown">
-      <button class="btn btn-sm btn-outline-primary dropdown-toggle" data-toggle="dropdown"
+      <button class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
         {% trans "Add sub-task" %}
       </button>

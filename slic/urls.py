@@ -147,9 +147,11 @@ def bug_report_submit(request):
 
         report = request.POST.get('report', '')
         email = request.POST.get('email', '')
+        subject = request.POST.get('subject', '').strip()
+        email_subject = f'[BUG REPORT] - {subject}' if subject else '[BUG REPORT]'
         from_email = email if email else getattr(settings, 'SERVER_EMAIL', 'root@localhost')
         msg = EmailMessage(
-            subject='[BUG REPORT]',
+            subject=email_subject,
             body=report,
             from_email=from_email,
             to=[settings.BUG_REPORT_EMAIL],

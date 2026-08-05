@@ -16,6 +16,7 @@
     * [Invitation links](#admin_2)
 * [Data Processing and Visualisation](#processing)
     * [Using Praat to visualise output from the SLIC tool](#praat)
+* [How to cite SLIC](#cite)
 
 ---
 ## <a name="signing_logging"></a> Signing up and Logging in
@@ -196,5 +197,12 @@ The Praat program can be used to prepare visualisations of the times of the reac
 * drawReactionData.praat (to prepare static graphics): [package](https://github.com/walkergareth/praat/blob/main/visreps/drawReactionData.praat), [documentation](https://github.com/walkergareth/praat/blob/main/visreps/drawReactionData.pdf)
 
 * makeReactionTextGrids.praat (to create TextGrids containing click and comment data, to be viewed in dynamic editor windows): [package](https://github.com/walkergareth/praat/blob/main/makeReactionTextGrids.praat), [documentation](https://github.com/walkergareth/praat/blob/main/makeReactionTextGrids.pdf)
+
+---
+## <a name="cite"></a> How to cite SLIC
+
+SLIC is free to use for non-commercial research purposes. If you use SLIC to collect data, you must cite the following paper in any publication, presentation, report, or other research output:
+
+> Montgomery, Chris, Gareth Walker and Harry Woods. 2025. Salient Language in Context (SLIC): a web app for collecting real-time attention data in response to audio samples. *Linguistics Vanguard* 11(1): 397-406. https://doi.org/10.1515/lingvan-2025-0028
 
 [Back to top](#top)
