@@ -21,7 +21,7 @@ dependencies = [
     "whitenoise==6.7.0",
     "python-dotenv==1.2.2",
     "Pillow==12.2.0",
-    "cryptography==48.0.1",
+    "cryptography==50.0.0",
     "bleach==6.4.0",
 ]
 
