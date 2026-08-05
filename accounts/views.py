@@ -1,3 +1,4 @@
+import mimetypes
 import secrets
 import markdown as md
 from django.conf import settings
@@ -5,12 +6,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, View, CreateView, DeleteView
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
-from django.urls import reverse_lazy
+from django.core.files.base import ContentFile
+from django.http import FileResponse, JsonResponse
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth import logout
 from django.utils.safestring import mark_safe
 import rules
 
-from .models import User, ResearcherInvitation, SiteContent
+from .models import User, ResearcherInvitation, SiteContent, DocumentationImage
 from .forms import ProfileEditForm
 
 
@@ -147,10 +150,37 @@ class DocumentationEditView(AdminRequiredMixin, View):
         return (settings.BASE_DIR / 'docs/USER_DOCUMENTATION.md').read_text(encoding='utf-8')
 
     def get(self, request):
-        return render(request, 'pages/documentation_edit.html', {'content': self._get_content()})
+        return render(request, 'pages/documentation_edit.html', {
+            'content': self._get_content(),
+            'images': DocumentationImage.objects.all(),
+        })
 
     def post(self, request):
         content = request.POST.get('content', '')
         SiteContent.objects.update_or_create(key='documentation', defaults={'content': content})
         messages.success(request, 'User guide updated successfully.')
         return redirect('documentation')
+
+
+class DocumentationImageUploadView(AdminRequiredMixin, View):
+    def post(self, request):
+        f = request.FILES.get('image')
+        if not f:
+            return JsonResponse({'error': 'No file provided'}, status=400)
+        obj = DocumentationImage.objects.create(
+            image=f,
+            original_filename=f.name,
+            uploaded_by=request.user,
+        )
+        return JsonResponse({
+            'url': reverse('documentation_image', args=[obj.pk]),
+            'filename': obj.original_filename,
+            'pk': obj.pk,
+        })
+
+
+class DocumentationImageView(View):
+    def get(self, request, pk):
+        obj = get_object_or_404(DocumentationImage, pk=pk)
+        content_type, _ = mimetypes.guess_type(obj.original_filename)
+        return FileResponse(obj.image.open('rb'), content_type=content_type or 'image/png')

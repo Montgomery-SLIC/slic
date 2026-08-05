@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import User, ResearcherInvitation
+from .models import User, ResearcherInvitation, DocumentationImage
 
 
 @admin.register(User)
@@ -32,6 +32,12 @@ class UserAdmin(BaseUserAdmin):
 
     def institution(self, obj):
         return obj.institution
+
+
+@admin.register(DocumentationImage)
+class DocumentationImageAdmin(admin.ModelAdmin):
+    list_display = ('original_filename', 'uploaded_by', 'uploaded_at')
+    ordering = ('-uploaded_at',)
 
 
 @admin.register(ResearcherInvitation)

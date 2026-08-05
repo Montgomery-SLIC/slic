@@ -16,6 +16,7 @@ from django.utils.http import url_has_allowed_host_and_scheme
 from django.urls import resolve, Resolver404
 from django.utils.translation import override as lang_override
 import markdown as md
+from accounts.views import DocumentationImageView
 
 
 def _render_md(filename):
@@ -162,6 +163,8 @@ urlpatterns = [
     path('', include('responses.urls')),
     # Click response XHR endpoint - no locale prefix
     path('click-responses/', include('responses.click_urls')),
+    # Documentation images - no locale prefix, served publicly
+    path('documentation-images/<int:pk>/', DocumentationImageView.as_view(), name='documentation_image'),
 ]
 
 urlpatterns += i18n_patterns(

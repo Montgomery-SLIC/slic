@@ -143,6 +143,23 @@ class SiteContent(models.Model):
         return self.key
 
 
+class DocumentationImage(models.Model):
+    image = models.ImageField(upload_to='documentation_images/')
+    original_filename = models.CharField(max_length=255)
+    uploaded_by = models.ForeignKey(
+        User, null=True, blank=True, on_delete=models.SET_NULL,
+        related_name='documentation_images',
+    )
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'documentation_images'
+        ordering = ['-uploaded_at']
+
+    def __str__(self):
+        return self.original_filename
+
+
 class ResearcherInvitation(models.Model):
     registration_code = models.CharField(max_length=255, unique=True)
     used = models.BooleanField(default=False)

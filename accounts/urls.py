@@ -14,4 +14,5 @@ urlpatterns = [
     path('admin/invitations/new/', views.ResearcherInvitationCreateView.as_view(), name='invitation_create'),
     path('admin/invitations/<int:pk>/delete/', views.ResearcherInvitationDeleteView.as_view(), name='invitation_delete'),
     path('admin/documentation/', views.DocumentationEditView.as_view(), name='documentation_edit'),
+    path('admin/documentation/images/upload/', views.DocumentationImageUploadView.as_view(), name='documentation_image_upload'),
 ]

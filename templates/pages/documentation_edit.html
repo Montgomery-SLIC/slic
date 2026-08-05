@@ -22,6 +22,89 @@
         <a href="{% url 'documentation' %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
       </div>
     </form>
+
+    <hr class="mt-4">
+
+    <h4>{% trans "Images" %}</h4>
+    <p class="text-muted small">{% trans "Upload screenshots to use in the guide. Copy the Markdown snippet and paste it into the editor above." %}</p>
+
+    <div class="mb-3">
+      <div class="d-flex align-items-center" style="gap: .5rem;">
+        <input type="file" id="imageInput" accept="image/*" class="form-control-file">
+        <button type="button" id="uploadBtn" class="btn btn-secondary btn-sm">{% trans "Upload" %}</button>
+      </div>
+      <div id="uploadStatus" class="mt-2"></div>
+    </div>
+
+    <div id="imageList">
+      {% for img in images %}
+      <div class="d-flex align-items-center mb-2 image-row" id="img-{{ img.pk }}">
+        <img src="{% url 'documentation_image' img.pk %}" alt="{{ img.original_filename }}"
+             style="height: 40px; width: 60px; object-fit: cover; border: 1px solid #dee2e6; border-radius: 3px; margin-right: .75rem; flex-shrink: 0;">
+        <code class="small flex-grow-1" style="word-break: break-all;">![description]({% url 'documentation_image' img.pk %})</code>
+        <button class="btn btn-outline-secondary btn-sm ml-2 copy-btn"
+                data-snippet="![description]({% url 'documentation_image' img.pk %})">
+          {% trans "Copy" %}
+        </button>
+      </div>
+      {% empty %}
+      <p class="text-muted small" id="noImages">{% trans "No images uploaded yet." %}</p>
+      {% endfor %}
+    </div>
   </div>
 </div>
+
+<script>
+  const csrfToken = '{{ csrf_token }}';
+  const uploadUrl = '{% url "accounts:documentation_image_upload" %}';
+
+  document.getElementById('uploadBtn').addEventListener('click', function () {
+    const file = document.getElementById('imageInput').files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('image', file);
+    formData.append('csrfmiddlewaretoken', csrfToken);
+
+    const status = document.getElementById('uploadStatus');
+    status.innerHTML = '<span class="text-muted small">Uploading...</span>';
+
+    fetch(uploadUrl, { method: 'POST', body: formData })
+      .then(r => r.json())
+      .then(data => {
+        if (data.error) {
+          status.innerHTML = '<span class="text-danger small">' + data.error + '</span>';
+          return;
+        }
+        status.innerHTML = '';
+        document.getElementById('imageInput').value = '';
+        document.getElementById('noImages') && document.getElementById('noImages').remove();
+
+        const snippet = '![description](' + data.url + ')';
+        const row = document.createElement('div');
+        row.className = 'd-flex align-items-center mb-2 image-row';
+        row.id = 'img-' + data.pk;
+        row.innerHTML =
+          '<img src="' + data.url + '" alt="' + data.filename + '"' +
+          ' style="height:40px;width:60px;object-fit:cover;border:1px solid #dee2e6;border-radius:3px;margin-right:.75rem;flex-shrink:0;">' +
+          '<code class="small flex-grow-1" style="word-break:break-all;">' + snippet + '</code>' +
+          '<button class="btn btn-outline-secondary btn-sm ml-2 copy-btn" data-snippet="' + snippet + '">Copy</button>';
+        row.querySelector('.copy-btn').addEventListener('click', copySnippet);
+        document.getElementById('imageList').insertBefore(row, document.getElementById('imageList').firstChild);
+      })
+      .catch(() => {
+        status.innerHTML = '<span class="text-danger small">Upload failed.</span>';
+      });
+  });
+
+  function copySnippet() {
+    navigator.clipboard.writeText(this.dataset.snippet).then(() => {
+      const orig = this.textContent;
+      this.textContent = 'Copied!';
+      setTimeout(() => { this.textContent = orig; }, 1500);
+    });
+  }
+
+  document.querySelectorAll('.copy-btn').forEach(btn => btn.addEventListener('click', copySnippet));
+</script>
 {% endblock %}
