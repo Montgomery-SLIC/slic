@@ -6,6 +6,7 @@
 ![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)
 [![Tests](https://github.com/Montgomery-SLIC/slic/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/Montgomery-SLIC/slic/actions/workflows/test.yml)
 [![CodeQL](https://github.com/Montgomery-SLIC/slic/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Montgomery-SLIC/slic/actions/workflows/github-code-scanning/codeql)
+[![DOI](https://img.shields.io/badge/DOI-10.15131%2Fshef.data.33165281-blue)](https://doi.org/10.15131/shef.data.33165281)
 
 A Django web application for running audio perception experiments. Researchers build experiments from audio samples, click tasks, and question pages. Participants complete them via a public URL with no account required. Results export as XLSX.
 

@@ -1,0 +1,52 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+type: software
+title: "SLIC - Salient Language In Context"
+version: 1.0.0
+date-released: "2026-08-06"
+doi: 10.15131/shef.data.33165281
+url: "https://github.com/Montgomery-SLIC/slic"
+license: LicenseRef-SLIC-NonCommercial
+authors:
+  - family-names: Allian
+    given-names: Farhad
+    affiliation: "The University of Sheffield"
+    email: f.allian@sheffield.ac.uk
+  - family-names: Montgomery
+    given-names: Chris
+    affiliation: "The University of Sheffield"
+    email: c.montgomery@sheffield.ac.uk
+abstract: >
+  A Django web application for running audio perception experiments.
+  Researchers build experiments from audio samples, click tasks, and
+  question pages. Participants complete them via a public URL with no
+  account required. Results export as XLSX.
+keywords:
+  - linguistics
+  - phonetics
+  - audio perception
+  - listener reactions
+  - web experiment
+  - Django
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Montgomery
+      given-names: Chris
+      affiliation: "The University of Sheffield"
+    - family-names: Walker
+      given-names: Gareth
+      affiliation: "The University of Sheffield"
+    - family-names: Woods
+      given-names: Harry
+      affiliation: "The University of Sheffield"
+  title: >
+    Salient Language in Context (SLIC): a web app for collecting
+    real-time attention data in response to audio samples
+  journal: "Linguistics Vanguard"
+  volume: 11
+  issue: 1
+  start: 397
+  end: 406
+  year: 2025
+  doi: 10.1515/lingvan-2025-0028
