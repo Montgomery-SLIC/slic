@@ -48,6 +48,8 @@ If you use SLIC to collect data, please cite:
 
 > Montgomery, Chris, Gareth Walker and Harry Woods. 2025. Salient Language in Context (SLIC): a web app for collecting real-time attention data in response to audio samples. Linguistics Vanguard 11(1): 397-406. https://doi.org/10.1515/lingvan-2025-0028
 
+The software itself is archived at https://doi.org/10.15131/shef.data.33165281.
+
 ## License
 
 SLIC is free to use for non-commercial research purposes. See [LICENSE](LICENSE) for full terms.
