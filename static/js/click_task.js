@@ -27,6 +27,7 @@ let clickTimes = [];
 let annotations = [];
 let audioEl = null;
 let isCalibration = false;
+let isPreview = false;
 let participantId = null;
 let clickTaskId = null;
 let nextUrl = null;
@@ -166,14 +167,29 @@ class SingleClickAudioManager {
 
     _buildTranscriptHtml() {
         if (!this.windowAnnotations.length) return `<em class="text-muted">${i18n.noTranscript}</em>`;
-        return this.windowAnnotations.map(ann => {
-            const isClicked = ann === this.clickedWord;
-            const word = escapeHtml(ann.text);
-            if (isClicked) {
-                return `<span class="clicked-word fw-bold text-primary" title="${i18n.clickedHere}">${word}<br><span style="color:var(--bs-primary)">^</span></span>`;
+
+        // Count characters to the centre of the clicked word.
+        // Works because .transcript-window uses font-monospace: every char is 1ch wide.
+        let charOffset = 0;
+        let runningChars = 0;
+        this.windowAnnotations.forEach((ann, i) => {
+            const word = ann.text.replace(/\s+/g, ' ').trim();
+            if (i > 0) runningChars += 1; // space between words
+            if (ann === this.clickedWord) {
+                charOffset = runningChars + Math.floor(word.length / 2);
             }
-            return `<span>${word}</span>`;
-        }).join(' ');
+            runningChars += word.length;
+        });
+
+        const words = this.windowAnnotations
+            .map(ann => escapeHtml(ann.text.replace(/\s+/g, ' ').trim()))
+            .join(' ');
+
+        // Wrap both lines in one scrollable container so they scroll in sync.
+        return `<div style="overflow-x:auto;">` +
+               `<div style="white-space:nowrap;">${words}</div>` +
+               `<div style="white-space:pre; height:1.1em; margin-top:2px;">${' '.repeat(charOffset)}<b style="color:#007bff;">^</b></div>` +
+               `</div>`;
     }
 
     _replay() {
@@ -285,7 +301,7 @@ function onAudioEnd() {
 function displayNoClicksUI() {
     const container = document.getElementById('review-container');
     container.innerHTML = `
-        <p class="mb-3">${i18n.noClicks}</p>
+        <p class="mb-3">${explanationPrompt || i18n.noClicks}</p>
         <textarea id="no-click-explanation" class="form-control mb-3" rows="3"
                   placeholder="${i18n.noClicksPlaceholder}"></textarea>
         <button type="button" class="btn btn-primary" id="no-click-submit">${i18n.continueBtn}</button>
@@ -343,6 +359,12 @@ function sendAllResponses(responses) {
     const submitBtn = document.querySelector('#review-container .btn-primary');
     if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = i18n.saving; }
 
+    // In preview mode skip saving and navigate immediately
+    if (isPreview) {
+        window.location.href = nextUrl;
+        return;
+    }
+
     const req = new XMLHttpRequest();
     req.open('POST', '/click-responses/');
     req.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
@@ -379,6 +401,7 @@ document.addEventListener('DOMContentLoaded', () => {
     participantId = parseInt(dataEl.dataset.participantId, 10);
     clickTaskId = parseInt(dataEl.dataset.clickTaskId, 10);
     isCalibration = dataEl.dataset.calibration === 'true';
+    isPreview = dataEl.dataset.preview === 'true';
     nextUrl = dataEl.dataset.nextUrl;
     explanationPrompt = dataEl.dataset.explanationPrompt || '';
 
@@ -424,18 +447,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Audio control button
+    // Audio control button: play once, then disable (no pause during listening phase)
     const audioControl = document.getElementById('audio-control');
     if (audioControl) {
         audioControl.addEventListener('click', () => {
-            if (audioEl.paused) {
+            if (audioEl.paused || audioEl.ended) {
                 audioEl.play();
-                audioControl.textContent = 'Pause';
-            } else {
-                audioEl.pause();
-                audioControl.textContent = 'Play';
+                audioControl.disabled = true;
             }
         });
-        audioEl.addEventListener('ended', () => { audioControl.textContent = 'Play'; });
     }
 });

@@ -205,11 +205,14 @@ def audio_upload(request, pk):
     if request.method == 'POST':
         form = AudioUploadForm(request.POST, request.FILES)
         if form.is_valid():
-            if st.audio:
-                st.audio.delete(save=False)
-            st.audio = form.cleaned_data['audio']
-            st.save(update_fields=['audio'])
-            messages.success(request, 'Audio uploaded.')
+            try:
+                if st.audio:
+                    st.audio.delete(save=False)
+                st.audio = form.cleaned_data['audio']
+                st.save(update_fields=['audio'])
+                messages.success(request, 'Audio uploaded.')
+            except OSError as e:
+                messages.error(request, f'Could not save file: {e}. Check that the media directory exists and is writable.')
         else:
             for error_list in form.errors.values():
                 for error in error_list:
@@ -235,11 +238,18 @@ def transcript_upload(request, pk):
     if request.method == 'POST':
         form = TranscriptUploadForm(request.POST, request.FILES)
         if form.is_valid():
-            if st.transcript:
-                st.transcript.delete(save=False)
-            st.transcript = form.cleaned_data['transcript']
-            st.save(update_fields=['transcript'])
-            messages.success(request, 'Transcript uploaded.')
+            try:
+                if st.transcript:
+                    st.transcript.delete(save=False)
+                st.transcript = form.cleaned_data['transcript']
+                st.save(update_fields=['transcript'])
+                messages.success(request, 'Transcript uploaded.')
+            except OSError as e:
+                messages.error(request, f'Could not save file: {e}. Check that the media directory exists and is writable.')
+        else:
+            for error_list in form.errors.values():
+                for error in error_list:
+                    messages.error(request, error)
     return redirect('tasks:sample_task_edit', pk=pk)
 
 

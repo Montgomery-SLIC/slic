@@ -32,8 +32,8 @@
     {% csrf_token %}
     <div class="form-group">
       <div class="form-text">
-        <label class="form-check-label">{% trans "Email address" %}</label>
-        <label class="form-check-label" title="{% trans 'Your email is only used to link responses if you participate more than once.' %}">?</label>
+        <label class="form-label" for="email-input">{% trans "Please enter your email address" %}</label>
+        <p class="small mb-1">{% trans "Your email is only used to link your responses if you participate more than once." %}</p>
         <input class="form-control" type="email" name="email" id="email-input"
                required placeholder="{% trans 'Enter your email address' %}">
         <div class="validation-error text-danger mt-1" style="display: none;"></div>

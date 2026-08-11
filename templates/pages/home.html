@@ -4,6 +4,7 @@
 {% block title %}{% trans "Home" %}{% endblock %}
 
 {% block content %}
+{% url 'contact_us' as contact_url %}
 <div class="jumbotron mb-3">
   <h1 class="display-5">{% trans "Welcome to SLIC" %}</h1>
   <p class="lead">{% trans "SLIC - Salient Language In Context" %}</p>
@@ -12,7 +13,7 @@
 <div class="card mb-3 text-center">
   <div class="card-header">{% trans "If you are a researcher" %}</div>
   <div class="card-body">
-    <p>{% trans "To use SLIC as a researcher you will need to register for an account. To register you will need an invitation code, which can be obtained from the system administrator." %}</p>
+    <p>{% trans "To use SLIC as a researcher you will need to register for an account. To register you will need an invitation code." %} {% blocktrans with url=contact_url %}To request one, use the <a href="{{ url }}">Contact</a> link in the navigation bar above.{% endblocktrans %}</p>
     <p>{% trans "SLIC is free to use for non-commercial research. If you use SLIC to collect data, please cite: Montgomery, Walker &amp; Woods (2025), <em>Linguistics Vanguard</em> 11(1): 397-406. <a href='https://doi.org/10.1515/lingvan-2025-0028' target='_blank' rel='noopener'>doi:10.1515/lingvan-2025-0028</a>" %}</p>
     <p>
       {% trans "To access the website's documentation please follow this link:" %}

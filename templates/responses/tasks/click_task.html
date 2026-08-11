@@ -8,7 +8,6 @@
   #progress { display: block; width: 100%; height: 48px; cursor: pointer; }
   #click-btn { font-size: 1.25rem; padding: .6rem 2rem; }
   .click-review-item { background: #fff; }
-  .clicked-word { background: rgba(13, 110, 253, .12); border-radius: 3px; padding: 0 2px; }
   #review-container { display: none; }
 </style>
 {% endblock %}
@@ -18,6 +17,7 @@
 <div id="click-task-data"
      data-participant-id="{{ participant_id }}"
      data-click-task-id="{{ task.id }}"
+     data-preview="{{ preview|yesno:'true,false' }}"
      data-calibration="{{ is_calibration|yesno:'true,false' }}"
      data-transcript="{{ transcript_content }}"
      data-next-url="{{ next_url }}"
@@ -45,26 +45,28 @@
      style="display:none"></div>
 
 <div class="py-3">
-  {% if specific.prompt %}
-    <div class="mb-4">{{ specific.prompt|markdown }}</div>
-  {% endif %}
-
   {# Hidden audio element - JS controls it #}
   <audio id="click-audio" preload="auto"
          src="{{ audio_url }}"></audio>
 
-  <div class="mb-3">
-    <canvas id="progress" width="700" height="48"
-            aria-label="{% trans 'Audio progress' %}" role="img"></canvas>
-  </div>
+  <div class="mx-auto" style="max-width:720px;">
+    {% if specific.prompt %}
+      <div class="mb-4">{{ specific.prompt|markdown }}</div>
+    {% endif %}
 
-  <div class="d-flex align-items-center mb-4" id="click-btn-container">
-    <button id="audio-control" class="btn btn-outline-secondary mr-2" type="button">
-      {% trans "Play" %}
-    </button>
-    <button id="click-btn" class="btn btn-danger" type="button">
-      {% trans "Click!" %}
-    </button>
+    <div class="mb-3">
+      <canvas id="progress" width="700" height="48"
+              aria-label="{% trans 'Audio progress' %}" role="img"></canvas>
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center mb-4" id="click-btn-container">
+      <button id="audio-control" class="btn btn-outline-secondary mr-2" type="button">
+        {% trans "Play" %}
+      </button>
+      <button id="click-btn" class="btn btn-primary" type="button">
+        {% trans "Click!" %}
+      </button>
+    </div>
   </div>
 
   <div id="review-container"></div>
