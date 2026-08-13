@@ -1,43 +1,43 @@
-﻿{% extends "base.html" %}
+{% extends "base.html" %}
 {% load i18n slic_tags %}
 {% block title %}{{ experiment.name }}{% endblock %}
 {% block content %}
 
-<a href="{% url 'experiments:index' %}" class="btn btn-primary">
+<a href="{% url 'experiments:index' %}" class="btn btn-outline-secondary">
   <i class="fas fa-reply"></i> {% trans "Back to experiments" %}
 </a>
 <hr>
 
-<h3>{{ experiment.name }}</h3>
+<h1 class="h4 mb-3">{{ experiment.name }}</h1>
 <p>{{ experiment.description }}</p>
 
 {% if experiment.complete %}
   {# ── Published view ────────────────────────────────────────────────────── #}
-  <h3>{% trans "Link" %}:</h3>
-  <p class="p-3 border m-2">
-    {% with request.scheme|add:"://"|add:request.get_host as base_url %}
-    <a href="{{ base_url }}{% url 'responses:home' experiment.slug %}">
-      {{ base_url }}{% url 'responses:home' experiment.slug %}
+  <h2 class="h5 mt-3 mb-2">{% trans "Link" %}</h2>
+  <div class="d-flex align-items-center gap-2 mb-4">
+    <div class="flex-grow-1 p-3 border rounded">
+      {% with request.scheme|add:"://"|add:request.get_host as base_url %}
+      <a href="{{ base_url }}{% url 'responses:home' experiment.slug %}">
+        {{ base_url }}{% url 'responses:home' experiment.slug %}
+      </a>
+      {% endwith %}
+    </div>
+    <a href="{% url 'experiments:download' experiment.pk %}" class="btn btn-primary">
+      {% trans "Download" %}
     </a>
-    {% endwith %}
-  </p>
-  <br>
-  <a href="{% url 'experiments:download' experiment.pk %}" class="btn btn-primary">
-    {% trans "Download" %}
-  </a>
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#terms">
-    {% trans "View terms" %}
-  </button>
+    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#terms">
+      {% trans "View terms" %}
+    </button>
+  </div>
 
   {# ── Stat table ──────────────────────────────────────────────────────────── #}
-  <br><br>
-  <table class="table" id="statistics_table">
-    <thead class="thead-light">
+  <table class="table table-striped" id="statistics_table">
+    <thead>
       <tr>
-        <th class="col" style="width: 25%">{% trans "Responses" %}</th>
-        <th class="col" style="width: 25%">{% trans "Complete responses" %}</th>
-        <th class="col" style="width: 25%">{% trans "Response ratio" %}</th>
-        <th class="col" style="width: 25%">{% trans "Last response" %}</th>
+        <th>{% trans "Responses" %}</th>
+        <th>{% trans "Complete responses" %}</th>
+        <th>{% trans "Response ratio" %}</th>
+        <th>{% trans "Last response" %}</th>
       </tr>
     </thead>
     <tbody>
@@ -55,7 +55,6 @@
       </tr>
     </tbody>
   </table>
-  <br>
 
 {% else %}
   {# ── Editing view ──────────────────────────────────────────────────────── #}
@@ -85,55 +84,41 @@
   </div>
   {% endif %}
 
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-9 border-right p-3">
-        <a href="{% url 'experiments:edit' experiment.pk %}" class="btn btn-primary">
-          {% trans "Edit experiment" %}
-        </a>
-        <a href="{% url 'experiments:terms' experiment.pk %}" class="btn btn-primary">
-          {% trans "Edit consent terms" %}
-        </a>
-      </div>
-      <div class="col-sm-3 p-3 d-flex align-items-start">
-        <a href="{% url 'experiments:preview_home' experiment.pk %}" class="btn btn-outline-secondary mr-2">
-          {% trans "Preview" %}
-        </a>
-        <form method="post" action="{% url 'experiments:complete' experiment.pk %}"
-              onsubmit="return confirm('{% trans "Publish this experiment?" %}')">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-success">{% trans "Publish" %}</button>
-        </form>
-      </div>
-    </div>
+  <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+    <a href="{% url 'experiments:edit' experiment.pk %}" class="btn btn-primary">
+      {% trans "Edit experiment" %}
+    </a>
+    <a href="{% url 'experiments:terms' experiment.pk %}" class="btn btn-primary">
+      {% trans "Edit consent terms" %}
+    </a>
+    <a href="{% url 'experiments:preview_home' experiment.pk %}" class="btn btn-outline-secondary ml-auto">
+      {% trans "Preview" %}
+    </a>
+    <form method="post" action="{% url 'experiments:complete' experiment.pk %}"
+          onsubmit="return confirm('{% trans "Publish this experiment?" %}')">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-success">{% trans "Publish" %}</button>
+    </form>
   </div>
 {% endif %}
 
-<br>
-
 {# ── Tasks list ────────────────────────────────────────────────────────────── #}
-<h3>{% trans "Tasks" %}</h3>
+<h2 class="h5 mt-3">{% trans "Tasks" %}</h2>
 
 {% if not experiment.complete %}
-<div class="d-flex mb-3">
-  <div class="px-2">
-    <a href="{% url 'tasks:question_task_new' taskable_type='experiment' taskable_id=experiment.pk %}"
-       class="btn btn-primary">
-      {% trans "Create question task" %}
-    </a>
-  </div>
-  <div class="px-2">
-    <a href="{% url 'tasks:sample_task_new' taskable_type='experiment' taskable_id=experiment.pk %}"
-       class="btn btn-primary">
-      {% trans "Create sample task" %}
-    </a>
-  </div>
-  <div class="px-2">
-    <a href="{% url 'tasks:intermediate_screen_new' taskable_type='experiment' taskable_id=experiment.pk %}"
-       class="btn btn-primary">
-      {% trans "Create intermediate screen task" %}
-    </a>
-  </div>
+<div class="d-flex flex-wrap gap-2 mb-3">
+  <a href="{% url 'tasks:question_task_new' taskable_type='experiment' taskable_id=experiment.pk %}"
+     class="btn btn-primary">
+    {% trans "Create question task" %}
+  </a>
+  <a href="{% url 'tasks:sample_task_new' taskable_type='experiment' taskable_id=experiment.pk %}"
+     class="btn btn-primary">
+    {% trans "Create sample task" %}
+  </a>
+  <a href="{% url 'tasks:intermediate_screen_new' taskable_type='experiment' taskable_id=experiment.pk %}"
+     class="btn btn-primary">
+    {% trans "Create intermediate screen task" %}
+  </a>
 </div>
 {% endif %}
 
@@ -245,7 +230,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="termsLabel">{% trans "Consent terms" %}</h5>
+        <h5 class="modal-title" id="termsLabel">{% trans "Consent Terms" %}</h5>
       </div>
       <div class="modal-body">
         {{ experiment.terms }}

@@ -3,7 +3,7 @@
 {% block title %}{{ target.name|default:target.email }} - SLIC{% endblock %}
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
-  <h2>{{ target.name|default:target.email }}</h2>
+  <h1 class="h4 mb-0">{{ target.name|default:target.email }}</h1>
   <a href="{% url 'accounts:admin_users' %}" class="btn btn-outline-secondary btn-sm">{% trans "Back" %}</a>
 </div>
 <dl class="row">

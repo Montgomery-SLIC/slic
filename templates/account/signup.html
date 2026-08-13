@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block title %}{% trans "Register" %}{% endblock %}
 {% block main_class %}page-centered{% endblock %}
@@ -7,9 +7,12 @@
 {% block content %}
 <div class="row justify-content-center">
   <div class="col-12 col-md-10 col-lg-8">
+    <div class="text-center mb-3">
+      <img src="{% static 'images/favicon/apple-touch-icon.png' %}" alt="SLIC" width="108" height="108">
+    </div>
     <div class="card shadow-sm">
       <div class="card-body py-4 px-4">
-        <h1 class="h4 mb-1">{% trans "Researcher registration" %}</h1>
+        <h1 class="h4 mb-1">{% trans "Researcher Registration" %}</h1>
         <p class="text-muted mb-4 small">{% trans "You need a valid invitation code to register." %}</p>
         <form method="post" action="{% url 'account_signup' %}">
           {% csrf_token %}

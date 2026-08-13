@@ -2,7 +2,10 @@
 {% load i18n %}
 {% block title %}{% trans "Experiments" %}{% endblock %}
 {% block content %}
-<h3>{% trans "Experiments" %}</h3>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h4 mb-0">{% trans "Experiments" %}</h1>
+  <a href="{% url 'experiments:new' %}" class="btn btn-primary">{% trans "New experiment" %}</a>
+</div>
 
 <table class="table table-striped">
   <thead>
@@ -31,7 +34,7 @@
         <form method="post" action="{% url 'experiments:delete' exp.pk %}" class="d-inline"
               onsubmit="return confirm('{% trans "Are you sure?" %}')">
           {% csrf_token %}
-          <button type="submit" class="btn btn-danger">{% trans "Delete" %}</button>
+          <button type="submit" class="btn btn-danger btn-sm">{% trans "Delete" %}</button>
         </form>
       </td>
     </tr>
@@ -42,6 +45,4 @@
     {% endfor %}
   </tbody>
 </table>
-
-<a href="{% url 'experiments:new' %}" class="btn btn-primary">{% trans "New experiment" %}</a>
 {% endblock %}
