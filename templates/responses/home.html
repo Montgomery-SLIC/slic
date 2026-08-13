@@ -4,57 +4,54 @@
 {% block title %}{{ experiment.name|default:"Study" }}{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-  <div class="col-12 col-md-8 col-lg-7">
+<h2 class="text-center">{{ experiment.name }}</h2>
 
-    <h1 class="h4 text-center mb-3">{{ experiment.name }}</h1>
-
-    {% if experiment.description %}
-    <div class="card mb-3">
-      <div class="card-body">
-        <h2 class="h5">{% trans "Description" %}</h2>
-        <p>{{ experiment.description|markdown }}</p>
-      </div>
-    </div>
-    {% endif %}
-
-    <div class="card mb-3">
-      <div class="card-body">
-        <h2 class="h5">{% trans "Terms" %}</h2>
-        <p>{{ experiment.terms|markdown }}</p>
-      </div>
-    </div>
-
-    {% if error %}
-    <div class="alert alert-danger mt-3" role="alert">{{ error }}</div>
-    {% endif %}
-
-    <div class="text-center mt-3">
-      <form method="post" action="{{ start_url }}" id="start-experiment-form">
-        {% csrf_token %}
-        <div class="mb-3 text-left">
-          <label class="form-label" for="email-input">{% trans "Please enter your email address" %}</label>
-          <p class="small mb-1">{% trans "Your email is only used to link your responses if you participate more than once." %}</p>
-          <input class="form-control" type="email" name="email" id="email-input"
-                 required placeholder="{% trans 'Enter your email address' %}">
-          <div class="validation-error text-danger mt-1" style="display: none;"></div>
-        </div>
-        <div class="form-check mb-3 text-left">
-          <input class="form-check-input" type="checkbox" name="consent" required>
-          <label class="form-check-label">{% trans "I have read and agree to the terms above." %}</label>
-        </div>
-        {% if RECAPTCHA_PUBLIC_KEY %}
-          <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-          <div class="g-recaptcha mt-2" data-sitekey="{{ RECAPTCHA_PUBLIC_KEY }}"></div>
-          <div id="captcha-error" class="text-danger small mt-1" style="display:none;">
-            {% trans "Please complete the 'I am not a robot' check." %}
-          </div>
-        {% endif %}
-        <button class="btn btn-primary mt-2" type="submit">{% trans "Start" %}</button>
-      </form>
-    </div>
-
+{% if experiment.description %}
+<div class="card">
+  <div class="card-body">
+    <h4>{% trans "Description" %}</h4>
+    <p>{{ experiment.description|markdown }}</p>
   </div>
+</div>
+{% endif %}
+
+<div class="card">
+  <div class="card-body">
+    <h4>{% trans "Terms" %}</h4>
+    <p>{{ experiment.terms|markdown }}</p>
+  </div>
+</div>
+
+{% if error %}
+<div class="alert alert-danger mt-3" role="alert">{{ error }}</div>
+{% endif %}
+
+<br>
+<div class="text-center">
+  <form method="post" action="{{ start_url }}" id="start-experiment-form">
+    {% csrf_token %}
+    <div class="form-group">
+      <div class="form-text">
+        <label class="form-label" for="email-input">{% trans "Please enter your email address" %}</label>
+        <p class="small mb-1">{% trans "Your email is only used to link your responses if you participate more than once." %}</p>
+        <input class="form-control" type="email" name="email" id="email-input"
+               required placeholder="{% trans 'Enter your email address' %}">
+        <div class="validation-error text-danger mt-1" style="display: none;"></div>
+      </div>
+      <div class="form-check mt-2">
+        <input class="form-check-input" type="checkbox" name="consent" required>
+        <label class="form-check-label">{% trans "I have read and agree to the terms above." %}</label>
+      </div>
+      {% if RECAPTCHA_PUBLIC_KEY %}
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <div class="g-recaptcha mt-2" data-sitekey="{{ RECAPTCHA_PUBLIC_KEY }}"></div>
+        <div id="captcha-error" class="text-danger small mt-1" style="display:none;">
+          {% trans "Please complete the 'I am not a robot' check." %}
+        </div>
+      {% endif %}
+    </div>
+    <button class="btn btn-primary" type="submit">{% trans "Start" %}</button>
+  </form>
 </div>
 
 <script>
