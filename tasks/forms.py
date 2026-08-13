@@ -58,6 +58,8 @@ class TranscriptUploadForm(forms.Form):
         f = self.cleaned_data['transcript']
         if f.size >= 314572800:
             raise forms.ValidationError(_('File must be under 300 MB.'))
+        if not f.name.lower().endswith(('.eaf', '.xml')):
+            raise forms.ValidationError(_('Transcript must be an EAF file (.eaf or .xml).'))
         return f
 
 

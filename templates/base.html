@@ -162,7 +162,7 @@
   {% if preview %}
   <div class="alert alert-warning text-center mb-0 rounded-0 py-2" role="alert">
     {% trans "Preview - no data is saved." %}
-    {% if preview_back_url %}&nbsp;<a href="{{ preview_back_url }}" class="alert-link">{% trans "Back to experiment" %}</a>{% endif %}
+    {% if preview_back_url %}&nbsp;<a href="{{ preview_back_url }}">{% trans "Back to experiment" %}</a>{% endif %}
   </div>
   {% endif %}
   <main class="{% block main_class %}{% endblock %}">

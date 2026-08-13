@@ -8,7 +8,7 @@
   <div class="data" data-listens="{{ specific.listens|default:1 }}" style="display:none;"></div>
   <audio id="audio-el" src="{{ audio_url }}" preload="auto"></audio>
 
-  <div class="mx-auto" style="max-width:520px;">
+  <div class="mx-auto text-center" style="max-width:520px;">
 
     <div class="progress mb-1" style="height:6px; border-radius:3px;">
       <div id="progress-bar" class="progress-bar" role="progressbar"
@@ -71,15 +71,18 @@
     bar.style.width = pct + '%';
     bar.setAttribute('aria-valuenow', Math.round(pct));
     timeEl.textContent = fmt(audio.currentTime);
-    if (audio.currentTime >= audio.duration - 0.05) {
-      nextBtn.style.display = 'inline-block';
-    }
+  });
+
+  audio.addEventListener('ended', function () {
+    if (listens <= 0) { nextBtn.style.display = 'inline-block'; }
+    if (listens > 0) { playBtn.disabled = false; }
   });
 
   playBtn.addEventListener('click', function () {
     if (listens > 0) {
       audio.currentTime = 0;
       audio.play();
+      playBtn.disabled = true;
       listens -= 1;
       updateCounter();
     }
