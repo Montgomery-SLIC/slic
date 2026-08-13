@@ -2,6 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from django_countries.fields import CountryField
+from slic.bootstrap_forms import BootstrapFormMixin, apply_form_control as _apply_form_control
 from .models import ResearcherInvitation
 
 RESEARCH_LEVEL_CHOICES = [
@@ -40,13 +41,12 @@ class ProfileEditForm(forms.Form):
         choices=RESEARCH_LEVEL_CHOICES,
         label=_('Research level'),
         required=True,
-        widget=forms.Select(attrs={'class': 'form-control'}),
     )
 
     def __init__(self, *args, user=None, **kwargs):
         super().__init__(*args, **kwargs)
         self.user = user
-        self.fields['country'].widget.attrs.update({'class': 'form-control'})
+        _apply_form_control(self)
 
     def clean_current_password(self):
         current_password = self.cleaned_data.get('current_password')
@@ -82,6 +82,10 @@ class ResearcherSignupForm(forms.Form):
         required=False,
         label=_('I would like to join the SLIC mailing list'),
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        _apply_form_control(self)
 
     def clean_registration_code(self):
         code = self.cleaned_data.get('registration_code', '').strip()

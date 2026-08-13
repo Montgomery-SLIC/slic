@@ -1,30 +1,31 @@
-﻿from django import forms
+from django import forms
 from django.utils.translation import gettext_lazy as _
+from slic.bootstrap_forms import BootstrapFormMixin
 from .models import (
     QuestionTask, SampleTask, ListeningTask, ClickTask, IntermediateScreenTask,
     Question, Option, Scale,
 )
 
 
-class QuestionTaskForm(forms.ModelForm):
+class QuestionTaskForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = QuestionTask
         fields = ['name']
 
 
-class SampleTaskForm(forms.ModelForm):
+class SampleTaskForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = SampleTask
         fields = ['name', 'calibration']
 
 
-class ListeningTaskForm(forms.ModelForm):
+class ListeningTaskForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = ListeningTask
         fields = ['name', 'listens']
 
 
-class ClickTaskForm(forms.ModelForm):
+class ClickTaskForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = ClickTask
         fields = ['name', 'prompt', 'explanation_prompt']
@@ -34,14 +35,14 @@ class ClickTaskForm(forms.ModelForm):
         }
 
 
-class IntermediateScreenTaskForm(forms.ModelForm):
+class IntermediateScreenTaskForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = IntermediateScreenTask
         fields = ['name', 'message']
         widgets = {'message': forms.Textarea(attrs={'rows': 6})}
 
 
-class AudioUploadForm(forms.Form):
+class AudioUploadForm(BootstrapFormMixin, forms.Form):
     audio = forms.FileField(label=_('Audio file'))
 
     def clean_audio(self):
@@ -51,7 +52,7 @@ class AudioUploadForm(forms.Form):
         return f
 
 
-class TranscriptUploadForm(forms.Form):
+class TranscriptUploadForm(BootstrapFormMixin, forms.Form):
     transcript = forms.FileField(label=_('Transcript file'))
 
     def clean_transcript(self):
@@ -63,28 +64,48 @@ class TranscriptUploadForm(forms.Form):
         return f
 
 
-class QuestionForm(forms.ModelForm):
+class QuestionForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = Question
         fields = ['question_type', 'prompt', 'required']
         widgets = {'prompt': forms.Textarea(attrs={'rows': 3})}
 
 
-class QuestionPromptForm(forms.ModelForm):
-    """Inline edit form for an existing question - type is immutable after creation."""
+class QuestionPromptForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = Question
         fields = ['prompt', 'required']
         widgets = {'prompt': forms.Textarea(attrs={'rows': 2, 'class': 'form-control form-control-sm'})}
 
 
-class OptionForm(forms.ModelForm):
+class OptionForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = Option
         fields = ['contents']
 
 
-class ScaleForm(forms.ModelForm):
+class ScaleForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = Scale
         fields = ['bins', 'low', 'high']
+
+    def clean(self):
+        cleaned_data = super().clean()
+        bins = cleaned_data.get('bins')
+        low = cleaned_data.get('low', '')
+        high = cleaned_data.get('high', '')
+        if bins and low and high:
+            try:
+                low_num = float(low)
+                high_num = float(high)
+                if high_num <= low_num:
+                    self.add_error('high', _('High value must be greater than low value.'))
+                elif bins > int(high_num - low_num) + 1:
+                    self.add_error(
+                        'bins',
+                        _('Number of options (%(bins)s) cannot exceed the numeric range %(low)s-%(high)s.')
+                        % {'bins': bins, 'low': low, 'high': high},
+                    )
+            except (ValueError, TypeError):
+                pass
+        return cleaned_data
