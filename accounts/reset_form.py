@@ -4,16 +4,14 @@ from allauth.account.forms import ResetPasswordForm
 from allauth.account import app_settings as allauth_app_settings
 from allauth.account.adapter import get_adapter as allauth_get_adapter
 
+from slic.bootstrap_forms import apply_form_control as _apply_form_control
 from .models import _compute_bidx
 
 
 class ResearcherResetPasswordForm(ResetPasswordForm):
-    """Override allauth's reset form to find users via HMAC blind index.
-
-    The standard allauth lookup queries the email field directly, which does
-    not work because our email is Fernet-encrypted. We use the HMAC blind
-    index instead to locate the matching user.
-    """
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        _apply_form_control(self)
 
     def clean_email(self):
         email = self.cleaned_data['email'].lower().strip()

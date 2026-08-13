@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "New reaction task" %}{% endblock %}
+{% block title %}{% trans "New Reaction Task" %}{% endblock %}
 
 {% block content %}
-<h1 class="h4 mb-4">{% trans "New reaction task" %}</h1>
+<h1 class="h4 mb-4">{% trans "New Reaction Task" %}</h1>
 <form method="post" action="{% url 'tasks:click_task_create' taskable_type=taskable_type taskable_id=taskable_id %}">
   {% csrf_token %}
   {% for field in form %}

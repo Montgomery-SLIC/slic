@@ -4,7 +4,7 @@
 {% block content %}
 
 <div class="d-flex align-items-center justify-content-between mb-3">
-  <h3 class="mb-0">{% trans "Your invitations" %}</h3>
+  <h1 class="h4 mb-0">{% trans "Your Invitations" %}</h1>
   <form method="post" action="{% url 'accounts:invitation_create' %}">
     {% csrf_token %}
     <button type="submit" class="btn btn-primary btn-sm">{% trans "Create invitation" %}</button>
@@ -31,9 +31,9 @@
       </small>
     </td>
     {% if inv.used %}
-      <td class="text-secondary">{% trans "True" %}</td>
+      <td class="text-muted">{% trans "Used" %}</td>
     {% else %}
-      <td class="text-success">{% trans "False" %}</td>
+      <td class="text-success">{% trans "Available" %}</td>
     {% endif %}
     <td>{{ inv.created_at }}</td>
     <td>

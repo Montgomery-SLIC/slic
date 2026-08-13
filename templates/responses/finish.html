@@ -5,8 +5,8 @@
 
 {% block content %}
 <div class="text-center">
-  <h2>{% trans "Thank you!" %}</h2>
-  <h4>{% trans "You have completed this experiment" %}</h4>
+  <h1 class="h4 mb-2">{% trans "Thank you!" %}</h1>
+  <p class="text-muted mb-3">{% trans "You have completed this experiment" %}</p>
   <p>
     {% if preview %}
       {% trans "Your unique response ID is" %} <span class="text-muted">(not shown in preview)</span>

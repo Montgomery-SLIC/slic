@@ -436,6 +436,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!audioEl) return;
 
     audioEl.addEventListener('timeupdate', updateBar);
+    audioEl.addEventListener('ended', onAudioEnd);
 
     // Click button
     const clickBtn = document.getElementById('click-btn');

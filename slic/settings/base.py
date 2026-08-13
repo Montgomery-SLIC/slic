@@ -155,7 +155,11 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_ADAPTER = 'accounts.adapter.ResearcherAccountAdapter'
 ACCOUNT_SIGNUP_FORM_CLASS = 'accounts.forms.ResearcherSignupForm'
-ACCOUNT_FORMS = {'reset_password': 'accounts.reset_form.ResearcherResetPasswordForm'}
+ACCOUNT_FORMS = {
+    'login': 'accounts.allauth_forms.SLICLoginForm',
+    'signup': 'accounts.allauth_forms.SLICSignupForm',
+    'reset_password': 'accounts.reset_form.ResearcherResetPasswordForm',
+}
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_SESSION_REMEMBER = True
 

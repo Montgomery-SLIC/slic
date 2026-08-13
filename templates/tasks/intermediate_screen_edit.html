@@ -5,11 +5,11 @@
 
 {% block content %}
 {% if task.sample_task_id %}
-<a href="{% url 'tasks:sample_task_edit' pk=task.sample_task_id %}" class="btn btn-primary">
+<a href="{% url 'tasks:sample_task_edit' pk=task.sample_task_id %}" class="btn btn-outline-secondary">
   <i class="fas fa-reply"></i> {% trans "Back to" %} {{ task.sample_task.name }}
 </a>
 {% else %}
-<a href="{% url 'experiments:show' pk=task.experiment_id %}" class="btn btn-primary">
+<a href="{% url 'experiments:show' pk=task.experiment_id %}" class="btn btn-outline-secondary">
   <i class="fas fa-reply"></i> {% trans "Back to" %} {{ task.experiment.name }}
 </a>
 {% endif %}

@@ -1,42 +1,39 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Report a bug" %}{% endblock %}
+{% block title %}{% trans "Report a Bug" %}{% endblock %}
 
 {% block content %}
-<h2>{% trans "Report a bug" %}</h2>
+<h1 class="h4 mb-3">{% trans "Report a Bug" %}</h1>
 <p class="text-muted">{% blocktrans %}You can also report bugs directly on our <a href="https://github.com/Montgomery-SLIC/slic/issues" target="_blank" rel="noopener noreferrer">GitHub issue tracker</a>.{% endblocktrans %}</p>
 
 {% if error %}
 <div class="alert alert-danger mt-3" role="alert">{{ error }}</div>
 {% endif %}
 
-<form action="{% url 'bug_report_submit' %}" method="post" class="simple_form" id="bug-report-form">
+<form action="{% url 'bug_report_submit' %}" method="post" id="bug-report-form">
   {% csrf_token %}
-  <div class="form-inputs">
-    <div class="form-group">
-      <label for="email">{% trans "Email address" %}</label>
-      <input type="text" name="email" id="email" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="subject">{% trans "Subject" %}</label>
-      <input type="text" name="subject" id="subject" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="report">{% trans "Details" %}</label>
-      <textarea name="report" id="report" rows="6" cols="24" class="form-control"></textarea>
-    </div>
-    {% if RECAPTCHA_PUBLIC_KEY %}
-      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-      <div class="g-recaptcha mt-2 mb-2" data-sitekey="{{ RECAPTCHA_PUBLIC_KEY }}"></div>
-      <div id="captcha-error" class="text-danger small mt-1" style="display:none;">
-        {% trans "Please complete the 'I am not a robot' check." %}
-      </div>
-    {% endif %}
-    <div class="form-group">
-      <input type="submit" value="{% trans 'Send' %}" class="btn btn-primary">
-    </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">{% trans "Email address" %}</label>
+    <input type="text" name="email" id="email" class="form-control">
   </div>
+  <div class="mb-3">
+    <label for="subject" class="form-label">{% trans "Subject" %}</label>
+    <input type="text" name="subject" id="subject" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label for="report" class="form-label">{% trans "Details" %}</label>
+    <textarea name="report" id="report" rows="6" class="form-control"></textarea>
+  </div>
+  {% if RECAPTCHA_PUBLIC_KEY %}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <div class="g-recaptcha mt-2 mb-2" data-sitekey="{{ RECAPTCHA_PUBLIC_KEY }}"></div>
+    <div id="captcha-error" class="text-danger small mt-1" style="display:none;">
+      {% trans "Please complete the 'I am not a robot' check." %}
+    </div>
+  {% endif %}
+  <button type="submit" class="btn btn-primary">{% trans "Send" %}</button>
+  <a href="javascript:history.back()" class="btn btn-secondary ml-2">{% trans "Cancel" %}</a>
 </form>
 
 {% if RECAPTCHA_PUBLIC_KEY %}
