@@ -5,11 +5,9 @@
 
 {% block content %}
 <div class="text-center">
-  <h2>{{ sample.name }}</h2>
+  <h1 class="h4 mb-3">{{ sample.name }}</h1>
   <p>{% trans "You are about to listen to a sample. Please use headphones if possible." %}</p>
-  <br>
-  <a href="{{ next_url }}" class="btn btn-primary" role="button">{% trans "Begin" %}</a>
-  <br>
   <p class="text-muted">{% trans "Click begin when you are ready to start." %}</p>
+  <a href="{{ next_url }}" class="btn btn-primary" role="button">{% trans "Begin" %}</a>
 </div>
 {% endblock %}

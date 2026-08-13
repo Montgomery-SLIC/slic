@@ -1,16 +1,7 @@
-﻿{% extends "base.html" %}
+{% extends "base.html" %}
 {% load i18n static slic_tags %}
 
 {% block title %}{% trans "Listening task" %}{% endblock %}
-
-{% block extra_css %}
-<style>
-  #progress { display: block; width: 100%; height: 48px; cursor: pointer; }
-  #click-btn { font-size: 1.25rem; padding: .6rem 2rem; }
-  .click-review-item { background: #fff; }
-  #review-container { display: none; }
-</style>
-{% endblock %}
 
 {% block content %}
 {# Data bag - JS reads all config from here #}
@@ -49,7 +40,7 @@
   <audio id="click-audio" preload="auto"
          src="{{ audio_url }}"></audio>
 
-  <div class="mx-auto" style="max-width:720px;">
+  <div class="mx-auto click-player">
     {% if specific.prompt %}
       <div class="mb-4">{{ specific.prompt|markdown }}</div>
     {% endif %}
@@ -69,7 +60,7 @@
     </div>
   </div>
 
-  <div id="review-container"></div>
+  <div id="review-container" style="display:none;"></div>
 </div>
 {% endblock %}
 
