@@ -51,6 +51,12 @@ deploy-staging:
 	$(PROD_MANAGE) collectstatic --noinput
 	systemctl restart slic_django_staging
 
+deploy-prod:
+	uv sync
+	$(PROD_MANAGE) migrate
+	$(PROD_MANAGE) collectstatic --noinput
+	systemctl restart slic_django_prod
+
 # Dependencies
 install:
 	uv sync --extra dev
@@ -84,7 +90,8 @@ help:
 	@echo "  test-all     Run all tests excluding e2e"
 	@echo ""
 	@echo "Deployment"
-	@echo "  deploy-staging  Pull-and-restart on staging (migrate, static, restart)"
+	@echo "  deploy-staging  Pull-and-restart on staging (migrate, static, restart)
+  deploy-prod     Pull-and-restart on production (migrate, static, restart)"
 	@echo "  static          Collect static files (dev)"
 	@echo "  superuser       Create a superuser"
 	@echo ""
@@ -97,4 +104,4 @@ help:
 
 .DEFAULT_GOAL := help
 
-.PHONY: help runserver migrations migrate check superuser static shell test test-all clean install deploy-staging bump-patch bump-minor bump-major
+.PHONY: help runserver migrations migrate check superuser static shell test test-all clean install deploy-staging deploy-prod bump-patch bump-minor bump-major
