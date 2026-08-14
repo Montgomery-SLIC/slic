@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-13 16:40+0100\n"
+"POT-Creation-Date: 2026-08-14 14:37+0100\n"
 "Language: fr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -289,7 +289,9 @@ msgstr "Réinitialiser le mot de passe"
 
 #: .\templates\account\password_reset.html:13
 msgid "Enter your email address and we'll send a reset link."
-msgstr "Saisissez votre adresse e-mail et nous vous enverrons un lien de réinitialisation."
+msgstr ""
+"Saisissez votre adresse e-mail et nous vous enverrons un lien de "
+"réinitialisation."
 
 #: .\templates\account\password_reset.html:23
 msgid "Send reset email"
@@ -322,7 +324,9 @@ msgstr "Définir un nouveau mot de passe"
 
 #: .\templates\account\password_reset_from_key.html:15
 msgid "This link is invalid or has expired. Please request a new reset."
-msgstr "Ce lien est invalide ou a expiré. Veuillez demander une nouvelle réinitialisation."
+msgstr ""
+"Ce lien est invalide ou a expiré. Veuillez demander une nouvelle "
+"réinitialisation."
 
 #: .\templates\account\password_reset_from_key.html:16
 msgid "Reset password"
@@ -609,9 +613,9 @@ msgid ""
 "Montgomery-SLIC/slic/issues\" target=\"_blank\" rel=\"noopener "
 "noreferrer\">GitHub issue tracker</a>."
 msgstr ""
-"Vous pouvez également signaler des bugs directement sur notre <a href=\"https://github.com/"
-"Montgomery-SLIC/slic/issues\" target=\"_blank\" rel=\"noopener "
-"noreferrer\">outil de suivi des problèmes GitHub</a>."
+"Vous pouvez également signaler des bugs directement sur notre <a "
+"href=\"https://github.com/Montgomery-SLIC/slic/issues\" target=\"_blank\" "
+"rel=\"noopener noreferrer\">outil de suivi des problèmes GitHub</a>."
 
 #: .\templates\bug_reports\new.html:17
 msgid "Email address"
@@ -625,7 +629,7 @@ msgstr "Objet"
 msgid "Details"
 msgstr "Détails"
 
-#: .\templates\bug_reports\new.html:32 .\templates\responses\home.html:50
+#: .\templates\bug_reports\new.html:32 .\templates\responses\home.html:49
 msgid "Please complete the 'I am not a robot' check."
 msgstr "Veuillez compléter la vérification 'Je ne suis pas un robot'."
 
@@ -648,7 +652,7 @@ msgstr "Modifier l'expérience"
 
 # Participant-facing strings (from fr.yml participant section)
 #: .\templates\experiments\edit.html:20 .\templates\experiments\index.html:14
-#: .\templates\experiments\new.html:20 .\templates\responses\home.html:15
+#: .\templates\experiments\new.html:20 .\templates\responses\home.html:12
 msgid "Description"
 msgstr "Description"
 
@@ -874,8 +878,8 @@ msgid ""
 "To use SLIC as a researcher you will need to register for an account. To "
 "register you will need an invitation code."
 msgstr ""
-"Pour utiliser SLIC en tant que chercheur, vous devrez créer un compte. "
-"Vous aurez besoin d'un code d'invitation pour vous inscrire."
+"Pour utiliser SLIC en tant que chercheur, vous devrez créer un compte. Vous "
+"aurez besoin d'un code d'invitation pour vous inscrire."
 
 #: .\templates\pages\home.html:16
 #, python-format
@@ -883,8 +887,8 @@ msgid ""
 "To request one, use the <a href=\"%(url)s\">Contact</a> link in the "
 "navigation bar above."
 msgstr ""
-"Pour en obtenir un, utilisez le lien <a href=\"%(url)s\">Contact</a> dans "
-"la barre de navigation ci-dessus."
+"Pour en obtenir un, utilisez le lien <a href=\"%(url)s\">Contact</a> dans la "
+"barre de navigation ci-dessus."
 
 #: .\templates\pages\home.html:17
 msgid ""
@@ -896,9 +900,9 @@ msgid ""
 msgstr ""
 "SLIC est gratuit pour la recherche non commerciale. Si vous utilisez SLIC "
 "pour collecter des données, veuillez citer : Montgomery, Walker &amp; Woods "
-"(2025), <em>Linguistics Vanguard</em> 11(1) : 397-406. <a href='https://"
-"doi.org/10.1515/lingvan-2025-0028' target='_blank' rel='noopener'>"
-"doi:10.1515/lingvan-2025-0028</a>"
+"(2025), <em>Linguistics Vanguard</em> 11(1) : 397-406. <a href='https://doi."
+"org/10.1515/lingvan-2025-0028' target='_blank' rel='noopener'>doi:10.1515/"
+"lingvan-2025-0028</a>"
 
 #: .\templates\pages\home.html:19
 msgid "To access the website's documentation please follow this link:"
@@ -916,15 +920,15 @@ msgstr "Vous avez complété cette expérience."
 msgid "Your unique response ID is"
 msgstr "Votre identifiant de participation est"
 
-#: .\templates\responses\home.html:23
+#: .\templates\responses\home.html:20
 msgid "Terms"
 msgstr "Termes et conditions"
 
-#: .\templates\responses\home.html:36
+#: .\templates\responses\home.html:35
 msgid "Please enter your email address"
 msgstr "Veuillez saisir votre adresse e-mail"
 
-#: .\templates\responses\home.html:37
+#: .\templates\responses\home.html:36
 msgid ""
 "Your email is only used to link your responses if you participate more than "
 "once."
@@ -932,11 +936,11 @@ msgstr ""
 "Votre e-mail n'est utilisé que pour relier vos réponses si vous participez "
 "plus d'une fois."
 
-#: .\templates\responses\home.html:39
+#: .\templates\responses\home.html:38
 msgid "Enter your email address"
 msgstr "Entrez votre adresse e-mail"
 
-#: .\templates\responses\home.html:44
+#: .\templates\responses\home.html:43
 msgid "I have read and agree to the terms above."
 msgstr "J'ai lu et j'accepte les conditions ci-dessus."
 
@@ -944,17 +948,19 @@ msgstr "J'ai lu et j'accepte les conditions ci-dessus."
 msgid "Start"
 msgstr "Commencer l'expérience"
 
-#: .\templates\responses\home.html:75
+#: .\templates\responses\home.html:72
 msgid "Email address is required."
 msgstr "Une adresse e-mail est requise."
 
-#: .\templates\responses\home.html:79
+#: .\templates\responses\home.html:76
 msgid "Please enter a valid email address."
 msgstr "Veuillez saisir une adresse e-mail valide."
 
 #: .\templates\responses\sample_intro.html:9
 msgid "You are about to listen to a sample. Please use headphones if possible."
-msgstr "Vous êtes sur le point d'écouter un extrait audio. Veuillez utiliser des écouteurs si possible."
+msgstr ""
+"Vous êtes sur le point d'écouter un extrait audio. Veuillez utiliser des "
+"écouteurs si possible."
 
 #: .\templates\responses\sample_intro.html:10
 msgid "Click begin when you are ready to start."
@@ -969,88 +975,90 @@ msgstr "Commencer"
 msgid "Listening task"
 msgstr "Tâche d'écoute"
 
-#: .\templates\responses\tasks\click_task.html:18
+#: .\templates\responses\tasks\click_task.html:27
 msgid "Replay"
 msgstr "Rejouer"
 
-#: .\templates\responses\tasks\click_task.html:19
+#: .\templates\responses\tasks\click_task.html:28
 msgid "Click at"
 msgstr "Clic à"
 
-#: .\templates\responses\tasks\click_task.html:20
+#: .\templates\responses\tasks\click_task.html:29
 msgid "Why did you click?"
 msgstr "Pourquoi avez-vous cliqué ?"
 
-#: .\templates\responses\tasks\click_task.html:21
+#: .\templates\responses\tasks\click_task.html:30
 msgid "Describe what you noticed..."
 msgstr "Décrivez ce que vous avez remarqué..."
 
-#: .\templates\responses\tasks\click_task.html:22
+#: .\templates\responses\tasks\click_task.html:31
 msgid "I clicked by accident"
 msgstr "J'ai cliqué par accident"
 
-#: .\templates\responses\tasks\click_task.html:23
+#: .\templates\responses\tasks\click_task.html:32
 msgid "I don't know why I clicked"
 msgstr "Je ne sais pas pourquoi j'ai cliqué"
 
-#: .\templates\responses\tasks\click_task.html:24
+#: .\templates\responses\tasks\click_task.html:33
 msgid "Please explain your click or tick a checkbox."
 msgstr "Veuillez expliquer votre clic ou cocher une case."
 
-#: .\templates\responses\tasks\click_task.html:25
+#: .\templates\responses\tasks\click_task.html:34
 msgid "You didn't click during this audio clip. Please explain why:"
-msgstr "Vous n'avez pas cliqué pendant cet extrait audio. Veuillez expliquer pourquoi :"
+msgstr ""
+"Vous n'avez pas cliqué pendant cet extrait audio. Veuillez expliquer "
+"pourquoi :"
 
-#: .\templates\responses\tasks\click_task.html:26
+#: .\templates\responses\tasks\click_task.html:35
 msgid "I didn't notice any accent features..."
 msgstr "Je n'ai pas remarqué de caractéristiques accentuelles..."
 
-#: .\templates\responses\tasks\click_task.html:27
+#: .\templates\responses\tasks\click_task.html:36
 msgid "Continue"
 msgstr "Continuer"
 
-#: .\templates\responses\tasks\click_task.html:28
+#: .\templates\responses\tasks\click_task.html:37
 msgid "You clicked"
 msgstr "Vous avez cliqué"
 
-#: .\templates\responses\tasks\click_task.html:29
+#: .\templates\responses\tasks\click_task.html:38
 msgid "time"
 msgstr "fois"
 
-#: .\templates\responses\tasks\click_task.html:30
+#: .\templates\responses\tasks\click_task.html:39
 msgid "times"
 msgstr "fois"
 
-#: .\templates\responses\tasks\click_task.html:31
+#: .\templates\responses\tasks\click_task.html:40
 msgid "For each click, tell us what you noticed:"
 msgstr "Pour chaque clic, dites-nous ce que vous avez remarqué :"
 
-#: .\templates\responses\tasks\click_task.html:32
+#: .\templates\responses\tasks\click_task.html:41
 msgid "Submit and continue"
 msgstr "Soumettre et continuer"
 
-#: .\templates\responses\tasks\click_task.html:33
+#: .\templates\responses\tasks\click_task.html:42
 msgid "Saving..."
 msgstr "Enregistrement..."
 
-#: .\templates\responses\tasks\click_task.html:34
+#: .\templates\responses\tasks\click_task.html:43
 msgid "[no transcript]"
 msgstr "[pas de transcription]"
 
-#: .\templates\responses\tasks\click_task.html:35
+#: .\templates\responses\tasks\click_task.html:44
 msgid "You clicked here"
 msgstr "Vous avez cliqué ici"
 
-#: .\templates\responses\tasks\click_task.html:50
+#: .\templates\responses\tasks\click_task.html:59
 msgid "Audio progress"
 msgstr "Progression audio"
 
-#: .\templates\responses\tasks\click_task.html:55
-#: .\templates\responses\tasks\listening_task.html:26
+#: .\templates\responses\tasks\click_task.html:64
+#: .\templates\responses\tasks\listening_task.html:27
 msgid "Play"
 msgstr "Écouter"
 
-#: .\templates\responses\tasks\click_task.html:58
+#: .\templates\responses\tasks\click_task.html:67
 msgid "Click!"
 msgstr "Cliquer !"
 
@@ -1059,7 +1067,7 @@ msgid "Information"
 msgstr "Information"
 
 #: .\templates\responses\tasks\intermediate_screen_task.html:11
-#: .\templates\responses\tasks\listening_task.html:31
+#: .\templates\responses\tasks\listening_task.html:32
 msgid "Next"
 msgstr "Suivant"
 
@@ -1067,7 +1075,7 @@ msgstr "Suivant"
 msgid "Listening"
 msgstr "Écoute"
 
-#: .\templates\responses\tasks\listening_task.html:58
+#: .\templates\responses\tasks\listening_task.html:59
 msgid "Listens remaining"
 msgstr "Écoutes restantes"
 
@@ -1248,8 +1256,8 @@ msgid "No audio uploaded yet."
 msgstr "Aucun audio téléchargé pour l'instant."
 
 #: .\templates\tasks\sample_task_edit.html:75
-msgid "Upload audio (max 300 MB)"
-msgstr "Télécharger l'audio (max 300 Mo)"
+msgid "Upload audio (WAV, MP3, or MP4 recommended - max 300 MB)"
+msgstr "Téléverser l'audio (WAV, MP3 ou MP4 recommandé - max. 300 Mo)"
 
 #: .\templates\tasks\sample_task_edit.html:89
 msgid "Transcript (EAF)"
@@ -1265,11 +1273,13 @@ msgstr "Supprimer la transcription"
 
 #: .\templates\tasks\sample_task_edit.html:107
 msgid "No transcript uploaded. Click task will show no transcript window."
-msgstr "Aucune transcription chargée. La tâche de clic n'affichera pas de fenêtre de transcription."
+msgstr ""
+"Aucune transcription chargée. La tâche de clic n'affichera pas de fenêtre de "
+"transcription."
 
 #: .\templates\tasks\sample_task_edit.html:112
-msgid "Upload transcript (max 300 MB)"
-msgstr "Télécharger la transcription (max 300 Mo)"
+msgid "Upload transcript (.eaf or .xml, max 300 MB)"
+msgstr "Téléverser la transcription (.eaf ou .xml, max. 300 Mo)"
 
 #: .\templates\tasks\sample_task_edit.html:126
 msgid "Sub-tasks"

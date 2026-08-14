@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-13 16:40+0100\n"
+"POT-Creation-Date: 2026-08-14 14:37+0100\n"
 "Language: da\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -321,7 +321,9 @@ msgstr "Angiv ny adgangskode"
 
 #: .\templates\account\password_reset_from_key.html:15
 msgid "This link is invalid or has expired. Please request a new reset."
-msgstr "Dette link er ugyldigt eller udløbet. Anmod venligst om et nyt nulstillingslink."
+msgstr ""
+"Dette link er ugyldigt eller udløbet. Anmod venligst om et nyt "
+"nulstillingslink."
 
 #: .\templates\account\password_reset_from_key.html:16
 msgid "Reset password"
@@ -624,7 +626,7 @@ msgstr "Emne"
 msgid "Details"
 msgstr "Detaljer"
 
-#: .\templates\bug_reports\new.html:32 .\templates\responses\home.html:50
+#: .\templates\bug_reports\new.html:32 .\templates\responses\home.html:49
 msgid "Please complete the 'I am not a robot' check."
 msgstr "Udfyld venligst 'Jeg er ikke en robot'-tjekket."
 
@@ -647,7 +649,7 @@ msgstr "Rediger eksperiment"
 
 # Participant-facing strings (from dk.yml participant section)
 #: .\templates\experiments\edit.html:20 .\templates\experiments\index.html:14
-#: .\templates\experiments\new.html:20 .\templates\responses\home.html:15
+#: .\templates\experiments\new.html:20 .\templates\responses\home.html:12
 msgid "Description"
 msgstr "Beskrivelse"
 
@@ -894,8 +896,8 @@ msgid ""
 msgstr ""
 "SLIC er gratis at bruge til ikke-kommerciel forskning. Hvis du bruger SLIC "
 "til dataindsamling, bedes du citere: Montgomery, Walker &amp; Woods (2025), "
-"<em>Linguistics Vanguard</em> 11(1): 397-406. <a href='https://doi.org/"
-"10.1515/lingvan-2025-0028' target='_blank' rel='noopener'>doi:10.1515/"
+"<em>Linguistics Vanguard</em> 11(1): 397-406. <a href='https://doi."
+"org/10.1515/lingvan-2025-0028' target='_blank' rel='noopener'>doi:10.1515/"
 "lingvan-2025-0028</a>"
 
 #: .\templates\pages\home.html:19
@@ -914,15 +916,15 @@ msgstr "Du har gennemført undersøgelsen."
 msgid "Your unique response ID is"
 msgstr "Dit unikke respondent-ID er"
 
-#: .\templates\responses\home.html:23
+#: .\templates\responses\home.html:20
 msgid "Terms"
 msgstr "Vilkår"
 
-#: .\templates\responses\home.html:36
+#: .\templates\responses\home.html:35
 msgid "Please enter your email address"
 msgstr "Indtast venligst din e-mailadresse"
 
-#: .\templates\responses\home.html:37
+#: .\templates\responses\home.html:36
 msgid ""
 "Your email is only used to link your responses if you participate more than "
 "once."
@@ -930,11 +932,11 @@ msgstr ""
 "Din e-mail bruges kun til at knytte dine svar, hvis du deltager mere end én "
 "gang."
 
-#: .\templates\responses\home.html:39
+#: .\templates\responses\home.html:38
 msgid "Enter your email address"
 msgstr "Indtast din e-mailadresse"
 
-#: .\templates\responses\home.html:44
+#: .\templates\responses\home.html:43
 msgid "I have read and agree to the terms above."
 msgstr "Jeg har læst og accepterer ovenstående betingelser."
 
@@ -942,17 +944,19 @@ msgstr "Jeg har læst og accepterer ovenstående betingelser."
 msgid "Start"
 msgstr "Start"
 
-#: .\templates\responses\home.html:75
+#: .\templates\responses\home.html:72
 msgid "Email address is required."
 msgstr "E-mailadresse er påkrævet."
 
-#: .\templates\responses\home.html:79
+#: .\templates\responses\home.html:76
 msgid "Please enter a valid email address."
 msgstr "Indtast venligst en gyldig e-mailadresse."
 
 #: .\templates\responses\sample_intro.html:9
 msgid "You are about to listen to a sample. Please use headphones if possible."
-msgstr "Du er ved at lytte til et lydeksempel. Brug venligst høretelefoner, hvis muligt."
+msgstr ""
+"Du er ved at lytte til et lydeksempel. Brug venligst høretelefoner, hvis "
+"muligt."
 
 #: .\templates\responses\sample_intro.html:10
 msgid "Click begin when you are ready to start."
@@ -967,88 +971,88 @@ msgstr "Start"
 msgid "Listening task"
 msgstr "Lytteopgave"
 
-#: .\templates\responses\tasks\click_task.html:18
+#: .\templates\responses\tasks\click_task.html:27
 msgid "Replay"
 msgstr "Afspil igen"
 
-#: .\templates\responses\tasks\click_task.html:19
+#: .\templates\responses\tasks\click_task.html:28
 msgid "Click at"
 msgstr "Klik ved"
 
-#: .\templates\responses\tasks\click_task.html:20
+#: .\templates\responses\tasks\click_task.html:29
 msgid "Why did you click?"
 msgstr "Hvorfor klikkede du?"
 
-#: .\templates\responses\tasks\click_task.html:21
+#: .\templates\responses\tasks\click_task.html:30
 msgid "Describe what you noticed..."
 msgstr "Beskriv hvad du lagde mærke til..."
 
-#: .\templates\responses\tasks\click_task.html:22
+#: .\templates\responses\tasks\click_task.html:31
 msgid "I clicked by accident"
 msgstr "Jeg klikkede ved et uheld"
 
-#: .\templates\responses\tasks\click_task.html:23
+#: .\templates\responses\tasks\click_task.html:32
 msgid "I don't know why I clicked"
 msgstr "Jeg ved ikke, hvorfor jeg klikkede"
 
-#: .\templates\responses\tasks\click_task.html:24
+#: .\templates\responses\tasks\click_task.html:33
 msgid "Please explain your click or tick a checkbox."
 msgstr "Forklar venligst dit klik eller sæt kryds i en boks."
 
-#: .\templates\responses\tasks\click_task.html:25
+#: .\templates\responses\tasks\click_task.html:34
 msgid "You didn't click during this audio clip. Please explain why:"
 msgstr "Du klikkede ikke under dette lydklip. Forklar venligst hvorfor:"
 
-#: .\templates\responses\tasks\click_task.html:26
+#: .\templates\responses\tasks\click_task.html:35
 msgid "I didn't notice any accent features..."
 msgstr "Jeg lagde ikke mærke til nogen accenttræk..."
 
-#: .\templates\responses\tasks\click_task.html:27
+#: .\templates\responses\tasks\click_task.html:36
 msgid "Continue"
 msgstr "Fortsæt"
 
-#: .\templates\responses\tasks\click_task.html:28
+#: .\templates\responses\tasks\click_task.html:37
 msgid "You clicked"
 msgstr "Du klikkede"
 
-#: .\templates\responses\tasks\click_task.html:29
+#: .\templates\responses\tasks\click_task.html:38
 msgid "time"
 msgstr "gang"
 
-#: .\templates\responses\tasks\click_task.html:30
+#: .\templates\responses\tasks\click_task.html:39
 msgid "times"
 msgstr "gange"
 
-#: .\templates\responses\tasks\click_task.html:31
+#: .\templates\responses\tasks\click_task.html:40
 msgid "For each click, tell us what you noticed:"
 msgstr "For hvert klik, fortæl os hvad du lagde mærke til:"
 
-#: .\templates\responses\tasks\click_task.html:32
+#: .\templates\responses\tasks\click_task.html:41
 msgid "Submit and continue"
 msgstr "Indsend og fortsæt"
 
-#: .\templates\responses\tasks\click_task.html:33
+#: .\templates\responses\tasks\click_task.html:42
 msgid "Saving..."
 msgstr "Gemmer..."
 
-#: .\templates\responses\tasks\click_task.html:34
+#: .\templates\responses\tasks\click_task.html:43
 msgid "[no transcript]"
 msgstr "[intet transskript]"
 
-#: .\templates\responses\tasks\click_task.html:35
+#: .\templates\responses\tasks\click_task.html:44
 msgid "You clicked here"
 msgstr "Du klikkede her"
 
-#: .\templates\responses\tasks\click_task.html:50
+#: .\templates\responses\tasks\click_task.html:59
 msgid "Audio progress"
 msgstr "Lydafspilning"
 
-#: .\templates\responses\tasks\click_task.html:55
-#: .\templates\responses\tasks\listening_task.html:26
+#: .\templates\responses\tasks\click_task.html:64
+#: .\templates\responses\tasks\listening_task.html:27
 msgid "Play"
 msgstr "Afspil"
 
-#: .\templates\responses\tasks\click_task.html:58
+#: .\templates\responses\tasks\click_task.html:67
 msgid "Click!"
 msgstr "Klik!"
 
@@ -1057,7 +1061,7 @@ msgid "Information"
 msgstr "Information"
 
 #: .\templates\responses\tasks\intermediate_screen_task.html:11
-#: .\templates\responses\tasks\listening_task.html:31
+#: .\templates\responses\tasks\listening_task.html:32
 msgid "Next"
 msgstr "Næste"
 
@@ -1065,7 +1069,7 @@ msgstr "Næste"
 msgid "Listening"
 msgstr "Lytning"
 
-#: .\templates\responses\tasks\listening_task.html:58
+#: .\templates\responses\tasks\listening_task.html:59
 msgid "Listens remaining"
 msgstr "Resterende afspilninger"
 
@@ -1246,8 +1250,10 @@ msgid "No audio uploaded yet."
 msgstr "Ingen lyd uploadet endnu."
 
 #: .\templates\tasks\sample_task_edit.html:75
-msgid "Upload audio (max 300 MB)"
-msgstr "Upload lyd (maks. 300 MB)"
+#, fuzzy
+#| msgid "Upload audio (max 300 MB)"
+msgid "Upload audio (WAV, MP3, or MP4 recommended - max 300 MB)"
+msgstr "Upload lyd (WAV, MP3 eller MP4 anbefales - maks. 300 MB)"
 
 #: .\templates\tasks\sample_task_edit.html:89
 msgid "Transcript (EAF)"
@@ -1266,8 +1272,10 @@ msgid "No transcript uploaded. Click task will show no transcript window."
 msgstr "Ingen transskript uploadet. Klikopgaven viser intet transskriptvindue."
 
 #: .\templates\tasks\sample_task_edit.html:112
-msgid "Upload transcript (max 300 MB)"
-msgstr "Upload transskript (maks. 300 MB)"
+#, fuzzy
+#| msgid "Upload transcript (max 300 MB)"
+msgid "Upload transcript (.eaf or .xml, max 300 MB)"
+msgstr "Upload transskript (.eaf eller .xml, maks. 300 MB)"
 
 #: .\templates\tasks\sample_task_edit.html:126
 msgid "Sub-tasks"

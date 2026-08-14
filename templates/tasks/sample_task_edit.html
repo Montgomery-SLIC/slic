@@ -64,7 +64,7 @@
         <code class="small">{{ task.audio.name }}</code>
       </p>
       <audio controls class="mb-3 d-block">
-        <source src="{% url 'responses:serve_audio' sample_task_id=task.pk %}" type="audio/wav">
+        <source src="{% url 'responses:serve_audio' sample_task_id=task.pk %}">
       </audio>
     {% else %}
       <p class="text-muted">{% trans "No audio uploaded yet." %}</p>
@@ -72,7 +72,7 @@
     <form method="post" action="{% url 'tasks:audio_upload' pk=task.pk %}"
           enctype="multipart/form-data">
       {% csrf_token %}
-      <label class="form-label small">{% trans "Upload audio (max 300 MB)" %}</label>
+      <label class="form-label small">{% trans "Upload audio (WAV, MP3, or MP4 recommended - max 300 MB)" %}</label>
       <div class="d-flex align-items-center gap-2">
         <div class="flex-grow-1">
           <input type="file" name="audio" class="form-control-file" required>
@@ -109,7 +109,7 @@
     <form method="post" action="{% url 'tasks:transcript_upload' pk=task.pk %}"
           enctype="multipart/form-data">
       {% csrf_token %}
-      <label class="form-label small">{% trans "Upload transcript (max 300 MB)" %}</label>
+      <label class="form-label small">{% trans "Upload transcript (.eaf or .xml, max 300 MB)" %}</label>
       <div class="d-flex align-items-center gap-2">
         <div class="flex-grow-1">
           <input type="file" name="transcript" class="form-control-file" required>
