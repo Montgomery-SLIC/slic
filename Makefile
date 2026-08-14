@@ -90,8 +90,8 @@ help:
 	@echo "  test-all     Run all tests excluding e2e"
 	@echo ""
 	@echo "Deployment"
-	@echo "  deploy-staging  Pull-and-restart on staging (migrate, static, restart)
-  deploy-prod     Pull-and-restart on production (migrate, static, restart)"
+	@echo "  deploy-staging  Pull-and-restart on staging (migrate, static, restart)"
+	@echo "  deploy-prod     Pull-and-restart on production (migrate, static, restart)"
 	@echo "  static          Collect static files (dev)"
 	@echo "  superuser       Create a superuser"
 	@echo ""
