@@ -1,4 +1,5 @@
 import multiprocessing
+import os
 
 # (2 × CPU cores) + 1 workers as per architectural decision
 workers = (multiprocessing.cpu_count() * 2) + 1
@@ -7,9 +8,9 @@ threads = 4
 timeout = 120
 keepalive = 5
 
-# Staging: port 9294 / Production: port 9295
-# Override with GUNICORN_BIND env var in systemd unit
-bind = '127.0.0.1:9294'
+# Staging: 127.0.0.1:9294 / Production: 127.0.0.1:9295
+# Set GUNICORN_BIND in .env to override
+bind = os.environ.get('GUNICORN_BIND', '127.0.0.1:9294')
 
 accesslog = '/var/log/slic/access.log'
 errorlog = '/var/log/slic/error.log'

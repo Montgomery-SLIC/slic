@@ -1,4 +1,5 @@
 ﻿import json
+import mimetypes
 import urllib.parse
 import urllib.request
 
@@ -275,18 +276,25 @@ class ClickResponseView(View):
 def serve_audio(request, sample_task_id):
     sample = get_object_or_404(SampleTask, pk=sample_task_id)
 
-    # Refuse to serve audio for unpublished experiments - prevents enumeration of stimuli
-    if not Experiment.objects.filter(pk=sample.get_experiment_pk(), complete=True).exists():
+    experiment = get_object_or_404(Experiment, pk=sample.get_experiment_pk())
+    # Authenticated researchers who own the experiment can preview unpublished audio;
+    # anonymous participants can only access published experiments.
+    is_owner = request.user.is_authenticated and experiment.user_id == request.user.pk
+    if not is_owner and not experiment.complete:
         raise Http404
 
     if not sample.audio:
         raise Http404
 
+    content_type, _ = mimetypes.guess_type(sample.audio.name)
+    if not content_type:
+        content_type = 'application/octet-stream'
+
     if getattr(settings, 'X_ACCEL_REDIRECT', False):
         response = HttpResponse()
         response['X-Accel-Redirect'] = f'/protected-media/{sample.audio.name}'
-        response['Content-Type'] = 'audio/wav'
+        response['Content-Type'] = content_type
         return response
 
     # Development: serve directly
-    return FileResponse(sample.audio.open('rb'), content_type='audio/wav')
+    return FileResponse(sample.audio.open('rb'), content_type=content_type)
